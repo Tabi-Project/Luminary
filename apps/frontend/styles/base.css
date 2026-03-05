@@ -1,0 +1,344 @@
+@layer tokens, base, utilities;
+
+/* TOKENS (design variables) */
+@layer tokens {
+  :root {
+    /* Background scale */
+    --color-bg-300: #D7E0E9;
+    --color-bg-400: #C5D0DC; /* base */
+    --color-bg-500: #AAB7C5;
+
+    /* Primary scale */
+    --color-primary-400: #32CFCF;
+    --color-primary-500: #0EA5A4; /* base */
+    --color-primary-600: #0B8F8E;
+
+    /* Card scale */
+    --color-card-200: #F6F9FC;
+    --color-card-300: #F1F5F9; /* base */
+    --color-card-400: #E4EAF0;
+
+    /* Heading scale */
+    --color-heading-400: #6F8099;
+    --color-heading-500: #1A2330; /* base */
+    --color-heading-600: #141C26;
+
+    /* Text scale */
+    --color-text-400: #7D90A6;
+    --color-text-500: #1D2633; /* base */
+    --color-text-600: #161D28;
+
+    /* Core Colors */
+    --color-bg: var(--color-bg-400); /* Main Background */
+    --color-card: var(--color-card-300); /* Card and content sections */
+    --color-primary: var(--color-primary-500); /* Buttons, links, highlights */
+    --color-heading: var(--color-heading-500); /* Headers */
+    --color-text: var(--color-text-500); /* Body and secondary text */
+
+    /* Neutrals and surfaces */
+    --color-white: #FFFFFF;
+    --color-border: #00000014;
+
+    /* Semantic roles */
+    --background: var(--color-bg);
+    --foreground: var(--color-text);
+    --border: var(--color-border);
+    --input: var(--color-white);
+
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-white);
+
+    --secondary: var(--color-card);
+    --secondary-foreground: var(--color-heading);
+
+    --muted: #F8FAFC;
+    --muted-foreground: #94A3B8;
+
+    --success: #ECFDF5;
+    --success-foreground: #065F46;
+
+    --accent: var(--color-primary);
+    --accent-foreground: var(--color-white);
+
+    --destructive: #FEF2F2;
+    --destructive-foreground: #991B1B;
+
+    --warning: #FFF7ED;
+    --warning-foreground: #92400E;
+
+    --card: var(--color-card);
+    --card-foreground: var(--color-text);
+
+    --sidebar: #F8FAFC;
+    --sidebar-foreground: var(--color-text);
+    --sidebar-primary: #E6FFFE;
+    --sidebar-primary-foreground: #055E5B;
+
+    /* Typography scale */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+
+    /* Spacing scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+
+    /* Radius, shadows, etc. */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+
+    /* Font family */
+    --font-raleway:
+      "Raleway", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+      Arial, sans-serif;
+
+    --font-weight-light: 300;
+    --font-weight-bold: 700;
+
+    --font-family-body: var(--font-raleway);
+  }
+}
+
+/* BASE (resets and global defaults) */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-light);
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: var(--color-primary-600);
+  }
+}
+
+/* UTILITIES */
+@layer utilities {
+  /* Text + surfaces */
+  .text-heading {
+    color: var(--color-heading);
+  }
+
+  .text-body {
+    color: var(--color-text);
+  }
+
+  .bg-page {
+    background: var(--background);
+  }
+
+  .bg-card {
+    background: var(--card);
+  }
+
+  .border {
+    border: 1px solid var(--border);
+  }
+
+  .rounded-sm {
+    border-radius: var(--radius-sm);
+  }
+
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  /* Layout container */
+  .container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+  }
+
+  /* Padding utilities */
+  .p-2 {
+    padding: var(--space-2);
+  }
+
+  .p-4 {
+    padding: var(--space-4);
+  }
+
+  .p-6 {
+    padding: var(--space-6);
+  }
+
+  .p-8 {
+    padding: var(--space-8);
+  }
+
+  .px-4 {
+    padding-inline: var(--space-4);
+  }
+
+  .px-6 {
+    padding-inline: var(--space-6);
+  }
+
+  .py-4 {
+    padding-block: var(--space-4);
+  }
+
+  .py-6 {
+    padding-block: var(--space-6);
+  }
+
+  .py-8 {
+    padding-block: var(--space-8);
+  }
+
+  /* Flex utilities */
+  .flex {
+    display: flex;
+  }
+
+  .inline-flex {
+    display: inline-flex;
+  }
+
+  .flex-row {
+    flex-direction: row;
+  }
+
+  .flex-col {
+    flex-direction: column;
+  }
+
+  .items-center {
+    align-items: center;
+  }
+
+  .items-start {
+    align-items: flex-start;
+  }
+
+  .items-end {
+    align-items: flex-end;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .justify-between {
+    justify-content: space-between;
+  }
+
+  .justify-start {
+    justify-content: flex-start;
+  }
+
+  .justify-end {
+    justify-content: flex-end;
+  }
+
+  /* Grid utilities */
+  .grid {
+    display: grid;
+  }
+
+  .grid-cols-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Responsive grids */
+  .grid-auto-fit {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .grid-auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  /* Grid alignment */
+  .place-center {
+    place-items: center;
+  }
+
+  .place-start {
+    place-items: start;
+  }
+
+  .place-end {
+    place-items: end;
+  }
+
+  .content-center {
+    justify-items: center;
+  }
+
+  .items-center-grid {
+    align-items: center;
+  }
+
+  /* Gaps */
+  .gap-2 {
+    gap: var(--space-2);
+  }
+
+  .gap-4 {
+    gap: var(--space-4);
+  }
+
+  .gap-6 {
+    gap: var(--space-6);
+  }
+
+  .gap-8 {
+    gap: var(--space-8);
+  }
+}
