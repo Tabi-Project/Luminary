@@ -1,0 +1,10 @@
+@layer components {
+  .landing-page-content {
+    max-width: 1200px;
+    margin-inline: auto;
+    display: grid;
+    gap: var(--space-8);
+    padding-block: var(--space-8);
+    place-items: center;
+  }
+}

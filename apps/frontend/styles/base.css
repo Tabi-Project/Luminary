@@ -4,39 +4,39 @@
 @layer tokens {
   :root {
     /* Background scale */
-    --color-bg-300: #D7E0E9;
-    --color-bg-400: #C5D0DC; /* base */
-    --color-bg-500: #AAB7C5;
+    --color-bg-300: #d7e0e9;
+    --color-bg-400: #c5d0dc; /* base */
+    --color-bg-500: #aab7c5;
 
     /* Primary scale */
-    --color-primary-400: #32CFCF;
-    --color-primary-500: #0EA5A4; /* base */
-    --color-primary-600: #0B8F8E;
+    --color-primary-400: #32cfcf;
+    --color-primary-500: #0ea5a4; /* base */
+    --color-primary-600: #0b8f8e;
 
     /* Card scale */
-    --color-card-200: #F6F9FC;
-    --color-card-300: #F1F5F9; /* base */
-    --color-card-400: #E4EAF0;
+    --color-card-200: #f6f9fc;
+    --color-card-300: #f1f5f9; /* base */
+    --color-card-400: #e4eaf0;
 
     /* Heading scale */
-    --color-heading-400: #6F8099;
-    --color-heading-500: #1A2330; /* base */
-    --color-heading-600: #141C26;
+    --color-heading-400: #6f8099;
+    --color-heading-500: #1a2330; /* base */
+    --color-heading-600: #141c26;
 
     /* Text scale */
-    --color-text-400: #7D90A6;
-    --color-text-500: #1D2633; /* base */
-    --color-text-600: #161D28;
+    --color-text-400: #7d90a6;
+    --color-text-500: #1d2633; /* base */
+    --color-text-600: #161d28;
 
     /* Core Colors */
-    --color-bg: var(--color-bg-400); /* Main Background */
-    --color-card: var(--color-card-300); /* Card and content sections */
-    --color-primary: var(--color-primary-500); /* Buttons, links, highlights */
-    --color-heading: var(--color-heading-500); /* Headers */
-    --color-text: var(--color-text-500); /* Body and secondary text */
+    --color-bg: var(--color-bg-400);
+    --color-card: var(--color-card-300);
+    --color-primary: var(--color-primary-500);
+    --color-heading: var(--color-heading-500);
+    --color-text: var(--color-text-500);
 
     /* Neutrals and surfaces */
-    --color-white: #FFFFFF;
+    --color-white: #ffffff;
     --color-border: #00000014;
 
     /* Semantic roles */
@@ -51,28 +51,28 @@
     --secondary: var(--color-card);
     --secondary-foreground: var(--color-heading);
 
-    --muted: #F8FAFC;
-    --muted-foreground: #94A3B8;
+    --muted: #f8fafc;
+    --muted-foreground: #94a3b8;
 
-    --success: #ECFDF5;
-    --success-foreground: #065F46;
+    --success: #ecfdf5;
+    --success-foreground: #065f46;
 
     --accent: var(--color-primary);
     --accent-foreground: var(--color-white);
 
-    --destructive: #FEF2F2;
-    --destructive-foreground: #991B1B;
+    --destructive: #fef2f2;
+    --destructive-foreground: #991b1b;
 
-    --warning: #FFF7ED;
-    --warning-foreground: #92400E;
+    --warning: #fff7ed;
+    --warning-foreground: #92400e;
 
     --card: var(--color-card);
     --card-foreground: var(--color-text);
 
-    --sidebar: #F8FAFC;
+    --sidebar: #f8fafc;
     --sidebar-foreground: var(--color-text);
-    --sidebar-primary: #E6FFFE;
-    --sidebar-primary-foreground: #055E5B;
+    --sidebar-primary: #e6fffe;
+    --sidebar-primary-foreground: #055e5b;
 
     /* Typography scale */
     --font-size-xs: 0.75rem;
@@ -91,15 +91,15 @@
     --space-6: 1.5rem;
     --space-8: 2rem;
 
-    /* Radius, shadows, etc. */
+    /* Radius */
     --radius-sm: 0.25rem;
     --radius-md: 0.5rem;
     --radius-lg: 0.75rem;
 
     /* Font family */
     --font-raleway:
-      "Raleway", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
-      Arial, sans-serif;
+      "Raleway", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, sans-serif;
 
     --font-weight-light: 300;
     --font-weight-bold: 700;
@@ -125,6 +125,7 @@
   body {
     font-family: var(--font-family-body);
     font-weight: var(--font-weight-light);
+    font-size: var(--font-size-base);
     background: var(--background);
     color: var(--foreground);
   }
@@ -196,15 +197,15 @@
   .p-2 {
     padding: var(--space-2);
   }
-
+  
   .p-4 {
     padding: var(--space-4);
   }
-
+  
   .p-6 {
     padding: var(--space-6);
   }
-
+  
   .p-8 {
     padding: var(--space-8);
   }
@@ -212,7 +213,7 @@
   .px-4 {
     padding-inline: var(--space-4);
   }
-
+  
   .px-6 {
     padding-inline: var(--space-6);
   }
@@ -220,11 +221,11 @@
   .py-4 {
     padding-block: var(--space-4);
   }
-
+  
   .py-6 {
     padding-block: var(--space-6);
   }
-
+  
   .py-8 {
     padding-block: var(--space-8);
   }
@@ -233,7 +234,7 @@
   .flex {
     display: flex;
   }
-
+  
   .inline-flex {
     display: inline-flex;
   }
@@ -241,7 +242,7 @@
   .flex-row {
     flex-direction: row;
   }
-
+  
   .flex-col {
     flex-direction: column;
   }
@@ -249,11 +250,11 @@
   .items-center {
     align-items: center;
   }
-
+  
   .items-start {
     align-items: flex-start;
   }
-
+  
   .items-end {
     align-items: flex-end;
   }
@@ -261,15 +262,15 @@
   .justify-center {
     justify-content: center;
   }
-
+  
   .justify-between {
     justify-content: space-between;
   }
-
+  
   .justify-start {
     justify-content: flex-start;
   }
-
+  
   .justify-end {
     justify-content: flex-end;
   }
@@ -282,24 +283,23 @@
   .grid-cols-1 {
     grid-template-columns: 1fr;
   }
-
+  
   .grid-cols-2 {
     grid-template-columns: repeat(2, 1fr);
   }
-
+  
   .grid-cols-3 {
     grid-template-columns: repeat(3, 1fr);
   }
-
+  
   .grid-cols-4 {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  /* Responsive grids */
   .grid-auto-fit {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
-
+  
   .grid-auto-fill {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
@@ -308,36 +308,40 @@
   .place-center {
     place-items: center;
   }
-
+  
   .place-start {
     place-items: start;
   }
-
+ 
   .place-end {
     place-items: end;
   }
 
-  .content-center {
-    justify-items: center;
+  /* Gap utilities */
+  .gap-1 {
+    gap: var(--space-1);
   }
-
-  .items-center-grid {
-    align-items: center;
-  }
-
-  /* Gaps */
+ 
   .gap-2 {
     gap: var(--space-2);
   }
-
+ 
+  .gap-3 {
+    gap: var(--space-3);
+  }
+ 
   .gap-4 {
     gap: var(--space-4);
   }
-
+ 
+  .gap-5 {
+    gap: var(--space-5);
+  }
+ 
   .gap-6 {
     gap: var(--space-6);
   }
-
+ 
   .gap-8 {
     gap: var(--space-8);
   }
