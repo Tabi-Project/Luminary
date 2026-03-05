@@ -17,4 +17,13 @@
       padding-inline: var(--space-8);
     }
   }
+
+  .header-section__nav a:nth-of-type(1) {
+    margin-left: auto;
+  }
+
+  .nav-cta__btn {
+    background: var(--color-heading-600);
+    color: var(--color-white);
+  }
 }

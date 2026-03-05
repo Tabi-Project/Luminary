@@ -9,11 +9,28 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" type="image/x-icon" href="/apps/frontend/assets/luminary-green-favicon.ico">
     <title>Luminary</title>
   </head>
   <body>
     <header>
-      <nav aria-label="primary navigation">Luminary Nav</nav>
+      <nav aria-label="primary navigation" class="header-section__nav flex flex-row justify-between gap-6 items-center px-4 py-4">
+        <picture>
+          <source 
+          media="(min-width: 768px)"
+          srcset="/apps/frontend/assets/luminary-green-logo.png" 
+          type="image/png"
+          />
+          <img 
+          src="/apps/frontend/assets/luminary-green-logo.png"
+          alt="Luminary Logo"
+          width="140px"
+          />
+        </picture>
+        <a>Support</a>
+        <a>Blog</a>
+        <button class="nav-cta__btn rounded-md p-2 px-4">Log in</button>
+      </nav>
       <section aria-label="hero">
         <h1>Welcome to Luminary</h1>
       </section>
