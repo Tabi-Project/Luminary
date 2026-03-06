@@ -1,29 +1,90 @@
 @layer components {
-  .landing-page-content {
-    max-width: 1200px;
-    margin-inline: auto;
-    padding-inline: var(--space-4);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-    padding-block: var(--space-8);
-    place-items: center;
+    .landing-page-content {
+        max-width: 1200px;
+        margin-inline: auto;
+        padding-inline: var(--space-4);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        padding-block: var(--space-8);
+        place-items: center;
 
-    @media (min-width: 768px) {
-      padding-inline: var(--space-6);
+        @media (min-width: 768px) {
+            padding-inline: var(--space-6);
+        }
+
+        @media (min-width: 1024px) {
+            padding-inline: var(--space-8);
+        }
     }
 
-    @media (min-width: 1024px) {
-      padding-inline: var(--space-8);
+    .header-section__nav a:nth-of-type(1) {
+        margin-left: auto;
     }
-  }
 
-  .header-section__nav a:nth-of-type(1) {
-    margin-left: auto;
-  }
+    .nav-cta__btn {
+        background: var(--color-heading-600);
+        color: var(--color-white);
+    }
 
-  .nav-cta__btn {
-    background: var(--color-heading-600);
-    color: var(--color-white);
-  }
+    footer {
+        width: 100%;
+        height: 60dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 24px;
+
+        > div:first-of-type {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            text-align: center;
+
+            > h3 {
+                font-size: 56px;
+                letter-spacing: -1%;
+            }
+
+            > p {
+                color: #888888;
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+
+            button {
+                border: none;
+                padding: 10px 16px;
+                border-radius: 8px;
+                font-size: 16px;
+            }
+
+            > div {
+                display: flex;
+                gap: 16px;
+                justify-content: center;
+            }
+
+            #nominate-a-woman-btn {
+                color: #888888;
+                background-color: #d9dfe8;
+            }
+
+            #submit-a-story-btn {
+                color: white;
+                background-color: var(--color-text-500);
+            }
+        }
+
+        #quick-links {
+            gap: 8px;
+            width: 70%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #e7e8e9;
+        }
+    }
 }
