@@ -90,11 +90,14 @@
         --space-5: 1.25rem;
         --space-6: 1.5rem;
         --space-8: 2rem;
+        --space-9: 2.5rem;
 
         /* Radius */
         --radius-sm: 0.25rem;
         --radius-md: 0.5rem;
         --radius-lg: 0.75rem;
+        --radius-xl: 1.5rem;
+        --radius-2xl: 1.5rem;
 
         /* Font family */
         --font-raleway:
@@ -255,6 +258,10 @@
         flex-direction: row;
     }
 
+    .flex-row-rev{
+        flex-direction: row-reverse;
+    }
+
     .flex-col {
         flex-direction: column;
     }
@@ -356,5 +363,9 @@
 
     .gap-8 {
         gap: var(--space-8);
+    }
+
+    .gap-9{
+        gap: var(--space-9);
     }
 }
