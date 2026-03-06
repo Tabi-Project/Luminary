@@ -1,80 +1,104 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../styles/base.css" />
-        <link rel="stylesheet" href="../styles/landing-page.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            type="image/x-icon"
-            href="/apps/frontend/assets/images/luminary-green-favicon.ico"
-        />
-        <title>Luminary</title>
-    </head>
-    <body>
-        <header>
-            <nav
-                aria-label="primary navigation"
-                class="header-section__nav flex flex-row justify-between gap-6 items-center px-4 py-4"
-            >
-                <picture>
-                    <source
-                        media="(min-width: 768px)"
-                        srcset="
-                            /apps/frontend/assets/images/luminary-green-logo.png
-                        "
-                        type="image/png"
-                    />
-                    <img
-                        src="/apps/frontend/assets/images/luminary-green-logo.png"
-                        alt="Luminary Logo"
-                        width="140px"
-                    />
-                </picture>
-                <a>Support</a>
-                <a>Blog</a>
-                <button class="nav-cta__btn rounded-md p-2 px-4">Log in</button>
-            </nav>
-            <section aria-label="hero">
-                <h1>Welcome to Luminary</h1>
-            </section>
-        </header>
-        <main class="landing-page-content">
-            <section aria-label="app features">
-                <h2>App Features</h2>
-            </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/landing-page.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/apps/frontend/assets/images/luminary-green-favicon.ico"
+    />
+    <title>Luminary</title>
+  </head>
+  <body>
+    <header>
+      <nav
+        aria-label="primary navigation"
+        class="header-section__nav flex flex-row justify-between gap-6 items-center px-4 py-4"
+      >
+        <picture>
+          <source
+            media="(min-width: 768px)"
+            srcset="/apps/frontend/assets/images/luminary-green-logo.png"
+            type="image/png"
+          />
+          <img
+            src="/apps/frontend/assets/images/luminary-green-logo.png"
+            alt="Luminary Logo"
+            width="140px"
+          />
+        </picture>
+        <a>Support</a>
+        <a>Blog</a>
+        <button class="nav-cta__btn rounded-md p-2 px-4">Log in</button>
+      </nav>
+      <section aria-label="hero">
+        <h1>Welcome to Luminary</h1>
+      </section>
+    </header>
+    <main class="landing-page-content">
+      <section aria-label="app features">
+        <h2>App Features</h2>
+      </section>
 
-            <section aria-label="team & contribution">
-                <h2>Team &amp; Contribution</h2>
-            </section>
+      <section aria-label="team & contribution">
+        <h2>Team &amp; Contribution</h2>
+      </section>
 
-            <section aria-label="featured stories">
-                <h2>Featured Stories</h2>
-            </section>
-        </main>
+      <section aria-label="featured stories">
+        <div>
+          <h2>Featured Stories</h2>
+          <a>View all stories</a>
+        </div>
+        <div>
+          <article>
+            <h3>
+              The midwife rewriting maternal health protocols from a one-room
+              clinic
+            </h3>
+            <p><span>Health</span> <span>East Africa</span></p>
+            <p>Punch Newspaper</p>
+          </article>
+          <article>
+            <h3>
+              The midwife rewriting maternal health protocols from a one-room
+              clinic
+            </h3>
+            <p><span>Health</span> <span>East Africa</span></p>
+            <p>Punch Newspaper</p>
+          </article>
+          <article>
+            <h3>
+              The midwife rewriting maternal health protocols from a one-room
+              clinic
+            </h3>
+            <p><span>Health</span> <span>East Africa</span></p>
+            <p>Punch Newspaper</p>
+          </article>
+        </div>
+      </section>
+    </main>
 
-        <footer aria-label="CTA & footer">
-            <div>
-                <h3>Celebrate a woman today</h3>
-                <p>
-                    Submit or nominate a story about an amazing woman with
-                    Luminary
-                </p>
-                <div>
-                    <button id="submit-a-story-btn">Submit a story</button>
-                    <button id="nominate-a-woman-btn">Nominate a woman</button>
-                </div>
-            </div>
-            <hr />
-            <div id="quick-links">
-                <a href="#">Support</a>
-                <a href="#">Blog</a>
-            </div>
-        </footer>
-    </body>
+    <footer aria-label="CTA & footer">
+      <div>
+        <h3>Celebrate a woman today</h3>
+        <p>Submit or nominate a story about an amazing woman with Luminary</p>
+        <div>
+          <button id="submit-a-story-btn">Submit a story</button>
+          <button id="nominate-a-woman-btn">Nominate a woman</button>
+        </div>
+      </div>
+      <hr />
+      <div id="quick-links">
+        <a href="#">Support</a>
+        <a href="#">Blog</a>
+      </div>
+    </footer>
+  </body>
 </html>
