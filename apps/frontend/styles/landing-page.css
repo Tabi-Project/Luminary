@@ -113,7 +113,7 @@
         /* ----- mobile styles -----*/
         @media (max-width: 768px) {
             flex-direction: column;
-            gap: 2rem;
+            gap: 1rem;
 
             .feature-image{
                 width: 15rem;
@@ -140,6 +140,16 @@
             }
         }
    
+    }
+    
+    .feature-container{
+        @media (max-width: 1024px){
+            gap: 4rem;
+        }
+
+        @media (max-width: 768px){
+            gap: 2.5rem;
+        }
     }
     /* ----------------------------------------------- */
 
