@@ -87,8 +87,28 @@
                 </div>
             </section>
 
-            <section aria-label="team & contribution">
-                <h2>Team &amp; Contribution</h2>
+            <section aria-label="team & contribution" class="contributors">
+                <h2>Meet the Contributors</h2>
+                <div id="contributorsGrid" class="contributors-grid"></div>
+            </section>
+            
+            <!-- modal -->
+            <section id="modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <img id="modalImage">
+                    <h3 id="modalName"></h3>
+                    <p id="modalRole"></p>
+                    <p id="modalBio"></p>
+                    <section class="modal-links">
+                        <a id="modalGithub" target="_blank">
+                            <img src="https://res.cloudinary.com/afroglot/image/upload/v1772788154/jvuqduz2feacaqr6t0uv.svg">
+                        </a>
+                        <a id="modalLinkedin" target="_blank">
+                            <img src="https://res.cloudinary.com/afroglot/image/upload/v1772788155/zwo9jxmh52x6dgxy5pes.svg">
+                        </a>
+                    </section>
+                </div>
             </section>
 
             <section aria-label="featured stories">
@@ -114,5 +134,6 @@
                 <a href="#">Blog</a>
             </div>
         </footer>
+        <script src="../js/index.js"></script>
     </body>
 </html>

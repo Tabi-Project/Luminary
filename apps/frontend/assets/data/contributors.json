@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Ramnan Ramyii",
+    "role": "Product Lead",
+    "image": "https://res.cloudinary.com/afroglot/image/upload/v1772785735/lnyjnhkt6eicmheuhl8s.jpg",
+    "bio": "Ramnan is a frontend developer who likes to build fun stuff. Very interested in arts and everything concerning Arsenal FC..",
+    "github": "https://github.com/Blisyphus",
+    "linkedin": "https://www.linkedin.com/in/ramnan-ramyil-05323924a/"
+  },
+  {
+    "name": "Awoyemi Abiola",
+    "role": "Product Lead",
+    "image": "https://res.cloudinary.com/afroglot/image/upload/v1772785730/kralwgcfl8hub8kbvny1.jpg",
+    "bio": "Abiola is a frontend developer with a passion for aesthetic and user-friendly web interfaces and part-time video game sweat/connoisseur.",
+    "github": "https://github.com/yourgotopyromaniac",
+    "linkedin": "https://linkedin.com/in/abiola-awoyemi-a908b51aa"
+  },
+  {
+    "name": "Emmanuel Dania",
+    "role": "People Lead",
+    "image": "https://res.cloudinary.com/afroglot/image/upload/v1772786140/ttbiouwojpc2q14gqbvu.jpg",
+    "bio": "Frontend developer focused on building accessible and interactive interfaces.",
+    "github": "https://github.com/MrNaturi",
+    "linkedin": "https://www.linkedin.com/in/emmanuel-dania-93a08b24a/"
+  },
+  {
+    "name": "Micheal Omonedo",
+    "role": "Design Lead",
+    "image": "https://res.cloudinary.com/afroglot/image/upload/v1772785734/mwlrlx0chdtaauufkau4.jpg",
+    "bio": "Michael is a frontend engineer with an interest in technology and continuous learning. He is also a chemical engineering graduate.",
+    "github": "https://github.com/Rukkyoo",
+    "linkedin": "https://www.linkedin.com/in/michael-omonedo/"
+  },
+  {
+    "name": "Ariyo Taiwo",
+    "role": "Design Lead",
+    "image": "https://ca.slack-edge.com/T0884GKLBD4-U0A9V70HKBJ-359f694bca1f-512",
+    "bio": "Designs interfaces, Changing experiences.",
+    "github": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Daniel Chisom",
+    "role": "Engineering Lead",
+    "image": "https://res.cloudinary.com/afroglot/image/upload/v1772785733/junxiy89bfaevtdyob6r.jpg",
+    "bio": "Creating Systems, Changing Realities",
+    "github": "",
+    "linkedin": ""
+  },
+  {
+    "name": "Isaac Shosanya",
+    "role": "Lead Maintainer",
+    "image": "https://res.cloudinary.com/afroglot/image/upload/v1772785736/pqblss7h9jq5rd24he9x.png",
+    "bio": "Isaac is a curious and driven person who enjoys building things, learning new ideas, and turning concepts into real projects, he loves cars and sports",
+    "github": "github.com/vaden89",
+    "linkedin": "https://www.linkedin.com/in/isaac-shosanya/"
+  }
+]
+
