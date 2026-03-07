@@ -1,139 +1,220 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../styles/base.css" />
-        <link rel="stylesheet" href="../styles/landing-page.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            rel="icon"
-            type="image/x-icon"
-            href="/apps/frontend/assets/images/luminary-green-favicon.ico"
-        />
-        <title>Luminary</title>
-    </head>
-    <body>
-        <header>
-            <nav
-                aria-label="primary navigation"
-                class="header-section__nav flex flex-row justify-between gap-6 items-center px-4 py-4"
-            >
-                <picture>
-                    <source
-                        media="(min-width: 768px)"
-                        srcset="
-                            /apps/frontend/assets/images/luminary-green-logo.png
-                        "
-                        type="image/png"
-                    />
-                    <img
-                        src="/apps/frontend/assets/images/luminary-green-logo.png"
-                        alt="Luminary Logo"
-                        width="140px"
-                    />
-                </picture>
-                <a>Support</a>
-                <a>Blog</a>
-                <button class="nav-cta__btn rounded-md p-2 px-4">Log in</button>
-            </nav>
-            <section aria-label="hero">
-                <h1>Welcome to Luminary</h1>
-            </section>
-        </header>
-        <main class="landing-page-content">
-            <section aria-label="app features">
-                <h2 class="text-center py-8">App Features</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/landing-page.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/images/luminary-green-favicon.ico"
+    />
+    <title>Luminary</title>
+  </head>
+  <body>
+    <header class="header-container">
+      <nav
+        aria-label="primary navigation"
+        class="header-section__nav flex flex-row justify-between gap-6 items-center px-4 py-4"
+      >
+        <picture>
+          <source
+            media="(min-width: 768px)"
+            srcset="../assets/images/luminary-green-logo.png"
+            type="image/png"
+          />
+          <img
+            src="../assets/images/luminary-green-logo.png"
+            alt="Luminary Logo"
+            width="140px"
+          />
+        </picture>
+        <a>Support</a>
+        <a>Blog</a>
+        <button class="nav-cta__btn rounded-md p-2 px-4">Log in</button>
+      </nav>
+      <section class="hero-section gap-8" aria-label="hero">
+        <h1 class="hero-title">Celebrating our Women</h1>
+        <p class="hero-description">
+          Luminary is a community-powered directory and news platform
+          celebrating women who are driving change across all fields — business,
+          science, arts, activism, sports, technology, agriculture, education
+          and more.
+        </p>
+        <button class="rounded-md p-2 px-4">Submit a story</button>
+        <picture class="hero-image">
+          <source
+            media="(min-width: 768px)"
+            srcset="../assets/images/hero-illustration.webp"
+            type="image/webp"
+          />
+          <img
+            src="../assets/images/hero-illustration.webp"
+            class="rounded-2xl"
+            alt="Illustration of different colored women across different cultures and disciplines: military, health, education and leadership"
+          />
+        </picture>
+        <div class="metrics-container">
+          <div class="metric-card">
+            <picture>
+              <source src="../assets/icons/metric-1.svg" type="image/svg" />
+              <img
+                src="../assets/icons/metric-1.svg"
+                alt="Female icon art with 2 offset circular cards"
+                width="130"
+              />
+            </picture>
 
-                <div class="flex flex-col gap-10 feature-container">
-                    <!-- submit feature -->
-                    <article class="feature-card flex flex-row-rev gap-9 items-center">
-                        <div class="flex flex-col gap-9">
-                            <h3 class="feature-heading">Submit</h3>
-                            <p class="feature-description">Luminary  helps you search for iconic female figures based on their names fields and accolades.</p>
-                        </div>
+            <p class="text-center">
+              120+ Women <br />
+              represented
+            </p>
+          </div>
+          <div class="metric-card">
+            <picture>
+              <source src="../assets/icons/metric-2.svg" type="image/svg" />
+              <img
+                src="../assets/icons/metric-2.svg"
+                alt="Globe icon art"
+                width="100"
+              />
+            </picture>
 
-                        <picture class="submit-image-container">
-                            <img class="feature-image" src="../assets/images/submit.png" alt="image showcasing the submit feature">
-                        </picture>   
-                    </article>
+            <p class="text-center">
+              Across 35+ <br />
+              countries
+            </p>
+          </div>
+          <div class="metric-card">
+            <picture>
+              <source src="../assets/icons/metric-3.svg" type="image/svg" />
+              <img
+                src="../assets/icons/metric-3.svg"
+                alt="Microscope icon art"
+                width="100"
+              />
+            </picture>
 
-                    <!-- search feature -->
-                    <article class="feature-card flex flex-row gap-9 items-center">
-                        <div class="flex flex-col gap-9">
-                            <h3 class="feature-heading">Search</h3>
-                            <p class="feature-description">Luminary helps you search for iconic female figures based on their names fields and accolades.</p>
-                        </div>
+            <p class="text-center">
+              In more than 22<br />
+              fields
+            </p>
+          </div>
+        </div>
+      </section>
+    </header>
+    <main class="landing-page-content">
+      <section aria-label="app features">
+        <h2 class="text-center py-8">App Features</h2>
 
-                        <picture class="search-image-container">
-                            <img class="feature-image" src="../assets/images/search.png" alt="image showcasing the search feature">
-                        </picture>   
-                    </article>
-
-                    <!-- search feature -->
-                    <article class="feature-card flex flex-row-rev gap-9 items-center">
-                        <div class="flex flex-col gap-9">
-                            <h3 class="feature-heading">Browse</h3>
-                            <p class="feature-description">Luminary helps you search for iconic female figures based on their names fields and accolades.</p>
-                        </div>
-
-                        <picture class="browse-image-container">
-                            <img class="browse-image" src="../assets/images/browse.png" alt="image showcasing the browse feature">
-                        </picture>   
-                    </article>
-                </div>
-            </section>
-
-            <section aria-label="team & contribution" class="contributors">
-                <h2>Meet the Contributors</h2>
-                <div id="contributorsGrid" class="contributors-grid"></div>
-            </section>
-            
-            <!-- modal -->
-            <section id="modal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <img id="modalImage">
-                    <h3 id="modalName"></h3>
-                    <p id="modalRole"></p>
-                    <p id="modalBio"></p>
-                    <section class="modal-links">
-                        <a id="modalGithub" target="_blank">
-                            <img src="https://res.cloudinary.com/afroglot/image/upload/v1772788154/jvuqduz2feacaqr6t0uv.svg">
-                        </a>
-                        <a id="modalLinkedin" target="_blank">
-                            <img src="https://res.cloudinary.com/afroglot/image/upload/v1772788155/zwo9jxmh52x6dgxy5pes.svg">
-                        </a>
-                    </section>
-                </div>
-            </section>
-
-            <section aria-label="featured stories">
-                <h2>Featured Stories</h2>
-            </section>
-        </main>
-
-        <footer aria-label="CTA & footer">
-            <div>
-                <h3>Celebrate a woman today</h3>
-                <p>
-                    Submit or nominate a story about an amazing woman with
-                    Luminary
-                </p>
-                <div>
-                    <button id="submit-a-story-btn">Submit a story</button>
-                    <button id="nominate-a-woman-btn">Nominate a woman</button>
-                </div>
+        <div class="flex flex-col gap-10 feature-container">
+          <!-- submit feature -->
+          <article class="feature-card flex flex-row-rev gap-9 items-center">
+            <div class="flex flex-col gap-9">
+              <h3 class="feature-heading">Submit</h3>
+              <p class="feature-description">
+                Luminary helps you search for iconic female figures based on
+                their names fields and accolades.
+              </p>
             </div>
-            <hr />
-            <div id="quick-links">
-                <a href="#">Support</a>
-                <a href="#">Blog</a>
+
+            <picture class="submit-image-container">
+              <img
+                class="feature-image"
+                src="../assets/images/submit.png"
+                alt="image showcasing the submit feature"
+              />
+            </picture>
+          </article>
+
+          <!-- search feature -->
+          <article class="feature-card flex flex-row gap-9 items-center">
+            <div class="flex flex-col gap-9">
+              <h3 class="feature-heading">Search</h3>
+              <p class="feature-description">
+                Luminary helps you search for iconic female figures based on
+                their names fields and accolades.
+              </p>
             </div>
-        </footer>
-        <script src="../js/index.js"></script>
-    </body>
+
+            <picture class="search-image-container">
+              <img
+                class="feature-image"
+                src="../assets/images/search.png"
+                alt="image showcasing the search feature"
+              />
+            </picture>
+          </article>
+
+          <!-- browse feature -->
+          <article class="feature-card flex flex-row-rev gap-9 items-center">
+            <div class="flex flex-col gap-9">
+              <h3 class="feature-heading">Browse</h3>
+              <p class="feature-description">
+                Luminary helps you search for iconic female figures based on
+                their names fields and accolades.
+              </p>
+            </div>
+
+            <picture class="browse-image-container">
+              <img
+                class="browse-image"
+                src="../assets/images/browse.png"
+                alt="image showcasing the browse feature"
+              />
+            </picture>
+          </article>
+        </div>
+      </section>
+      <section aria-label="team & contribution" class="contributors">
+        <h2>Meet the Contributors</h2>
+        <div id="contributorsGrid" class="contributors-grid"></div>
+      </section>
+
+      <!-- modal -->
+      <section id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <img id="modalImage" />
+          <h3 id="modalName"></h3>
+          <p id="modalRole"></p>
+          <p id="modalBio"></p>
+          <section class="modal-links">
+            <a id="modalGithub" target="_blank">
+              <img
+                src="https://res.cloudinary.com/afroglot/image/upload/v1772788154/jvuqduz2feacaqr6t0uv.svg"
+              />
+            </a>
+            <a id="modalLinkedin" target="_blank">
+              <img
+                src="https://res.cloudinary.com/afroglot/image/upload/v1772788155/zwo9jxmh52x6dgxy5pes.svg"
+              />
+            </a>
+          </section>
+        </div>
+      </section>
+    </main>
+    <footer aria-label="CTA & footer">
+      <div>
+        <h3>Celebrate a woman today</h3>
+        <p>Submit or nominate a story about an amazing woman with Luminary</p>
+        <div>
+          <button id="submit-a-story-btn">Submit a story</button>
+          <button id="nominate-a-woman-btn">Nominate a woman</button>
+        </div>
+      </div>
+      <hr />
+      <div id="quick-links">
+        <a href="#">Support</a>
+        <a href="#">Blog</a>
+      </div>
+    </footer>
+
+    <script src="../js/index.js"></script>
+  </body>
 </html>
