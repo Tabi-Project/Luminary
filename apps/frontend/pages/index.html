@@ -17,7 +17,7 @@
     <title>Luminary</title>
   </head>
   <body>
-    <header>
+    <header class="header-container">
       <nav
         aria-label="primary navigation"
         class="header-section__nav flex flex-row justify-between gap-6 items-center px-4 py-4"
@@ -38,64 +38,140 @@
         <a>Blog</a>
         <button class="nav-cta__btn rounded-md p-2 px-4">Log in</button>
       </nav>
-      <section class="hero-section" aria-label="hero">
-        <h1 class="hero-title">Celebrating our women</h1>
+      <section class="hero-section gap-8" aria-label="hero">
+        <h1 class="hero-title">Celebrating our Women</h1>
         <p class="hero-description">
           Luminary is a community-powered directory and news platform
           celebrating women who are driving change across all fields — business,
           science, arts, activism, sports, technology, agriculture, education
           and more.
         </p>
-        <button class="hero-cta__btn rounded-md p-2 px-4">
-          Submit a story
-        </button>
+        <button class="rounded-md p-2 px-4">Submit a story</button>
+        <picture class="hero-image">
+          <source
+            media="(min-width: 768px)"
+            srcset="../assets/images/hero-illustration.png"
+            type="image/png"
+          />
+          <img
+            src="../assets/images/hero-illustration.png"
+            class="rounded-2xl"
+            alt="Illustration of different colored women across different cultures and disciplines: military, health, education and leadership"
+          />
+        </picture>
+        <div class="metrics-container">
+          <div class="metric-card">
+            <picture>
+              <source src="../assets/images/metric-1.png" type="image/png" />
+              <img
+                src="../assets/images/metric-1.png"
+                alt="Illustration of different colored women across different cultures and disciplines: military, health, education and leadership"
+                width="130"
+              />
+            </picture>
 
-        <img src="../assets/images/hero-illustration.png" />
+            <p class="text-center">
+              120+ Women <br />
+              represented
+            </p>
+          </div>
+          <div class="metric-card">
+            <picture>
+              <source src="../assets/images/metric-2.png" type="image/png" />
+              <img
+                src="../assets/images/metric-2.png"
+                alt="Illustration of different colored women across different cultures and disciplines: military, health, education and leadership"
+                width="100"
+              />
+            </picture>
+
+            <p class="text-center">
+              Across 35+ <br />
+              countries
+            </p>
+          </div>
+          <div class="metric-card">
+            <picture>
+              <source src="../assets/images/metric-3.png" type="image/png" />
+              <img
+                src="../assets/images/metric-3.png"
+                alt="Illustration of different colored women across different cultures and disciplines: military, health, education and leadership"
+                width="100"
+              />
+            </picture>
+
+            <p class="text-center">
+              In more than 22<br />
+              fields
+            </p>
+          </div>
+        </div>
       </section>
     </header>
-       <main class="landing-page-content">
-            <section aria-label="app features">
-                <h2 class="text-center py-8">App Features</h2>
+    <main class="landing-page-content">
+      <section aria-label="app features">
+        <h2 class="text-center py-8">App Features</h2>
 
-                <div class="flex flex-col gap-10 feature-container">
-                    <!-- submit feature -->
-                    <article class="feature-card flex flex-row-rev gap-9 items-center">
-                        <div class="flex flex-col gap-9">
-                            <h3 class="feature-heading">Submit</h3>
-                            <p class="feature-description">Luminary  helps you search for iconic female figures based on their names fields and accolades.</p>
-                        </div>
+        <div class="flex flex-col gap-10 feature-container">
+          <!-- submit feature -->
+          <article class="feature-card flex flex-row-rev gap-9 items-center">
+            <div class="flex flex-col gap-9">
+              <h3 class="feature-heading">Submit</h3>
+              <p class="feature-description">
+                Luminary helps you search for iconic female figures based on
+                their names fields and accolades.
+              </p>
+            </div>
 
-                        <picture class="submit-image-container">
-                            <img class="feature-image" src="../assets/images/submit.png" alt="image showcasing the submit feature">
-                        </picture>   
-                    </article>
+            <picture class="submit-image-container">
+              <img
+                class="feature-image"
+                src="../assets/images/submit.png"
+                alt="image showcasing the submit feature"
+              />
+            </picture>
+          </article>
 
-                    <!-- search feature -->
-                    <article class="feature-card flex flex-row gap-9 items-center">
-                        <div class="flex flex-col gap-9">
-                            <h3 class="feature-heading">Search</h3>
-                            <p class="feature-description">Luminary helps you search for iconic female figures based on their names fields and accolades.</p>
-                        </div>
+          <!-- search feature -->
+          <article class="feature-card flex flex-row gap-9 items-center">
+            <div class="flex flex-col gap-9">
+              <h3 class="feature-heading">Search</h3>
+              <p class="feature-description">
+                Luminary helps you search for iconic female figures based on
+                their names fields and accolades.
+              </p>
+            </div>
 
-                        <picture class="search-image-container">
-                            <img class="feature-image" src="../assets/images/search.png" alt="image showcasing the search feature">
-                        </picture>   
-                    </article>
+            <picture class="search-image-container">
+              <img
+                class="feature-image"
+                src="../assets/images/search.png"
+                alt="image showcasing the search feature"
+              />
+            </picture>
+          </article>
 
-                    <!-- search feature -->
-                    <article class="feature-card flex flex-row-rev gap-9 items-center">
-                        <div class="flex flex-col gap-9">
-                            <h3 class="feature-heading">Browse</h3>
-                            <p class="feature-description">Luminary helps you search for iconic female figures based on their names fields and accolades.</p>
-                        </div>
+          <!-- search feature -->
+          <article class="feature-card flex flex-row-rev gap-9 items-center">
+            <div class="flex flex-col gap-9">
+              <h3 class="feature-heading">Browse</h3>
+              <p class="feature-description">
+                Luminary helps you search for iconic female figures based on
+                their names fields and accolades.
+              </p>
+            </div>
 
-                        <picture class="browse-image-container">
-                            <img class="browse-image" src="../assets/images/browse.png" alt="image showcasing the browse feature">
-                        </picture>   
-                    </article>
-                </div>
-            </section>
-
+            <picture class="browse-image-container">
+              <img
+                class="browse-image"
+                src="../assets/images/browse.png"
+                alt="image showcasing the browse feature"
+              />
+            </picture>
+          </article>
+        </div>
+      </section>
+    </main>
     <footer aria-label="CTA & footer">
       <div>
         <h3>Celebrate a woman today</h3>

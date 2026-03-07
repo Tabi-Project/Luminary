@@ -81,24 +81,28 @@
     --font-size-lg: 1.125rem;
     --font-size-xl: 1.25rem;
     --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    --font-size-5xl: 3rem;
+    --font-size-6xl: 3.75rem;
 
-        /* Spacing scale */
-        --space-1: 0.25rem;
-        --space-2: 0.5rem;
-        --space-3: 0.75rem;
-        --space-4: 1rem;
-        --space-5: 1.25rem;
-        --space-6: 1.5rem;
-        --space-8: 2rem;
-        --space-9: 2.5rem;
-        --space-10: 6rem;
+    /* Spacing scale */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-9: 2.5rem;
+    --space-10: 6rem;
 
-        /* Radius */
-        --radius-sm: 0.25rem;
-        --radius-md: 0.5rem;
-        --radius-lg: 0.75rem;
-        --radius-xl: 1.5rem;
-        --radius-2xl: 1.5rem;
+    /* Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1.5rem;
+    --radius-2xl: 1.5rem;
 
     /* Font family */
     --font-raleway:
@@ -200,7 +204,12 @@
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
-
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
   /* Layout container */
   .container {
     max-width: 1200px;
@@ -262,13 +271,13 @@
     display: inline-flex;
   }
 
-    .flex-row {
-        flex-direction: row;
-    }
+  .flex-row {
+    flex-direction: row;
+  }
 
-    .flex-row-rev{
-        flex-direction: row-reverse;
-    }
+  .flex-row-rev {
+    flex-direction: row-reverse;
+  }
 
   .flex-col {
     flex-direction: column;
@@ -369,28 +378,28 @@
     gap: var(--space-6);
   }
 
-    .gap-8 {
-        gap: var(--space-8);
-    }
+  .gap-8 {
+    gap: var(--space-8);
+  }
 
-    .gap-9{
-        gap: var(--space-9);
-    }
+  .gap-9 {
+    gap: var(--space-9);
+  }
 
-    .gap-10{
-        gap: var(--space-10);
-    }
+  .gap-10 {
+    gap: var(--space-10);
+  }
 
-    /* text alignment utilities */
-    .text-center{
-        text-align: center;
-    }
+  /* text alignment utilities */
+  .text-center {
+    text-align: center;
+  }
 
-    .text-left{
-        text-align: left;
-    }
+  .text-left {
+    text-align: left;
+  }
 
-    .text-right{
-        text-align: right;
-    }
+  .text-right {
+    text-align: right;
+  }
 }
