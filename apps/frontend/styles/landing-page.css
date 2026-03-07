@@ -152,7 +152,131 @@
         }
     }
     /* ----------------------------------------------- */
+    /* -------  Contributors Section -------*/
+    .contributors {
+        padding: var(--space-8) var(--space-4);
+        text-align: center;
+    }
 
+    .contributors-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 140px);
+        justify-content: center;
+        gap: var(--space-6);
+        margin-top: var(--space-8);
+
+    }
+
+    .contributor-card {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .contributor-card:hover {
+        transform: translateY(-6px);
+    }
+
+    .contributor-card img {
+        width: 110px;
+        height: 110px;
+        border-radius: var(--radius-full, 50%);
+        object-fit: cover;
+        transition: box-shadow 0.2s;
+        background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600));
+        padding: 2px;
+    }
+
+    .contributor-card img:hover {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .contributor-card h3 {
+        margin-top: var(--space-2);
+        font-size: var(--font-size-sm);
+        color: var(--color-heading-500);
+    }
+
+    .contributor-card p {
+        font-size: var(--font-size-xs);
+        color: var(--color-text-400);
+    }
+    /* ------ Modal ------ */
+    .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background: var(--card);
+        padding: var(--space-8);
+        border-radius: var(--radius-lg);
+        width: 360px;
+        text-align: center;
+        position: relative;
+        animation: modalPop 0.25s ease;
+        color: var(--card-foreground);
+    }
+
+    .modal-content img {
+        width: 120px;
+        height: 120px;
+        border-radius: var(--radius-full, 50%);
+        object-fit: cover;
+    }
+
+    .modal-content h3 {
+        margin-top: var(--space-2);
+        color: var(--color-heading-500);
+    }
+    .modal-content p {
+        margin-top: var(--space-1);
+    }
+    #modalRole{
+        color: var(--color-primary-600);
+    }
+    .close {
+        position: absolute;
+        top: var(--space-2);
+        right: var(--space-4);
+        font-size: 22px;
+        cursor: pointer;
+    }
+
+    .modal-links {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-5);
+        margin-top: var(--space-4);
+    }
+
+    .modal-links img {
+        width: 36px;
+        height: 36px;
+    }
+
+    @keyframes modalPop {
+        from {
+            transform: scale(0.8);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .contributors-grid {
+            grid-template-columns: repeat(2, 140px);
+        }
+        .contributor-card:nth-child(5) {
+            grid-column: auto;
+        }
+    }
 
     footer {
         width: 100%;
