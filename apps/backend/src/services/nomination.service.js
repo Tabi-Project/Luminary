@@ -36,6 +36,7 @@ export const create = async (nominationData) => {
         email: nominationData.nominee_email,
         country: nominationData.nominee_country,
         field: nominationData.nominee_field,
+        profile_image_url: nominationData.nominee_profile_image_url,
         organization: nominationData.nominee_organization,
       })
       .select("id")
