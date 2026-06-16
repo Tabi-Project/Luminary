@@ -108,12 +108,69 @@ Profiles and news items are organised using a shared category system:
 
 ---
 
+## Developer Setup
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v18+
+- [pnpm](https://pnpm.io/) v8+ (`npm install -g pnpm`)
+
+### Monorepo Structure
+
+This project uses **pnpm workspaces** with [Turborepo](https://turbo.build/). The two apps are:
+
+| App | Path | Description |
+|-----|------|-------------|
+| `web` | `apps/web` | Next.js frontend |
+| `server` | `apps/server` | Express.js backend |
+
+### Install all dependencies
+
+From the repo root:
+
+```bash
+pnpm install
+```
+
+### Run in development
+
+```bash
+pnpm dev
+```
+
+This starts both apps concurrently via Turborepo.
+
+### Installing new packages
+
+Always run installs from the **repo root** using the `--filter` flag to target a specific app:
+
+```bash
+# Add a dependency to the frontend
+pnpm add <package> --filter web
+
+# Add a dependency to the backend
+pnpm add <package> --filter server
+
+# Add a dev dependency
+pnpm add -D <package> --filter web
+```
+
+### Environment variables
+
+Each app has its own `.env` file. Copy the example files and fill in your values:
+
+```bash
+cp apps/server/.env.example apps/server/.env
+```
+
+---
+
 ## Technology Stack
 
 **Frontend**
-- HTML
-- CSS
-- JavaScript
+- Next.js 16 (React 19)
+- TypeScript
+- Tailwind CSS
 
 **Backend**
 - Node.js
