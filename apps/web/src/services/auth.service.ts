@@ -1,3 +1,22 @@
+import { endpoints } from "@/data/endpoints";
+import { ErrorApiResponse, Response } from "@/types/api.type";
+import { axiosPost } from "@/utils/api";
+
 export class AuthService {
-  static async login() {}
+  static async login(payload: unknown) {
+    try {
+      const response = await axiosPost<Response<unknown>>(
+        endpoints.auth.login,
+        payload,
+      );
+
+      if (!("data" in response)) {
+        return response as ErrorApiResponse;
+      }
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

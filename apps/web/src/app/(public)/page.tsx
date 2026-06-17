@@ -1,12 +1,10 @@
 import { Button } from "@/components/common/button";
-import { FullScreenLoader } from "@/components/common/loader";
 
 export default function Home() {
   return (
-    <FullScreenLoader />
-    // <div className="w-full max-w-6xl flex flex-col items-center justify-center p-4 md:p-8 lg:p-10">
-    //   <HeroSection />
-    // </div>
+    <div className="w-full max-w-6xl flex flex-col items-center justify-center p-4 md:p-8 lg:p-10">
+      <HeroSection />
+    </div>
   );
 }
 

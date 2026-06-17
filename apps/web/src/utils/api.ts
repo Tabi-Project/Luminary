@@ -1,4 +1,5 @@
-import axios, { AxiosInstance } from "axios";
+import { ErrorApiResponse } from "@/types/api.type";
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 const instance: AxiosInstance = axios.create({
   baseURL:
@@ -19,7 +20,75 @@ instance.interceptors.response.use(
   },
 );
 
-export async function axiosGet() {}
-export async function axiosPost() {}
-export async function axiosPatch() {}
-export async function axiosDelete() {}
+export async function axiosGet<T = unknown>(
+  url: string,
+  {
+    params,
+    config,
+  }: {
+    params?: Record<string, unknown>;
+    config?: AxiosRequestConfig;
+  },
+) {
+  try {
+    const response = await instance.get<T>(url, { params, ...config });
+
+    return response.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error.response?.data as ErrorApiResponse;
+    }
+
+    throw error;
+  }
+}
+
+export async function axiosPost<T = unknown>(
+  url: string,
+  payload?: unknown,
+  { config }: { config?: AxiosRequestConfig } = {},
+) {
+  try {
+    const response = await instance.post<T>(url, payload, config);
+    return response.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error.response?.data as ErrorApiResponse;
+    }
+
+    throw error;
+  }
+}
+
+export async function axiosPatch<T = unknown>(
+  url: string,
+  payload?: unknown,
+  { config }: { config?: AxiosRequestConfig } = {},
+) {
+  try {
+    const response = await instance.patch<T>(url, payload, config);
+    return response.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error.response?.data as ErrorApiResponse;
+    }
+
+    throw error;
+  }
+}
+
+export async function axiosDelete<T = unknown>(
+  url: string,
+  { config }: { config?: AxiosRequestConfig } = {},
+) {
+  try {
+    const response = await instance.delete<T>(url, config);
+    return response.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error.response?.data as ErrorApiResponse;
+    }
+
+    throw error;
+  }
+}
