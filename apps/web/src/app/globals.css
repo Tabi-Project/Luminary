@@ -5,7 +5,7 @@
     --tetiary: #1d4ed8;
 
     --border: #e5e7eb;
-    --bg-main: #ffffff;
+    --bg-main: #f1f5f9;
     --bg-surface: #f3f4f6;
 
     --success: #22c55e;
@@ -37,5 +37,27 @@ body {
     isolation: isolate;
     color: var(--text-main);
     background: var(--bg-main);
-    font-family: var(--font-raleway);
+    font-family: var(--font-raleway), sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: "";
+    left: 0;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    position: absolute;
+    transition: width ease 0.3s;
+    background: var(--primary);
+}
+.nav-link:hover::after {
+    width: 100%;
 }

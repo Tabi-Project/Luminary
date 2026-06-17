@@ -1,4 +1,5 @@
-import "./globals.css";
+import { NavBar } from "@/components/nav-bar";
+import "../globals.css";
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 
@@ -20,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${raleway.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
