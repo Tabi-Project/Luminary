@@ -4,6 +4,8 @@
     --primary: #0ea5a4;
     --tetiary: #1d4ed8;
 
+    --light-gray: #d9dfe8;
+
     --border: #e5e7eb;
     --bg-main: #f1f5f9;
     --bg-surface: #f3f4f6;
@@ -12,8 +14,12 @@
     --warning: #f59e0b;
     --danger: #ef4444;
 
-    --text-main: #111827;
     --muted: #6b7280;
+    --text-main: #111827;
+    --muted-blue: #dee7f4;
+
+    --space-8: 2rem;
+    --radius-2xl: 1.5rem;
 }
 
 @theme inline {
@@ -24,13 +30,20 @@
     --color-primary: var(--primary);
     --color-tertiary: var(--tetiary);
 
+    --color-light-gray: var(--light-gray);
+
     --color-danger: var(--danger);
     --color-warning: var(--warning);
     --color-success: var(--success);
     --color-text-main: var(--text-main);
     --color-bg-surface: var(--bg-surface);
 
+    --color-muted-blue: var(--muted-blue);
     --color-muted: var(--muted);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -42,6 +55,10 @@ body {
 
 button {
     cursor: pointer;
+}
+
+h2 {
+    @apply font-extrabold text-text-main text-2xl;
 }
 
 .nav-link {
