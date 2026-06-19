@@ -16,6 +16,17 @@
     --muted: #6b7280;
 }
 
+/* Base UI Select popup transitions */
+[data-starting-style] {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+}
+[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+}
+
+
 @theme inline {
     --color-background: var(--bg-main);
     --font-raleway: var(--font-raleway), sans-serif;

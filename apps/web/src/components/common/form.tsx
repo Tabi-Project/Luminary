@@ -8,6 +8,7 @@ interface FormFieldProps extends FormLabelProps {
   placeholder?: string;
   inputClassName?: string;
   className?: string;
+  labelClassName?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -22,6 +23,7 @@ export function FormField({
   onChange,
   inputClassName,
   className,
+  labelClassName,
 }: FormFieldProps) {
   const inputStyling = cn(
     "w-full px-4 py-2 h-10 border border-border",
@@ -32,7 +34,12 @@ export function FormField({
 
   return (
     <div className={formFieldStyling}>
-      <FormLabel label={label} htmlFor={htmlFor} required={required} />
+      <FormLabel
+        label={label}
+        htmlFor={htmlFor}
+        required={required}
+        className={labelClassName}
+      />
       <input
         type={type}
         name={name}
@@ -41,6 +48,7 @@ export function FormField({
         onChange={onChange}
         placeholder={placeholder}
         className={inputStyling}
+        required={required}
       />
     </div>
   );
