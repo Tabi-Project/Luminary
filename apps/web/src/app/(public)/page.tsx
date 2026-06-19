@@ -1,25 +1,15 @@
-import { Button } from "@/components/common/button";
+import { Footer } from "@/components/footer";
+import { FeaturesSection } from "@/components/landing/sections/feature-section";
+import { HeroSection } from "@/components/landing/sections/hero-section";
+import { ContributorsSection } from "@/components/landing/sections/contributors-section";
 
 export default function Home() {
   return (
-    <div className="w-full max-w-6xl flex flex-col items-center justify-center p-4 md:p-8 lg:p-10">
+    <div className="w-full max-w-6xl flex flex-col items-center justify-center p-4 md:px-8 lg:px-10 space-y-14">
       <HeroSection />
+      <FeaturesSection />
+      <ContributorsSection />
+      <Footer />
     </div>
   );
 }
-
-const HeroSection = () => {
-  return (
-    <div className="flex flex-col items-center text-center gap-5">
-      <h1 className="text-6xl font-bold text-text-main">
-        Celebrating our Women
-      </h1>
-      <p className="text-muted font-light">
-        Luminary is a community-powered directory and news platform celebrating
-        women who are driving change across all fields — business, science,
-        arts, activism, sports, technology, agriculture, education and more.
-      </p>
-      <Button text="Submit a story" />
-    </div>
-  );
-};

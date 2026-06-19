@@ -1,0 +1,69 @@
+.hero-image-outer {
+    position: relative;
+    display: inline-block;
+    margin-top: var(--space-8);
+}
+
+.hero-image-outer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #97d5d7;
+    border-radius: var(--radius-2xl);
+    transform: rotate(0deg) scale(0.9);
+    animation: cardReveal 1s ease-in 0.5s forwards;
+    z-index: 0;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    z-index: 1;
+    height: 500px;
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+}
+
+.hero-image-track {
+    display: flex;
+    flex-direction: column;
+    animation: verticalMarquee 20s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-image-track {
+        animation: none;
+    }
+}
+
+.hero-image-track picture {
+    display: block;
+    flex-shrink: 0;
+}
+
+.hero-image-track img {
+    width: 100%;
+    display: block;
+}
+
+@keyframes verticalMarquee {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-50%);
+    }
+}
+
+@keyframes cardReveal {
+    0% {
+        transform: rotate(0deg) scale(0.9);
+        opacity: 0;
+    }
+    40% {
+        transform: rotate(6deg) scale(1.02);
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(4deg) scale(1);
+    }
+}
