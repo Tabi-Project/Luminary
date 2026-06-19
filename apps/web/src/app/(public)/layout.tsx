@@ -21,9 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${raleway.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full">
         <NavBar />
-        {children}
+        <main className="flex flex-col items-center">{children}</main>
       </body>
     </html>
   );
