@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Globe } from 'lucide-react';
+import { Globe, UserCircle } from 'lucide-react';
 import { NomineeProfile } from '@/types/profile.type';
 import { cn } from '@/utils/cn';
 
@@ -11,17 +11,18 @@ interface ProfileCardProps {
 
 const ProfileCard: React.FC<ProfileCardProps> = ({ profile, className }) => {
   return (
-    <div className={cn(
-      "bg-white rounded-[2.5rem] p-8 shadow-sm flex flex-col gap-6 hover:shadow-md transition-all duration-300",
-      className
-    )}>
+    <article
+      className={cn(
+        "bg-white rounded-[2.5rem] p-8 shadow-sm flex flex-col gap-6 hover:shadow-md transition-all duration-300",
+        className,
+      )}
+    >
       {/* Header section */}
       <div className="flex gap-5 items-start">
         <div className="relative w-24 h-24 flex-shrink-0">
           <img
             src={profile.profilePhoto}
             alt={profile.name}
-            
             className="object-cover rounded-[1.25rem]"
           />
         </div>
@@ -64,15 +65,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, className }) => {
         </h4>
         <div className="flex flex-col gap-3">
           {profile.socialLinks.map((link, idx) => (
-            <div key={idx} className="flex items-center gap-3 text-[var(--color-text-main)]">
-              <Globe className="w-5 h-5 text-[var(--color-muted)] opacity-70" />
-              <a 
-                href={link.startsWith('http') ? link : `https://${link}`} 
-                target="_blank" 
+            <div
+              key={idx}
+              className="flex items-center gap-3 text-[var(--color-text-main)]"
+            >
+              <UserCircle className="w-5 h-5 text-[var(--color-muted)] opacity-70" />
+              <a
+                href={link.startsWith("http") ? link : `https://${link}`}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-base font-semibold hover:underline truncate"
               >
-                {link.replace(/^https?:\/\//, '')}
+                {link.replace(/^https?:\/\//, "")}
               </a>
             </div>
           ))}
@@ -86,16 +90,19 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, className }) => {
         </h4>
         <div className="flex flex-col gap-3">
           {profile.evidence.map((item, idx) => (
-            <div 
-              key={idx} 
-              className="bg-[#eef2ff] p-5 rounded-2xl flex flex-col gap-1 border border-[#e0e7ff]"
+            <div
+              key={idx}
+              className="flex items-center gap-3 text-[var(--color-text-main)]"
             >
-              <span className="text-base font-bold text-[var(--color-text-main)]">
-                {item.title}
-              </span>
-              <span className="text-sm text-[var(--color-muted)] font-medium">
-                {item.subtitle}
-              </span>
+              <Globe className="w-5 h-5 text-[var(--color-muted)] opacity-70" />
+              <a
+                href={item.startsWith("http") ? item : `https://${item}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-base font-semibold hover:underline truncate"
+              >
+                {item.replace(/^https?:\/\//, "")}
+              </a>
             </div>
           ))}
         </div>
@@ -105,7 +112,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ profile, className }) => {
       <button className="w-full bg-[#1e293b] text-white py-4 rounded-2xl font-bold text-base hover:bg-[#0f172a] transition-colors mt-4">
         View Full Profile
       </button>
-    </div>
+    </article>
   );
 };
 
