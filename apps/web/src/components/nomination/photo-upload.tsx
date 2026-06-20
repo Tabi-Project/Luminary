@@ -1,6 +1,6 @@
 "use client";
 
-import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_SIZE_MB } from "@/data/nomination";
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_SIZE_MB } from "@/data/constants/nomination";
 import { PhotoUploadProps } from "@/types/nomination.type";
 import Image from "next/image";
 import { useEffect, useMemo } from "react";

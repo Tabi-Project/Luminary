@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default function NominatePage() {
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 p-4 md:p-8 lg:p-10">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 p-4 md:p-8 lg:p-10">
       <NominationHeader />
       <NominationSection />
-    </main>
+    </div>
   );
 }

@@ -9,19 +9,18 @@ import {
 import { CollapsibleSection } from "@/components/nomination/collapsible-section";
 import { LinkFields } from "@/components/nomination/link-fields";
 import { PhotoUpload } from "@/components/nomination/photo-upload";
-import { FIELDS_OF_WORK } from "@/data/nomination";
+import { FIELDS_OF_WORK } from "@/data/constants/nomination";
 import { NominationService } from "@/services/nomination.service";
 import {
   FormStatus,
   NominationFormState,
-  NominationPayload,
   NominationTab,
   NomineeDetails,
   NominatorDetails,
 } from "@/types/nomination.type";
 import { getApiErrorMessage } from "@/utils/api";
 import { cn } from "@/utils/cn";
-import { splitName } from "@/utils/string";
+import { useMutation } from "@tanstack/react-query";
 import { FormEvent, useState } from "react";
 
 const INITIAL_STATE: NominationFormState = {
@@ -44,51 +43,26 @@ const TABS: { id: NominationTab; label: string }[] = [
   { id: "self-submission", label: "Self Submission" },
 ];
 
-function toPayload(
-  state: NominationFormState,
-  tab: NominationTab,
-  imageUrl: string,
-): NominationPayload {
-  const isSelfSubmission = tab === "self-submission";
-  const { firstName, lastName } = splitName(state.nominee.fullName);
-
-  const payload: NominationPayload = {
-    is_self_submission: isSelfSubmission,
-    nominee_first_name: firstName,
-    nominee_last_name: lastName,
-    nominee_email: state.nominee.email.trim(),
-    nominee_country: state.nominee.region.trim(),
-    nominee_field: state.nominee.field,
-    nominee_organization: "",
-    nominee_profile_image_url: imageUrl,
-    evidence_urls: state.evidenceLinks.map((link) => link.trim()).filter(Boolean),
-    supporting_urls: state.supportingLinks
-      .map((link) => link.trim())
-      .filter(Boolean),
-    description: state.nominee.description.trim(),
-  };
-
-  if (!isSelfSubmission) {
-    const { firstName: nominatorFirst, lastName: nominatorLast } = splitName(
-      state.nominator.fullName,
-    );
-
-    payload.nominator_first_name = nominatorFirst;
-    payload.nominator_last_name = nominatorLast;
-    payload.nominator_email = state.nominator.email.trim();
-    payload.relationship_to_nominee = state.nominator.relationship.trim();
-  }
-
-  return payload;
-}
-
 export function NominationForm() {
   const [tab, setTab] = useState<NominationTab>("nomination");
   const [state, setState] = useState<NominationFormState>(INITIAL_STATE);
   const [status, setStatus] = useState<FormStatus>(IDLE_STATUS);
-  const [loading, setLoading] = useState(false);
 
   const isSelfSubmission = tab === "self-submission";
+
+  const mutation = useMutation({
+    mutationFn: () => NominationService.submit(state, tab),
+    onSuccess: () => {
+      setStatus({
+        type: "success",
+        message: "Submission received. We will reach out shortly.",
+      });
+      setState(INITIAL_STATE);
+    },
+    onError: (error) => {
+      setStatus({ type: "error", message: getApiErrorMessage(error) });
+    },
+  });
 
   const updateNominator = (field: keyof NominatorDetails, value: string) => {
     setState((prev) => ({
@@ -110,7 +84,7 @@ export function NominationForm() {
     setStatus(IDLE_STATUS);
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus(IDLE_STATUS);
 
@@ -122,29 +96,7 @@ export function NominationForm() {
       return;
     }
 
-    setLoading(true);
-
-    try {
-      const upload = await NominationService.uploadPhoto(state.photo);
-
-      if ("error" in upload) throw upload;
-
-      const result = await NominationService.create(
-        toPayload(state, tab, upload.data.url),
-      );
-
-      if ("error" in result) throw result;
-
-      setStatus({
-        type: "success",
-        message: "Submission received. We will reach out shortly.",
-      });
-      setState(INITIAL_STATE);
-    } catch (error) {
-      setStatus({ type: "error", message: getApiErrorMessage(error) });
-    } finally {
-      setLoading(false);
-    }
+    mutation.mutate();
   };
 
   return (
@@ -326,7 +278,7 @@ export function NominationForm() {
         <Button
           type="submit"
           text="Submit Nomination"
-          loading={loading}
+          loading={mutation.isPending}
           className="rounded-full px-6"
         />
         {status.type !== "idle" && (

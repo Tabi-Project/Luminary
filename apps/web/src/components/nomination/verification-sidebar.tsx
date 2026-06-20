@@ -1,4 +1,4 @@
-import { VERIFICATION_STEPS } from "@/data/nomination";
+import { VERIFICATION_STEPS } from "@/data/constants/nomination";
 
 export function VerificationSidebar() {
   return (
