@@ -23,6 +23,7 @@
 
     --color-primary: var(--primary);
     --color-tertiary: var(--tetiary);
+    --color-border: var(--border);
 
     --color-danger: var(--danger);
     --color-warning: var(--warning);

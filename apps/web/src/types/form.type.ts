@@ -3,3 +3,8 @@ export interface FormLabelProps {
   htmlFor?: string;
   required?: boolean;
 }
+
+export interface SelectOption {
+  label: string;
+  value: string;
+}
