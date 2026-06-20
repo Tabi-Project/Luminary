@@ -1,63 +1,69 @@
 @import "tailwindcss";
 
 :root {
-    --primary: #0ea5a4;
-    --tetiary: #1d4ed8;
+  --primary: #0ea5a4;
+  --tetiary: #1d4ed8;
 
-    --border: #e5e7eb;
-    --bg-main: #f1f5f9;
-    --bg-surface: #f3f4f6;
+  --border: #e5e7eb;
+  --bg-main: #f1f5f9;
+  --bg-surface: #f3f4f6;
 
-    --success: #22c55e;
-    --warning: #f59e0b;
-    --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
 
-    --text-main: #111827;
-    --muted: #6b7280;
+  --text-main: #111827;
+  --muted: #6b7280;
+
+  --color-bg-300: #d7e0e9;
+  --color-heading-500: #1a2330; /* base */
+  --color-heading-600: #141c26;
+  --color-primary-400: #32cfcf;
+  --color-white: #ffffff;
 }
 
 @theme inline {
-    --color-background: var(--bg-main);
-    --font-raleway: var(--font-raleway), sans-serif;
-    --color-foreground: var(--text-main);
+  --color-background: var(--bg-main);
+  --font-raleway: var(--font-raleway), sans-serif;
+  --color-foreground: var(--text-main);
 
-    --color-primary: var(--primary);
-    --color-tertiary: var(--tetiary);
+  --color-primary: var(--primary);
+  --color-tertiary: var(--tetiary);
 
-    --color-danger: var(--danger);
-    --color-warning: var(--warning);
-    --color-success: var(--success);
-    --color-text-main: var(--text-main);
-    --color-bg-surface: var(--bg-surface);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-text-main: var(--text-main);
+  --color-bg-surface: var(--bg-surface);
 
-    --color-muted: var(--muted);
+  --color-muted: var(--muted);
 }
 
 body {
-    isolation: isolate;
-    color: var(--text-main);
-    background: var(--bg-main);
-    font-family: var(--font-raleway), sans-serif;
+  isolation: isolate;
+  color: var(--text-main);
+  background: var(--bg-main);
+  font-family: var(--font-raleway), sans-serif;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .nav-link {
-    position: relative;
+  position: relative;
 }
 
 .nav-link::after {
-    content: "";
-    left: 0;
-    width: 0;
-    height: 2px;
-    bottom: -2px;
-    position: absolute;
-    transition: width ease 0.3s;
-    background: var(--primary);
+  content: "";
+  left: 0;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  position: absolute;
+  transition: width ease 0.3s;
+  background: var(--primary);
 }
 .nav-link:hover::after {
-    width: 100%;
+  width: 100%;
 }
