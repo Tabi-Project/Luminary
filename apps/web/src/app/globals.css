@@ -16,6 +16,12 @@
   --warning: #f59e0b;
   --danger: #ef4444;
 
+  --color-bg-300: #d7e0e9;
+  --color-heading-500: #1a2330; /* base */
+  --color-heading-600: #141c26;
+  --color-primary-400: #32cfcf;
+  --color-white: #ffffff;
+
   --text-main: #111827;
   --muted: #6b7280;
 }
