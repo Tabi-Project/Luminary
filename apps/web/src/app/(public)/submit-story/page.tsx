@@ -150,7 +150,7 @@ export default function SubmitStoryPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#E4EBF3] px-5 pt-10 pb-16">
+    <main className="min-h-screen bg-[#E4EBF3] w-full px-5 pt-10 pb-16">
       <div className="max-w-2xl mx-auto flex flex-col gap-6">
         <div>
           <h1 className="text-4xl lg:text-5xl font-bold">Submit A Story</h1>
