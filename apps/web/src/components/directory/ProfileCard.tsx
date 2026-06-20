@@ -1,5 +1,7 @@
 import type { FC } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/common/button";
 import { Globe, UserCircle } from 'lucide-react';
 import { NomineeProfile } from '@/types/profile.type';
 import { ProfileCardProps } from "@/types/profile.type";
@@ -16,7 +18,9 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
     >
       <div className="flex gap-5 items-center">
         <div className="relative w-24 h-24 shrink-0">
-          <img
+          <Image
+            width={96}
+            height={96}
             src={profile.profilePhoto}
             alt={profile.firstname}
             className="object-cover rounded-[1.25rem]"
@@ -90,9 +94,11 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
         </div>
       </div>
 
-      <button className="w-full bg-[#1e293b] text-white py-4 rounded-2xl font-bold text-base hover:bg-[#0f172a] transition-colors mt-4">
-        View Full Profile
-      </button>
+
+      <Button
+        text="View Full Profile"
+        className="w-full bg-primary text-white justify-center py-4 rounded-2xl font-bold text-base hover:bg-[#097676] transition-colors mt-4"
+      />
     </article>
   );
 };
