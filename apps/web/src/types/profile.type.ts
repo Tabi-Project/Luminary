@@ -1,11 +1,17 @@
 export interface NomineeProfile {
   id: string;
-  name: string;
+  firstname: string;
+  lastname: string;
   field: string;
   region?: string;
   impact: string;
   tags: string[];
   profilePhoto: string;
-  socialLinks: string[]; // Links (Business website, projects, publications, social profiles)
-  evidence: string[]; // Evidence section (Links to press coverage or documents)
+  socialLinks: string[];
+  evidence: string[];
+}
+
+export interface ProfileCardProps {
+  profile: NomineeProfile;
+  className?: string;
 }
