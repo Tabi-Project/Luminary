@@ -1,4 +1,4 @@
-import "@/app/globals.css";
+import "@/app/styles/hero.css";
 import Image from "next/image";
 import { MetricCard } from "../mertic-card";
 import { Button } from "@/components/common/button";
