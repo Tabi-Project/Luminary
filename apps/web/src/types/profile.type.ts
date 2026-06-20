@@ -4,7 +4,7 @@ export interface NomineeProfile {
   field: string;
   region?: string;
   impact: string;
-  tags: any;
+  tags: string[];
   profilePhoto: string;
   socialLinks: string[]; // Links (Business website, projects, publications, social profiles)
   evidence: string[]; // Evidence section (Links to press coverage or documents)

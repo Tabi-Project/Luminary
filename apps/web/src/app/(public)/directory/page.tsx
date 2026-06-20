@@ -1,11 +1,11 @@
 import React from 'react'
-
+import {SearchBar} from '@/components/common/search-bar';
 import ProfileCard from '@/components/directory/ProfileCard'
 import { MOCK_PROFILES } from '@/data/profiles'
 
 const page = () => {
   return (
-    <main className="bg-backAlt pt-3 px-10 grid gap-6 pb-20">
+    <main className="bg-backAlt pt-3 px-10 grid gap-8 pb-20">
       <section className="flex flex-col gap-2 max-w-2xl">
         <h1 className="font-bold text-4xl">Women's Directory</h1>
         <p className="text-[var(--color-muted)] font-semibold">
@@ -14,6 +14,8 @@ const page = () => {
           and contributions.
         </p>
       </section>
+
+      <SearchBar/>
 
       <section>
         {/* women's profile container */}

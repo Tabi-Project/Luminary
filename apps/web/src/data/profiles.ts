@@ -20,12 +20,12 @@ export const MOCK_PROFILES: NomineeProfile[] = [
     name: "Elena Rodriguez",
     impact:
       "Bridging the digital divide by providing affordable internet and tech education to underserved communities. Her program has reached over 10,000 students in the last two years.",
-    field: "Medicine",
-    region: "East Africa",
+    field: "Technology",
+    region: "South America",
     get tags() {
       return [this.field, this.region];
     },
-    profilePhoto: "https://i.pravatar.cc/200?u=elena",
+    profilePhoto: "https://i.pravatar.cc/200?u=amina",
     socialLinks: ["techforall.org", "linkedin.com/in/elena-r"],
     evidence: ["techforall.org", "linkedin.com/in/elena-r"],
   },
@@ -34,8 +34,8 @@ export const MOCK_PROFILES: NomineeProfile[] = [
     name: "Sarah Chen",
     impact:
       "Developing sustainable waste management systems for urban environments. Her startup has successfully implemented composting programs in three major cities.",
-    field: "Medicine",
-    region: "East Africa",
+    field: "Art & Culture",
+    region: "Asia",
     get tags() {
       return [this.field, this.region];
     },
