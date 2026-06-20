@@ -3,6 +3,10 @@
 :root {
   --primary: #0ea5a4;
   --tetiary: #1d4ed8;
+  --primary: #0ea5a4;
+  --tetiary: #1d4ed8;
+
+  --light-gray: #d9dfe8;
 
   --border: #e5e7eb;
   --bg-main: #f1f5f9;
@@ -14,12 +18,6 @@
 
   --text-main: #111827;
   --muted: #6b7280;
-
-  --color-bg-300: #d7e0e9;
-  --color-heading-500: #1a2330; /* base */
-  --color-heading-600: #141c26;
-  --color-primary-400: #32cfcf;
-  --color-white: #ffffff;
 }
 
 @theme inline {
@@ -39,6 +37,10 @@
   --color-muted: var(--muted);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   isolation: isolate;
   color: var(--text-main);
@@ -48,6 +50,10 @@ body {
 
 button {
   cursor: pointer;
+}
+
+h2 {
+  @apply font-extrabold text-text-main text-2xl;
 }
 
 .nav-link {

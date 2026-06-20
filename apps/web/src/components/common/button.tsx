@@ -5,7 +5,7 @@ import { Button as BaseButton } from "@base-ui/react";
 export function Button({
   text,
   icon,
-  iconPosition,
+  iconPosition = "left",
   className,
   loading,
   ...props
