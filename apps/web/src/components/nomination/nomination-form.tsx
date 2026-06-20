@@ -22,7 +22,7 @@ import {
 import { getApiErrorMessage } from "@/utils/api";
 import { cn } from "@/utils/cn";
 import { splitName } from "@/utils/string";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const INITIAL_STATE: NominationFormState = {
   nominator: { fullName: "", email: "", relationship: "" },
@@ -110,7 +110,7 @@ export function NominationForm() {
     setStatus(IDLE_STATUS);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus(IDLE_STATUS);
 

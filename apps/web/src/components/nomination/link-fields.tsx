@@ -1,14 +1,7 @@
 "use client";
 
-import { FormLabelProps } from "@/types/form.type";
+import { LinkFieldsProps } from "@/types/nomination.type";
 import { Plus, X } from "lucide-react";
-
-interface LinkFieldsProps extends FormLabelProps {
-  name: string;
-  values: string[];
-  placeholder?: string;
-  onChange: (values: string[]) => void;
-}
 
 export function LinkFields({
   label,

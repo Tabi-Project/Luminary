@@ -1,19 +1,9 @@
 "use client";
 
-import {
-  ACCEPTED_IMAGE_TYPES,
-  MAX_IMAGE_SIZE_MB,
-} from "@/data/nomination";
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_SIZE_MB } from "@/data/nomination";
+import { PhotoUploadProps } from "@/types/nomination.type";
 import Image from "next/image";
 import { useEffect, useMemo } from "react";
-
-interface PhotoUploadProps {
-  id: string;
-  label: string;
-  required?: boolean;
-  value: File | null;
-  onChange: (file: File | null) => void;
-}
 
 export function PhotoUpload({
   id,

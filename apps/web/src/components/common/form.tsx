@@ -1,19 +1,13 @@
-import { FormLabelProps, SelectOption } from "@/types/form.type";
+import {
+  FormFieldProps,
+  FormLabelProps,
+  SelectFieldProps,
+  TextAreaFieldProps,
+} from "@/types/form.type";
 import { cn } from "@/utils/cn";
 
 const fieldStyling =
   "w-full px-4 py-2 h-10 border border-border rounded-md bg-bg-surface";
-
-interface FormFieldProps extends FormLabelProps {
-  type?: string;
-  name?: string;
-  value?: string;
-  placeholder?: string;
-  required?: boolean;
-  inputClassName?: string;
-  className?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 export function FormField({
   label,
@@ -46,16 +40,6 @@ export function FormField({
       />
     </div>
   );
-}
-
-interface SelectFieldProps extends FormLabelProps {
-  name?: string;
-  value?: string;
-  placeholder?: string;
-  options: SelectOption[];
-  selectClassName?: string;
-  className?: string;
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export function SelectField({
@@ -96,16 +80,6 @@ export function SelectField({
       </select>
     </div>
   );
-}
-
-interface TextAreaFieldProps extends FormLabelProps {
-  name?: string;
-  value?: string;
-  placeholder?: string;
-  rows?: number;
-  textAreaClassName?: string;
-  className?: string;
-  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 export function TextAreaField({

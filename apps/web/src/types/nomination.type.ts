@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import { FormLabelProps } from "@/types/form.type";
+
 export type NominationTab = "nomination" | "self-submission";
 
 export type FormStatusType = "idle" | "success" | "error";
@@ -29,10 +32,6 @@ export interface NominationFormState {
   photo: File | null;
 }
 
-/**
- * Payload shape expected by the backend `POST /nomination` endpoint.
- * Nominator fields are only present for nominations (not self-submissions).
- */
 export interface NominationPayload {
   is_self_submission: boolean;
   nominee_first_name: string;
@@ -58,4 +57,25 @@ export interface UploadedFile {
 export interface VerificationStep {
   title: string;
   description: string;
+}
+
+export interface CollapsibleSectionProps {
+  title: string;
+  children: ReactNode;
+  defaultOpen?: boolean;
+}
+
+export interface LinkFieldsProps extends FormLabelProps {
+  name: string;
+  values: string[];
+  placeholder?: string;
+  onChange: (values: string[]) => void;
+}
+
+export interface PhotoUploadProps {
+  id: string;
+  label: string;
+  required?: boolean;
+  value: File | null;
+  onChange: (file: File | null) => void;
 }
