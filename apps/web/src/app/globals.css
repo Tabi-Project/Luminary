@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./styles/select.css";
 
 :root {
     --primary: #0ea5a4;
@@ -22,15 +23,6 @@
     --radius-2xl: 1.5rem;
 }
 
-/* Base UI Select popup transitions */
-[data-starting-style] {
-    opacity: 0;
-    transform: scale(0.97) translateY(-4px);
-}
-[data-ending-style] {
-    opacity: 0;
-    transform: scale(0.97) translateY(-4px);
-}
 
 
 @theme inline {

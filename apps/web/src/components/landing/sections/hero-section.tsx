@@ -1,13 +1,10 @@
-"use client"
-
 import "@/app/globals.css";
 import Image from "next/image";
+import Link from "next/link";
 import { MetricCard } from "../mertic-card";
 import { Button } from "@/components/common/button";
-import { useRouter } from "next/navigation";
 
 export function HeroSection() {
-  const router = useRouter();
   return (
     <div className="flex flex-col items-center text-center gap-4 lg:gap-6 mt-10">
       <h1 className="text-5xl lg:text-6xl font-bold text-text-main">
@@ -18,7 +15,9 @@ export function HeroSection() {
         women who are driving change across all fields — business, science,
         arts, activism, sports, technology, agriculture, education and more.
       </p>
-      <Button onClick={() => router.push("/submit-story")} text="Submit a story" />
+      <Link href="/submit-story">
+        <Button text="Submit a story" />
+      </Link>
 
       <div className="hero-image-outer">
         <div className="hero-image-wrapper">
