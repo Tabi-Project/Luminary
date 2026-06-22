@@ -9,6 +9,7 @@
     --border: #e5e7eb;
     --bg-main: #f1f5f9;
     --bg-surface: #f3f4f6;
+    --bg-2: #c5d0dd;
 
     --success: #22c55e;
     --warning: #f59e0b;
@@ -26,6 +27,7 @@
     --color-background: var(--bg-main);
     --font-raleway: var(--font-raleway), sans-serif;
     --color-foreground: var(--text-main);
+    --color-background-2: var(--bg-2);
 
     --color-primary: var(--primary);
     --color-tertiary: var(--tetiary);

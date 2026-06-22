@@ -5,6 +5,8 @@ import {
   TextAreaFieldProps,
 } from "@/types/form.type";
 import { cn } from "@/utils/cn";
+import { Select } from "@base-ui/react";
+import { Check, ChevronDown } from "lucide-react";
 
 const fieldStyling =
   "w-full px-4 py-2 h-10 border border-border rounded-md bg-bg-surface";
@@ -54,30 +56,49 @@ export function SelectField({
   selectClassName,
   className,
 }: SelectFieldProps) {
-  const selectStyling = cn(fieldStyling, selectClassName);
+  const triggerStyling = cn(
+    fieldStyling,
+    "flex items-center justify-between gap-2 text-left outline-none focus-visible:border-primary",
+    selectClassName,
+  );
 
   const formFieldStyling = cn("flex flex-col gap-2", className);
 
   return (
     <div className={formFieldStyling}>
       <FormLabel label={label} htmlFor={htmlFor} required={required} />
-      <select
+      <Select.Root
         name={name}
-        id={htmlFor}
-        value={value}
+        items={options}
         required={required}
-        onChange={onChange}
-        className={selectStyling}
+        value={value ?? null}
+        onValueChange={(selected) => onChange?.(selected ?? "")}
       >
-        <option value="" disabled>
-          {placeholder}
-        </option>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        <Select.Trigger id={htmlFor} className={triggerStyling}>
+          <Select.Value placeholder={placeholder} />
+          <Select.Icon className="text-muted">
+            <ChevronDown className="size-4" />
+          </Select.Icon>
+        </Select.Trigger>
+        <Select.Portal>
+          <Select.Positioner className="z-50" sideOffset={4}>
+            <Select.Popup className="min-w-[var(--anchor-width)] overflow-y-auto rounded-md border border-border bg-bg-surface py-1 shadow-md outline-none">
+              {options.map((option) => (
+                <Select.Item
+                  key={option.value}
+                  value={option.value}
+                  className="flex cursor-pointer items-center justify-between gap-2 px-4 py-2 text-sm outline-none data-highlighted:bg-primary/10"
+                >
+                  <Select.ItemText>{option.label}</Select.ItemText>
+                  <Select.ItemIndicator className="text-primary">
+                    <Check className="size-4" />
+                  </Select.ItemIndicator>
+                </Select.Item>
+              ))}
+            </Select.Popup>
+          </Select.Positioner>
+        </Select.Portal>
+      </Select.Root>
     </div>
   );
 }
