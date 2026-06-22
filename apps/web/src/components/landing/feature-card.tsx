@@ -19,9 +19,9 @@ export function FeatureCard({
 
   return (
     <div
-      className={`w-full flex flex-col-reverse sm:flex-row items-center gap-8 sm:gap-16 ${idx % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}
+      className={`w-full flex flex-col-reverse sm:flex-row items-center gap-8 lg:gap-16 ${idx % 2 !== 0 ? "sm:flex-row-reverse" : ""}`}
     >
-      <div className="relative w-full sm:w-[62%] max-h-122.5 aspect-square bg-muted-blue rounded-3xl overflow-hidden">
+      <div className="relative w-full sm:w-[62%] max-h-100 sm:max-h-122.5 aspect-square bg-muted-blue rounded-3xl overflow-hidden">
         {layout && (
           <div className={layout.wrapper}>
             <Image
@@ -45,7 +45,7 @@ export function FeatureCard({
 const imageLayouts = [
   {
     wrapper:
-      "absolute sm:top-20 bottom-0 left-1/2 -translate-x-1/2 w-4/5 sm:w-[72%]",
+      "absolute lg:top-20 top-10 bottom-0 left-1/2 -translate-x-1/2 w-[72%]",
     img: "w-full h-auto",
   },
   {
@@ -53,7 +53,7 @@ const imageLayouts = [
     img: "max-w-full max-h-full object-contain",
   },
   {
-    wrapper: "absolute top-1/2 -translate-y-1/2 left-1/2 sm:right-40 right-10",
-    img: "w-full h-auto scale-300 ",
+    wrapper: "absolute top-1/2 -translate-y-1/2 left-1/2 lg:right-40 right-10",
+    img: "w-full h-auto sm:scale-300 scale-250 ",
   },
 ];
