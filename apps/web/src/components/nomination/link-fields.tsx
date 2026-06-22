@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/common/button";
+import { FormLabel, TextField } from "@/components/common/form";
 import { LinkFieldsProps } from "@/types/nomination.type";
 import { Plus, X } from "lucide-react";
 
@@ -24,18 +26,12 @@ export function LinkFields({
 
   return (
     <div className="flex flex-col gap-2">
-      <label
-        htmlFor={htmlFor}
-        className="flex items-start text-xs font-medium text-muted"
-      >
-        <span>{label}</span>
-        {required && <span className="text-warning">*</span>}
-      </label>
+      <FormLabel label={label} htmlFor={htmlFor} required={required} />
 
       <div className="flex flex-col gap-3">
         {values.map((value, index) => (
           <div key={index} className="flex items-center gap-2">
-            <input
+            <TextField
               type="url"
               name={`${name}${index + 1}`}
               id={index === 0 ? htmlFor : undefined}
@@ -44,29 +40,28 @@ export function LinkFields({
               placeholder={placeholder}
               aria-label={`${label} ${index + 1}`}
               onChange={(event) => updateLink(index, event.target.value)}
-              className="h-10 w-full rounded-md border border-border bg-bg-surface px-4 py-2"
             />
             {values.length > 1 && (
-              <button
+              <Button
                 type="button"
+                text=""
                 aria-label="Remove link"
                 onClick={() => removeLink(index)}
-                className="grid size-9 shrink-0 place-items-center rounded-full border border-border text-muted hover:border-danger hover:text-danger"
-              >
-                <X className="size-4" />
-              </button>
+                icon={<X className="size-4" />}
+                className="grid size-9 shrink-0 place-items-center rounded-full border border-border bg-transparent p-0 text-muted shadow-none hover:border-danger hover:text-danger"
+              />
             )}
           </div>
         ))}
       </div>
 
-      <button
+      <Button
         type="button"
+        text="Add another link"
         onClick={addLink}
-        className="flex w-fit items-center gap-1 text-sm font-medium text-muted hover:text-text-main"
-      >
-        <Plus className="size-4" /> Add another link
-      </button>
+        icon={<Plus className="size-4" />}
+        className="w-fit gap-1 bg-transparent p-0 text-sm font-medium text-muted shadow-none hover:text-text-main"
+      />
     </div>
   );
 }

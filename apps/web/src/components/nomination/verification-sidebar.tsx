@@ -1,12 +1,12 @@
+"use client";
+
+import { Drawer } from "@/components/common/drawer";
 import { VERIFICATION_STEPS } from "@/data/constants/nomination";
+import { ShieldCheck } from "lucide-react";
 
-export function VerificationSidebar() {
+function VerificationContent() {
   return (
-    <aside className="flex w-full flex-col gap-4 rounded-xl border border-border bg-white p-4 lg:sticky lg:top-20 lg:max-w-xs">
-      <h2 className="text-lg font-semibold text-text-main">
-        Verification Workflow
-      </h2>
-
+    <>
       <ol className="flex flex-col gap-3 rounded-lg bg-bg-surface p-3">
         {VERIFICATION_STEPS.map((step, index) => (
           <li key={step.title} className="flex items-start gap-3">
@@ -32,6 +32,35 @@ export function VerificationSidebar() {
           automatically bypassed, making the process faster.
         </p>
       </article>
-    </aside>
+    </>
+  );
+}
+
+export function VerificationSidebar() {
+  return (
+    <>
+      <aside className="hidden w-full flex-col gap-4 rounded-xl border border-border bg-white p-4 lg:flex lg:sticky lg:top-20 lg:max-w-xs">
+        <h2 className="text-lg font-semibold text-text-main">
+          Verification Workflow
+        </h2>
+
+        <VerificationContent />
+      </aside>
+
+      <div className="w-full lg:hidden">
+        <Drawer
+          title="Verification Workflow"
+          trigger={
+            <>
+              <ShieldCheck className="size-4" />
+              <span>Verification Workflow</span>
+            </>
+          }
+          triggerClassName="flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-white p-3 text-sm font-semibold text-text-main shadow-sm"
+        >
+          <VerificationContent />
+        </Drawer>
+      </div>
+    </>
   );
 }

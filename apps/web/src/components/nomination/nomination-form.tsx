@@ -9,7 +9,12 @@ import {
 import { CollapsibleSection } from "@/components/nomination/collapsible-section";
 import { LinkFields } from "@/components/nomination/link-fields";
 import { PhotoUpload } from "@/components/nomination/photo-upload";
-import { FIELDS_OF_WORK } from "@/data/constants/nomination";
+import {
+  FIELD_OPTIONS,
+  IDLE_STATUS,
+  INITIAL_STATE,
+  TABS,
+} from "@/data/nomination";
 import { NominationService } from "@/services/nomination.service";
 import {
   FormStatus,
@@ -18,30 +23,10 @@ import {
   NomineeDetails,
   NominatorDetails,
 } from "@/types/nomination.type";
-import { getApiErrorMessage } from "@/utils/api";
+import { getApiErrorMessage } from "@/utils/error";
 import { cn } from "@/utils/cn";
 import { useMutation } from "@tanstack/react-query";
 import { FormEvent, useState } from "react";
-
-const INITIAL_STATE: NominationFormState = {
-  nominator: { fullName: "", email: "", relationship: "" },
-  nominee: { fullName: "", email: "", field: "", region: "", description: "" },
-  supportingLinks: [""],
-  evidenceLinks: [""],
-  photo: null,
-};
-
-const IDLE_STATUS: FormStatus = { type: "idle", message: "" };
-
-const FIELD_OPTIONS = FIELDS_OF_WORK.map((field) => ({
-  label: field,
-  value: field,
-}));
-
-const TABS: { id: NominationTab; label: string }[] = [
-  { id: "nomination", label: "Nomination" },
-  { id: "self-submission", label: "Self Submission" },
-];
 
 export function NominationForm() {
   const [tab, setTab] = useState<NominationTab>("nomination");
@@ -51,7 +36,7 @@ export function NominationForm() {
   const isSelfSubmission = tab === "self-submission";
 
   const mutation = useMutation({
-    mutationFn: () => NominationService.submit(state, tab),
+    mutationFn: () => NominationService.create(state, tab),
     onSuccess: () => {
       setStatus({
         type: "success",
@@ -207,7 +192,7 @@ export function NominationForm() {
             placeholder="Select a field"
             options={FIELD_OPTIONS}
             value={state.nominee.field}
-            onChange={(event) => updateNominee("field", event.target.value)}
+            onChange={(value) => updateNominee("field", value)}
           />
           <FormField
             label="Region"

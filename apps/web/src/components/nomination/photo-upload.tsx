@@ -1,9 +1,10 @@
 "use client";
 
+import { FormLabel } from "@/components/common/form";
 import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_SIZE_MB } from "@/data/constants/nomination";
 import { PhotoUploadProps } from "@/types/nomination.type";
 import Image from "next/image";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 export function PhotoUpload({
   id,
@@ -12,10 +13,7 @@ export function PhotoUpload({
   value,
   onChange,
 }: PhotoUploadProps) {
-  const preview = useMemo(
-    () => (value ? URL.createObjectURL(value) : null),
-    [value],
-  );
+  const preview = value ? URL.createObjectURL(value) : null;
 
   useEffect(() => {
     if (!preview) return;
@@ -25,13 +23,7 @@ export function PhotoUpload({
 
   return (
     <div className="flex flex-col gap-2">
-      <label
-        htmlFor={id}
-        className="flex items-start text-xs font-medium text-muted"
-      >
-        <span>{label}</span>
-        {required && <span className="text-warning">*</span>}
-      </label>
+      <FormLabel label={label} htmlFor={id} required={required} />
 
       <div className="flex items-center gap-4">
         <div className="relative size-14 shrink-0 overflow-hidden rounded-full border border-border bg-bg-surface">
@@ -48,12 +40,11 @@ export function PhotoUpload({
         </div>
 
         <div className="flex flex-col gap-1">
-          <label
+          <FormLabel
+            label="Upload image"
             htmlFor={id}
             className="w-fit cursor-pointer rounded-full bg-bg-surface px-4 py-2 text-sm font-semibold text-muted hover:text-text-main"
-          >
-            Upload image
-          </label>
+          />
           <input
             id={id}
             type="file"
