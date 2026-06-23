@@ -2,6 +2,7 @@ import { Footer } from "@/components/footer";
 import { FeaturesSection } from "@/components/landing/sections/feature-section";
 import { HeroSection } from "@/components/landing/sections/hero-section";
 import { ContributorsSection } from "@/components/landing/sections/contributors-section";
+import { FeaturedArticleSection } from "@/components/landing/sections/featured-article-section";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <HeroSection />
       <FeaturesSection />
       <ContributorsSection />
+      <FeaturedArticleSection />
       <Footer />
     </div>
   );
