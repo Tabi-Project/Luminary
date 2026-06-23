@@ -34,6 +34,7 @@
 
     --color-primary: var(--primary);
     --color-tertiary: var(--tetiary);
+    --color-border: var(--border);
 
     --color-light-gray: var(--light-gray);
 

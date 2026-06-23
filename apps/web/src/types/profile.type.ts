@@ -3,7 +3,7 @@ export interface NomineeProfile {
   firstname: string;
   lastname: string;
   field: string;
-  region?: string;
+  region: string;
   impact: string;
   tags: string[];
   profilePhoto: string;

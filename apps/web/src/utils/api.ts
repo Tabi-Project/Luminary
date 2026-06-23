@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 const instance: AxiosInstance = axios.create({
   baseURL:
-    process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://localhost:3001/api/v1",
+    process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5000/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,7 +12,7 @@ const instance: AxiosInstance = axios.create({
 instance.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response.status === 401) {
+    if (error.response?.status === 401) {
       // Please Remember to write the logout function
     }
 

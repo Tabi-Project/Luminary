@@ -1,4 +1,4 @@
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, InputHTMLAttributes } from "react";
 
 export interface FormLabelProps {
   label: string;
@@ -11,6 +11,8 @@ export interface SelectOption {
   label: string;
   value: string | number;
 }
+
+export type TextFieldProps = InputHTMLAttributes<HTMLInputElement>;
 
 export interface FormFieldProps extends FormLabelProps {
   type?: string;
