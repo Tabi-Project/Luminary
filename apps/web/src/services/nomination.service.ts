@@ -7,7 +7,6 @@ import {
   NominationTab,
 } from "@/types/nomination.type";
 import { axiosPost } from "@/utils/api";
-import { isErrorApiResponse } from "@/utils/error";
 import { splitName } from "@/utils/string";
 
 export class NominationService {
@@ -52,23 +51,17 @@ export class NominationService {
   }
 
   static async create(state: NominationFormState, tab: NominationTab) {
-    try {
-      const upload = await UploadService.uploadPhoto(state.photo as File);
+    const upload = await UploadService.uploadPhoto(state.photo as File);
 
-      const payload = this.toPayload(state, tab, upload.data.url);
+    const payload = this.toPayload(state, tab, upload.data.url);
 
-      const response = await axiosPost<Response<unknown>>(
-        endpoints.nomination.create,
-        payload,
-      );
+    const response = await axiosPost<Response<unknown>>(
+      endpoints.nomination.create,
+      payload,
+    );
 
-      if (!("data" in response)) throw response as ErrorApiResponse;
+    if (!("data" in response)) throw response as ErrorApiResponse;
 
-      return response;
-    } catch (error) {
-      if (isErrorApiResponse(error)) throw error;
-
-      throw error;
-    }
+    return response;
   }
 }
