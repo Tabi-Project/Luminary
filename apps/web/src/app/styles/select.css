@@ -1,4 +1,3 @@
-/* Base UI Select popup transitions */
 .select-popup {
     transition-property: opacity, transform, display, overlay;
     transition-duration: 200ms;
