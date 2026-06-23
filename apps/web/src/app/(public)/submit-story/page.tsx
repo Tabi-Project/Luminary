@@ -52,7 +52,7 @@ export default function SubmitStoryPage() {
       }
 
       const result = await submitArticleAction(formData);
-      
+
       if (!result.success) {
         throw new Error(result.error);
       }
@@ -229,15 +229,13 @@ export default function SubmitStoryPage() {
               )}
             </div>
 
-            <div className="flex flex-col gap-1.5">
-              <label className={cls.label}>Brief Summary</label>
-              <textarea
-                name="summary"
-                rows={4}
-                placeholder="A short summary that will appear on the news card."
-                className="w-full px-3 py-2 border border-slate-200 rounded-md bg-white text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-            </div>
+            <TextAreaField
+              name="summary"
+              label="Brief Summary"
+              rows={4}
+              placeholder="A short summary that will appear on the news card."
+              textAreaClassName="w-full px-3 py-2 border border-slate-200 rounded-md bg-white text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
+            />
           </section>
 
           <section className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col gap-4">
@@ -248,7 +246,7 @@ export default function SubmitStoryPage() {
               </p>
             </div>
             <div className="flex flex-col">
-              <div className="flex gap-1 border border-slate-200 rounded-t-md bg-gray-50 px-2 py-1">
+              <div className="flex gap-1 border border-slate-200 rounded-t-md mb-5 bg-gray-50 px-2 py-1">
                 <Button type="button" className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded hover:bg-gray-200 hover:text-slate-800 font-bold text-sm" text="B" />
                 <Button type="button" className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded hover:bg-gray-200 hover:text-slate-800 italic text-sm" text="I" />
                 <Button type="button" className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded hover:bg-gray-200 hover:text-slate-800 underline text-sm" text="U" />

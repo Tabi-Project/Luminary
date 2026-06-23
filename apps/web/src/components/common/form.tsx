@@ -85,7 +85,7 @@ export function SelectField({
         </Select.Trigger>
         <Select.Portal>
           <Select.Positioner className="z-50" sideOffset={4}>
-                            <Select.Popup className="select-popup min-w-[var(--anchor-width)] overflow-y-auto rounded-md border border-border bg-bg-surface py-1 shadow-md outline-none">
+            <Select.Popup className="min-w-[var(--anchor-width)] overflow-y-auto rounded-md border border-border bg-bg-surface py-1 shadow-md outline-none">
               {options.map((option) => (
                 <Select.Item
                   key={option.value}
