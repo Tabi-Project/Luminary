@@ -22,11 +22,12 @@ export function HeroSection() {
           and more.
         </p>
       </FadeIn>
-      <Link href="/submit-story">
-        <FadeIn className="w-full flex justify-center" delay={0.2}>
+      <FadeIn className="w-full flex justify-center" delay={0.2}>
+        <Link href="/submit-story">
           <Button text="Submit a story" />
-        </FadeIn>
-      </Link>
+        </Link>
+      </FadeIn>
+
 
       <div className="hero-image-outer">
         <div className="hero-image-wrapper">
@@ -71,6 +72,6 @@ export function HeroSection() {
           />
         </StaggerItem>
       </Stagger>
-    </div>
+    </div >
   );
 }

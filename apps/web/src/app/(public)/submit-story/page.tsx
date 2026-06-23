@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/common/button";
-import { FormField, SelectField } from "@/components/common/form";
-import { useQuery } from "@tanstack/react-query";
-import { axiosGet, axiosPost } from "@/utils/api";
+import { FormField, SelectField, TextAreaField } from "@/components/common/form";
+import { getCategories } from "@/services/categories.service";
 import { Check, ImageIcon, X } from "lucide-react";
-import { submitArticleAction } from "../../../actions/sanity";
+import { submitArticleAction } from "@/actions/sanity";
 import { SOURCE_TYPES, REGIONS } from "@/data/submit-story";
-import { Category } from "@/types/submit-story";
 import Image from "next/image";
 
 
@@ -34,13 +32,7 @@ export default function SubmitStoryPage() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const { data: categories = [], isLoading: isLoadingCategories } = useQuery<Category[]>({
-    queryKey: ["categories"],
-    queryFn: async () => {
-      const response = await axiosGet<{ data: Category[] }>("/categories", {});
-      return response.data ?? [];
-    },
-  });
+  const { categories, isLoadingCategories } = getCategories();
 
   useEffect(() => {
     if (!coverFile) { setCoverPreview(null); return; }
@@ -92,12 +84,11 @@ export default function SubmitStoryPage() {
           <p className="text-sm text-muted">
             Your submission is under review. We&apos;ll notify you once it&apos;s published.
           </p>
-          <button
+          <Button
             onClick={() => setSuccess(false)}
             className="mt-6 text-sm text-primary underline"
-          >
-            Submit another story
-          </button>
+            text="Submit another story"
+          />
         </div>
       </main>
     );
@@ -257,16 +248,17 @@ export default function SubmitStoryPage() {
               </p>
             </div>
             <div className="flex flex-col">
-              <div className="flex gap-1 border border-slate-200 rounded-t-md bg-gray-50 px-2 py-1 border-b-0">
-                <button type="button" className="w-7 h-7 flex items-center justify-center rounded hover:bg-gray-200 font-bold text-sm">B</button>
-                <button type="button" className="w-7 h-7 flex items-center justify-center rounded hover:bg-gray-200 italic text-sm">I</button>
-                <button type="button" className="w-7 h-7 flex items-center justify-center rounded hover:bg-gray-200 underline text-sm">U</button>
+              <div className="flex gap-1 border border-slate-200 rounded-t-md bg-gray-50 px-2 py-1">
+                <Button type="button" className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded hover:bg-gray-200 hover:text-slate-800 font-bold text-sm" text="B" />
+                <Button type="button" className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded hover:bg-gray-200 hover:text-slate-800 italic text-sm" text="I" />
+                <Button type="button" className="w-7 h-7 flex items-center justify-center bg-slate-800 rounded hover:bg-gray-200 hover:text-slate-800 underline text-sm" text="U" />
               </div>
-              <textarea
+              <TextAreaField
                 name="content"
+                label="Article"
                 rows={6}
                 placeholder="Start writing the article content here."
-                className="w-full px-3 py-2 border border-slate-200 rounded-b-md bg-white text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
+                textAreaClassName="w-full px-3 py-2 border border-slate-200 rounded-b-md bg-white text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
           </section>
