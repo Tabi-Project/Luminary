@@ -98,21 +98,20 @@ export function NominationForm() {
           const isActive = tab === id;
 
           return (
-            <button
+            <Button
               key={id}
               type="button"
               role="tab"
+              text={label}
               aria-selected={isActive}
               onClick={() => switchTab(id)}
               className={cn(
                 "rounded-md px-4 py-2 text-sm font-medium transition-colors",
                 isActive
                   ? "bg-white text-text-main shadow-sm"
-                  : "text-muted hover:text-text-main",
+                  : "bg-transparent text-muted shadow-none hover:text-text-main",
               )}
-            >
-              {label}
-            </button>
+            />
           );
         })}
       </div>
