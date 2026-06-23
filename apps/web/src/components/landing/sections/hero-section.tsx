@@ -1,5 +1,6 @@
 import "@/app/styles/hero.css";
 import Image from "next/image";
+import Link from "next/link";
 import { MetricCard } from "../mertic-card";
 import { Button } from "@/components/common/button";
 import { FadeIn } from "@/components/animation/fade-in";
@@ -22,8 +23,11 @@ export function HeroSection() {
         </p>
       </FadeIn>
       <FadeIn className="w-full flex justify-center" delay={0.2}>
-        <Button text="Submit a story" />
+        <Link href="/submit-story">
+          <Button text="Submit a story" />
+        </Link>
       </FadeIn>
+
 
       <div className="hero-image-outer">
         <div className="hero-image-wrapper">
@@ -68,6 +72,6 @@ export function HeroSection() {
           />
         </StaggerItem>
       </Stagger>
-    </div>
+    </div >
   );
 }

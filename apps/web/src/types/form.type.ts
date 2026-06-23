@@ -9,7 +9,7 @@ export interface FormLabelProps {
 
 export interface SelectOption {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 export type TextFieldProps = InputHTMLAttributes<HTMLInputElement>;
@@ -21,6 +21,7 @@ export interface FormFieldProps extends FormLabelProps {
   placeholder?: string;
   inputClassName?: string;
   className?: string;
+  labelClassName?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -29,8 +30,10 @@ export interface SelectFieldProps extends FormLabelProps {
   value?: string;
   placeholder?: string;
   options: SelectOption[];
+  inputClassName?: string;
   selectClassName?: string;
   className?: string;
+  labelClassName?: string;
   onChange?: (value: string) => void;
 }
 

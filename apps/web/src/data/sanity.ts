@@ -1,0 +1,3 @@
+export const QUERY_URL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v${process.env.SANITY_API_VERSION}/data/query/${process.env.SANITY_DATASET}`
+export const MUTATE_URL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v${process.env.SANITY_API_VERSION}/data/mutate/${process.env.SANITY_DATASET}`
+export const ASSET_URL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v${process.env.SANITY_API_VERSION}/assets/images/${process.env.SANITY_DATASET}`
