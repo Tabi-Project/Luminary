@@ -4,13 +4,12 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
 import { FormField } from "@/components/common/form";
 import { Button } from "@/components/common/button";
 import { AuthService } from "@/services/auth.service";
 import type { ErrorApiResponse } from "@/types/api.type";
 
-// `admin/page.tsx` already exists, so this won't 404. Repoint at the
-// nominations route once that page lands.
 const POST_LOGIN_REDIRECT = "/admin";
 
 export default function LoginPage() {
@@ -22,7 +21,6 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Mirrors the old auth-guard.js: skip the login screen if already signed in.
   useEffect(() => {
     if (typeof window !== "undefined" && localStorage.getItem("access_token")) {
       router.replace(POST_LOGIN_REDIRECT);
@@ -42,7 +40,6 @@ export default function LoginPage() {
 
       if (!response || !("data" in response) || !response.data) {
         setError("Invalid email or password.");
-        setLoading(false);
         return;
       }
 
@@ -51,15 +48,13 @@ export default function LoginPage() {
       localStorage.setItem("refresh_token", refresh_token);
       router.push(POST_LOGIN_REDIRECT);
     } catch (err) {
-      const apiError = err as Partial<ErrorApiResponse> & {
-        message?: string;
-        error?: string;
-      };
+      const apiError = err as ErrorApiResponse;
       setError(
         apiError?.message ??
           apiError?.error ??
           "Something went wrong. Please try again.",
       );
+    } finally {
       setLoading(false);
     }
   }
@@ -69,7 +64,7 @@ export default function LoginPage() {
       <article className="flex w-full max-w-[480px] flex-col gap-6 rounded-lg bg-white p-8 shadow">
         <Link href="/" className="w-fit">
           <Image
-            src="/images/logo.png"
+            src="/images/luminary-black-logo.png"
             alt="Luminary"
             width={108}
             height={32}
@@ -116,7 +111,7 @@ export default function LoginPage() {
               aria-pressed={showPassword}
               className="absolute bottom-0 right-3 flex h-10 items-center text-muted transition-colors hover:text-primary"
             >
-              {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
 
@@ -136,47 +131,5 @@ export default function LoginPage() {
         </form>
       </article>
     </main>
-  );
-}
-
-/* Inline icons replace the old Font Awesome CDN kit. */
-
-function EyeIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
-      <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-function EyeOffIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M9.88 9.88a3 3 0 0 0 4.24 4.24" />
-      <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c6.5 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
-      <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3.5 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
-      <line x1="2" x2="22" y1="2" y2="22" />
-    </svg>
   );
 }
