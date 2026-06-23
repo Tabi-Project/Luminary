@@ -22,9 +22,11 @@ export function HeroSection() {
           and more.
         </p>
       </FadeIn>
-      <FadeIn className="w-full flex justify-center" delay={0.2}>
-        <Button text="Submit a story" />
-      </FadeIn>
+      <Link href="/submit-story">
+        <FadeIn className="w-full flex justify-center" delay={0.2}>
+          <Button text="Submit a story" />
+        </FadeIn>
+      </Link>
 
       <div className="hero-image-outer">
         <div className="hero-image-wrapper">
