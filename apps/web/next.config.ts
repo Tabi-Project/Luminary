@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
         hostname: "ca.slack-edge.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+        port: "",
+      },
     ],
   },
 };

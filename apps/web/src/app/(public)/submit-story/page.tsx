@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosGet, axiosPost } from "@/utils/api";
 import { Check, ImageIcon, X } from "lucide-react";
 import { submitArticleAction } from "../../../actions/sanity";
-import { SOURCE_TYPES, REGIONS } from "@/data/constants/submit-story";
+import { SOURCE_TYPES, REGIONS } from "@/data/submit-story";
 import { Category } from "@/types/submit-story";
 import Image from "next/image";
 
@@ -42,7 +42,6 @@ export default function SubmitStoryPage() {
     },
   });
 
-  // Track cover image preview
   useEffect(() => {
     if (!coverFile) { setCoverPreview(null); return; }
     const url = URL.createObjectURL(coverFile);
@@ -66,6 +65,11 @@ export default function SubmitStoryPage() {
         throw new Error(result.error);
       }
       setSuccess(true);
+      setCoverFile(null);
+      setCoverPreview(null);
+      setCategory("");
+      setRegion("");
+      setSourceType("External Link");
     } catch (err: unknown) {
       const msg =
         err && typeof err === "object" && "message" in err
@@ -79,7 +83,7 @@ export default function SubmitStoryPage() {
 
   if (success) {
     return (
-      <main className="min-h-screen bg-[#E4EBF3] flex items-center justify-center px-4">
+      <main className="min-h-screen bg-[#E4EBF3] w-full flex items-center justify-center px-4">
         <div className="bg-white rounded-xl border border-border/50 shadow-sm p-10 text-center max-w-md w-full">
           <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
             <Check className="text-green-600" size={24} />
@@ -112,7 +116,6 @@ export default function SubmitStoryPage() {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
-          {/* Basic Information */}
           <section className="bg-white rounded-xl  shadow-sm p-6 flex flex-col gap-4">
             <h3 className="font-bold">Basic Information</h3>
 
@@ -150,7 +153,7 @@ export default function SubmitStoryPage() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-10 md:gap-4">
               <SelectField
                 label="Region"
                 name="region"
@@ -159,7 +162,7 @@ export default function SubmitStoryPage() {
                 onChange={setRegion}
                 options={REGIONS}
                 placeholder="Select region"
-                className="gap-1.5"
+                className="gap-1.5 w-40 md:w-full"
                 labelClassName={cls.label}
               />
 
@@ -194,7 +197,6 @@ export default function SubmitStoryPage() {
             />
           </section>
 
-          {/* Media & Summary */}
           <section className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col gap-4">
             <h3 className="font-bold">Media &amp; Summary</h3>
 
@@ -247,7 +249,6 @@ export default function SubmitStoryPage() {
             </div>
           </section>
 
-          {/* Article Content */}
           <section className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 flex flex-col gap-4">
             <div>
               <h3 className="font-bold">Article Content</h3>
@@ -270,7 +271,6 @@ export default function SubmitStoryPage() {
             </div>
           </section>
 
-          {/* Error + Submit */}
           {error && (
             <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-4 py-2.5">
               {error}

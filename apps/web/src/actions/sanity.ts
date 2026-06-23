@@ -1,10 +1,8 @@
 "use server";
 import { axiosGet, axiosPost } from "@/utils/api";
+import { QUERY_URL, MUTATE_URL, ASSET_URL } from "@/data/sanity";
 
 
-const QUERY_URL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v${process.env.SANITY_API_VERSION}/data/query/${process.env.SANITY_DATASET}`
-const MUTATE_URL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v${process.env.SANITY_API_VERSION}/data/mutate/${process.env.SANITY_DATASET}`
-const ASSET_URL = `https://${process.env.SANITY_PROJECT_ID}.api.sanity.io/v${process.env.SANITY_API_VERSION}/assets/images/${process.env.SANITY_DATASET}`
 
 export async function sanityQuery(groqQuery: string, params: Record<string, any> = {}) {
   const url = new URL(QUERY_URL)
