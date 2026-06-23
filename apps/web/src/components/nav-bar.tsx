@@ -31,7 +31,7 @@ export const DesktopNav = () => {
         </li>
       ))}
       <Link
-        href="/"
+        href="/nominate"
         className="bg-text-main text-bg-surface px-3 py-1.5 rounded-lg"
       >
         Nominate
