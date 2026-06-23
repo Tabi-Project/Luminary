@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { SlideIn } from "@/components/animation/slide-in";
 
 export function FeatureCard({
   text,
@@ -16,12 +17,18 @@ export function FeatureCard({
   idx: number;
 }) {
   const layout = imageLayouts[idx];
+  const isReversed = idx % 2 !== 0;
+  const imageFrom = isReversed ? "right" : "left";
+  const textFrom = isReversed ? "left" : "right";
 
   return (
     <div
-      className={`w-full flex flex-col-reverse sm:flex-row items-center gap-8 lg:gap-16 ${idx % 2 !== 0 ? "sm:flex-row-reverse" : ""}`}
+      className={`w-full flex flex-col-reverse sm:flex-row items-center gap-8 lg:gap-16 ${isReversed ? "sm:flex-row-reverse" : ""}`}
     >
-      <div className="relative w-full sm:w-[62%] max-h-100 sm:max-h-122.5 aspect-square bg-muted-blue rounded-3xl overflow-hidden">
+      <SlideIn
+        from={imageFrom}
+        className="relative w-full sm:w-[62%] max-h-100 sm:max-h-122.5 aspect-square bg-muted-blue rounded-3xl overflow-hidden"
+      >
         {layout && (
           <div className={layout.wrapper}>
             <Image
@@ -33,11 +40,11 @@ export function FeatureCard({
             />
           </div>
         )}
-      </div>
-      <div className="w-full sm:w-[38%]">
+      </SlideIn>
+      <SlideIn from={textFrom} className="w-full sm:w-[38%]">
         <h3 className="font-extrabold text-text-main text-4xl">{text}</h3>
         <p className="mt-3 lg:mt-6 text-lg font-light">{desc}</p>
-      </div>
+      </SlideIn>
     </div>
   );
 }
