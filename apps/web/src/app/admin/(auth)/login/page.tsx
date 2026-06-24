@@ -104,15 +104,14 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               inputClassName="rounded-md pr-10"
             />
-            <button
+            <Button
               type="button"
               onClick={() => setShowPassword((visible) => !visible)}
               aria-label={showPassword ? "Hide password" : "Show password"}
               aria-pressed={showPassword}
-              className="absolute bottom-0 right-3 flex h-10 items-center text-muted transition-colors hover:text-primary"
-            >
-              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-            </button>
+              icon={showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              className="absolute bottom-0 right-3 h-10 bg-transparent px-2 py-0 text-muted shadow-none transition-colors hover:text-primary"
+            />
           </div>
 
           {error && (
