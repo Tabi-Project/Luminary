@@ -48,7 +48,6 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
         </p>
       </div>
 
-      <div className="h-[1px] bg-light-gray w-full" />
 
       <div className="flex flex-col gap-4">
         <h4 className="text-muted text-[13px] font-bold uppercase tracking-wider">
