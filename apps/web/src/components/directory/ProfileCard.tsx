@@ -23,7 +23,7 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
             height={96}
             src={profile.profilePhoto}
             alt={profile.firstname}
-            className="object-cover rounded-[1.25rem]"
+            className="object-cover rounded-[1.25rem] w-24 h-24"
           />
         </div>
 
