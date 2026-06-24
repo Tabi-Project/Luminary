@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/common/button";
 import { Globe, UserCircle } from 'lucide-react';
-import { NomineeProfile } from '@/types/profile.type';
 import { ProfileCardProps } from "@/types/profile.type";
 import { cn } from '@/utils/cn';
 
@@ -50,7 +49,7 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
         </p>
       </div>
 
-      <div className="h-[1px] bg-light-gray w-full" />
+    <div className="h-[1px] bg-light-gray w-full" />
 
       <div className="flex flex-col gap-4">
         <h4 className="text-muted text-[13px] font-bold uppercase tracking-wider">
@@ -93,7 +92,6 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
           ))}
         </div>
       </div>
-
 
       <Button
         text="View Full Profile"
