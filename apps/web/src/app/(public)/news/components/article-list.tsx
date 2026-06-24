@@ -1,6 +1,15 @@
 import { type Article } from "../types";
+import ArticleCard from "./article-card";
 
-export default function ArticleList({ articles }: { articles: Article[] }) {
+const MAX_GRID_ITEMS = 4;
+
+export default function ArticleList({
+  articles,
+  articleDetailPage,
+}: {
+  articles: Article[];
+  articleDetailPage: string;
+}) {
   return (
     <>
       <div className="news-results__main">
@@ -18,7 +27,15 @@ export default function ArticleList({ articles }: { articles: Article[] }) {
               Unable to load articles right now. Please try again later.
             </p>
           ) : (
-            <p>Coming soon...</p>
+            articles
+              .slice(0, MAX_GRID_ITEMS)
+              .map((article) => (
+                <ArticleCard
+                  article={article}
+                  articleDetailPage={articleDetailPage}
+                  key={article.id}
+                />
+              ))
           )}
         </div>
 

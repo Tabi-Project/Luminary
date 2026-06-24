@@ -7,8 +7,10 @@ import { getFilteredArticles } from "../utils";
 
 export default function ArticlesSection({
   browseableArticles,
+  articleDetailPage,
 }: {
   browseableArticles: Article[];
+  articleDetailPage: string;
 }) {
   const state = { field: "all", region: "all", time: "all" };
   const filteredArticles = getFilteredArticles(browseableArticles, state);
@@ -22,7 +24,10 @@ export default function ArticlesSection({
       </section>
 
       <section className="news-results">
-        <ArticleList articles={filteredArticles} />
+        <ArticleList
+          articles={filteredArticles}
+          articleDetailPage={articleDetailPage}
+        />
         <Aside />
       </section>
     </>

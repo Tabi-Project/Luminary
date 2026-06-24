@@ -1,5 +1,5 @@
 import "@/app/styles/news.css";
-import { fetchArticlesFromSantry, getFilteredArticles } from "./utils";
+import { fetchArticlesFromSantry } from "./utils";
 import NewsSpotlight from "./components/news-spotlight";
 import ArticlesSection from "./components/articles-section";
 import { type Article } from "./types";
@@ -22,7 +22,7 @@ export default async function News() {
 
   return (
     <>
-      <main className="bg-(--color-bg-300) news-page">
+      <main className="news-page">
         <section className="news-container">
           <NewsSpotlight
             featuredArticle={featuredArticle}
@@ -30,7 +30,10 @@ export default async function News() {
           />
         </section>
 
-        <ArticlesSection browseableArticles={browseableArticles} />
+        <ArticlesSection
+          browseableArticles={browseableArticles}
+          articleDetailPage={articleDetailPage}
+        />
       </main>
     </>
   );

@@ -1,5 +1,5 @@
 :root {
-  --color-bg-300: #d7e0e9;
+  /* --color-bg-300: #d7e0e9; */
   --color-heading-500: #1a2330; /* base */
   --color-heading-600: #141c26;
   --color-primary-400: #32cfcf;
@@ -16,11 +16,6 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-body {
-  background: var(--color-bg-300);
-  color: var(--color-text-500);
 }
 
 .news-page {
