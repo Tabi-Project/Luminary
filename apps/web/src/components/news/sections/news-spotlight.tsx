@@ -33,8 +33,7 @@ export default function NewsSpotlight({
               formatDate(featuredArticle?.date),
             ]
               .filter(Boolean)
-              .map((item) => `<span>${escapeHtml(item)}</span>`)
-              .join("")}
+              .map((item) => <span key={item}>{escapeHtml(item)}</span>)}
           </div>
 
           <Link

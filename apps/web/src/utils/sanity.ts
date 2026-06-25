@@ -1,4 +1,4 @@
-import { sanityQuery } from "@/app/(public)/news/sanity";
+import { sanityQuery } from "@/actions/sanity";
 import type { Article } from "@/types/news.types";
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
@@ -13,7 +13,7 @@ export const client = createClient({
 });
 
 const builder = imageUrlBuilder(client);
-export const urlFor = (source: any) => builder.image(source);
+export const urlFor = (source: string) => builder.image(source);
 
 export function generateSlug(text: string) {
   return text

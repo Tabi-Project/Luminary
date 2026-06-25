@@ -29,7 +29,7 @@ export const getFilteredArticles = (
     .sort((l, r) => new Date(r.date).getTime() - new Date(l.date).getTime());
 
 export const buildArticleUrl = (slug: string, articleDetailPageUrl: string) =>
-  `${articleDetailPageUrl}?slug=${encodeURIComponent(String(slug).trim())}`;
+  `${articleDetailPageUrl}/${encodeURIComponent(String(slug).trim())}`;
 
 export const getCategoryLabel = (
   category:

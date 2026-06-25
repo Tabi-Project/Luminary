@@ -11,6 +11,6 @@ export const endpoints = {
     get: "/api/categories",
   },
   articles: {
-    get: "/article",
+    get: "/articles",
   },
 };
