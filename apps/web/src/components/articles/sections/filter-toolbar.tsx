@@ -55,7 +55,7 @@ export default function FilterToolbar({
             required={false}
             name="field"
             value={state.field}
-            onChange={(e) => setState({ ...state, field: e.target.value })}
+            onChange={(value) => setState({ ...state, field: value })}
             options={[
               { value: "all", label: "All Fields" },
               ...categories.map((cat: string) => {
@@ -73,7 +73,7 @@ export default function FilterToolbar({
             required={false}
             name="region"
             value={state.region}
-            onChange={(e) => setState({ ...state, region: e.target.value })}
+            onChange={(value) => setState({ ...state, region: value })}
             options={[
               { value: "all", label: "All Regions" },
               { value: "Global", label: "Global" },
@@ -94,7 +94,7 @@ export default function FilterToolbar({
             required={false}
             name="time"
             value={state.time}
-            onChange={(e) => setState({ ...state, time: e.target.value })}
+            onChange={(value) => setState({ ...state, time: value })}
             options={[
               { value: "all", label: "Any Time" },
               { value: "last-7", label: "Last 7 days" },

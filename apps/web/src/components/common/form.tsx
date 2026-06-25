@@ -75,11 +75,7 @@ export function SelectField({
         items={options}
         required={required}
         value={value ?? null}
-        onValueChange={(selected) =>
-          onChange?.({
-            target: { value: selected ?? "" },
-          } as React.ChangeEvent<HTMLSelectElement>)
-        }
+        onValueChange={(selected) => onChange?.(selected ?? "")}
       >
         <Select.Trigger id={htmlFor} className={triggerStyling}>
           <Select.Value placeholder={placeholder} />
