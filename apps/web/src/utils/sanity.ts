@@ -2,17 +2,12 @@ import { createClient } from "@sanity/client";
 import imageUrlBuilder from '@sanity/image-url';
 import { defineQuery } from "next-sanity";
 
-const SANITY_PROJECT_ID = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
-const SANITY_DATASET = process.env.NEXT_PUBLIC_SANITY_DATASET;
-const READ_TOKEN = process.env.SANITY_WRITE_TOKEN;
-const API_VERSION = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
-
 export const client = createClient({
-  projectId: SANITY_PROJECT_ID,
-  dataset: SANITY_DATASET,
-  apiVersion: API_VERSION,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
   useCdn: false,
-  token: READ_TOKEN,
+  token: process.env.SANITY_WRITE_TOKEN,
 });
 
 const builder = imageUrlBuilder(client);
