@@ -1,5 +1,5 @@
 import { type Article } from "@/types/news.types";
-import { buildArticleUrl } from "@/utils/news";
+import { buildArticleUrl } from "@/utils/article";
 import { escapeHtml } from "@/utils/string";
 import { formatDate } from "@/utils/date";
 

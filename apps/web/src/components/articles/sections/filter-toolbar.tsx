@@ -1,5 +1,5 @@
 import { type State, type Article } from "@/types/news.types";
-import { fetchCategories, getCategoryLabel } from "@/utils/news";
+import { fetchCategories, getCategoryLabel } from "@/utils/article";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/common/button";
 import { SelectField, FormLabel } from "@/components/common/form";

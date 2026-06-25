@@ -1,4 +1,4 @@
-import { buildArticleUrl } from "@/utils/news";
+import { buildArticleUrl } from "@/utils/article";
 import { formatDate } from "@/utils/date";
 import { type Article } from "@/types/news.types";
 import Link from "next/link";
@@ -33,7 +33,9 @@ export default function NewsSpotlight({
               formatDate(featuredArticle?.date),
             ]
               .filter(Boolean)
-              .map((item) => <span key={item}>{escapeHtml(item)}</span>)}
+              .map((item) => (
+                <span key={item}>{escapeHtml(item)}</span>
+              ))}
           </div>
 
           <Link

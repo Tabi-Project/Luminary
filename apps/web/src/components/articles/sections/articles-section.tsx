@@ -3,7 +3,7 @@ import FilterToolbar from "./filter-toolbar";
 import Aside from "./sidebar";
 import ArticleList from "./article-list";
 import { type Article, State } from "@/types/news.types";
-import { getFilteredArticles } from "@/utils/news";
+import { getFilteredArticles } from "@/utils/article";
 import { useState } from "react";
 
 export default function ArticlesSection({
