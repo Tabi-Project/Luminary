@@ -1,8 +1,9 @@
-import { escapeHtml, buildArticleUrl } from "@/utils/news";
+import { buildArticleUrl } from "@/utils/news";
 import { formatDate } from "@/utils/date";
 import { type Article } from "@/types/news.types";
 import Link from "next/link";
 import Image from "next/image";
+import { escapeHtml } from "@/utils/string";
 
 export default function NewsSpotlight({
   featuredArticle,

@@ -1,19 +1,17 @@
 import "@/app/styles/news.css";
-import { fetchArticlesFromSantry } from "@/utils/news";
+import { fetchArticlesFromSantry } from "@/utils/sanity";
 import NewsSpotlight from "@/components/news/sections/news-spotlight";
 import ArticlesSection from "@/components/news/sections/articles-section";
 import { type Article } from "@/types/news.types";
+import { endpoints } from "@/data/endpoints";
 
 export default async function News() {
-  //   const [rendered, setRendered] = useState(false);
   let articles: Article[] = [];
   try {
     articles = await fetchArticlesFromSantry();
   } catch (error) {
     console.error("Error fetching articles:", error);
   }
-
-  const articleDetailPage = "./article";
 
   const featuredArticle = articles.find((a) => a.featured) || articles[0];
   const browseableArticles = articles.filter(
@@ -26,13 +24,13 @@ export default async function News() {
         <section className="news-container">
           <NewsSpotlight
             featuredArticle={featuredArticle}
-            articleDetailPage={articleDetailPage}
+            articleDetailPage={endpoints.articles.get}
           />
         </section>
 
         <ArticlesSection
           browseableArticles={browseableArticles}
-          articleDetailPage={articleDetailPage}
+          articleDetailPage={endpoints.articles.get}
         />
       </main>
     </>

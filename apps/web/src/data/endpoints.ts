@@ -9,4 +9,7 @@ export const endpoints = {
   categories: {
     get: "/api/categories",
   },
+  articles: {
+    get: "/article",
+  },
 };

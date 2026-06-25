@@ -1,9 +1,7 @@
 :root {
-  /* --color-bg-300: #d7e0e9; */
   --color-heading-500: #1a2330; /* base */
   --color-heading-600: #141c26;
   --color-primary-400: #32cfcf;
-  --color-white: #ffffff;
 }
 
 .visually-hidden {
@@ -34,7 +32,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 0.95fr);
   min-height: 25rem;
-  background: var(--color-white);
+  background: white;
   border: 1px solid var(--color-border);
   border-radius: calc(var(--radius-xl) + 0.25rem);
   overflow: hidden;
@@ -54,7 +52,7 @@
       var(--color-heading-500) 0%,
       var(--color-heading-600) 100%
     );
-  color: var(--color-white);
+  color: white;
 }
 
 .spotlight-eyebrow {
@@ -81,7 +79,7 @@
   max-width: 12ch;
   font-size: clamp(2rem, 4vw, 3.15rem);
   line-height: 1.04;
-  color: var(--color-white);
+  color: white;
 }
 
 .spotlight-summary {
@@ -123,7 +121,7 @@
   border-radius: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.08);
-  color: var(--color-white);
+  color: white;
   font-weight: 700;
   transition:
     transform 180ms ease,
@@ -181,7 +179,7 @@
   padding: 0.52rem 0.85rem;
   border-radius: 999px;
   background: rgba(20, 28, 38, 0.8);
-  color: var(--color-white);
+  color: white;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -198,7 +196,7 @@
   align-items: center;
   gap: 0.9rem;
   padding: 0.8rem;
-  background: var(--color-white);
+  background: white;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: 0 12px 28px rgba(20, 28, 38, 0.07);
@@ -253,7 +251,7 @@
   padding: 0.95rem 1.3rem;
   border-radius: var(--radius-lg);
   background: var(--color-heading-500);
-  color: var(--color-white);
+  color: white;
   font: inherit;
   font-weight: 700;
   box-shadow: 0 14px 28px rgba(28, 37, 51, 0.18);
@@ -322,7 +320,7 @@
 }
 
 .story-card {
-  background: var(--color-white);
+  background: white;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   overflow: hidden;
@@ -421,7 +419,7 @@
 }
 
 .news-widget {
-  background: var(--color-white);
+  background: white;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   box-shadow: 0 12px 28px rgba(20, 28, 38, 0.07);
@@ -530,7 +528,7 @@
   padding: 0.9rem 1rem;
   border-radius: var(--radius-lg);
   background: var(--color-heading-500);
-  color: var(--color-white);
+  color: white;
   font-weight: 700;
 }
 
@@ -544,7 +542,7 @@
   padding: 2rem 1.5rem;
   border: 1px dashed var(--color-border);
   border-radius: var(--radius-xl);
-  background: var(--color-white);
+  background: white;
   text-align: center;
 }
 
