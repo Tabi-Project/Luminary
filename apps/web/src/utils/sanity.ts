@@ -1,5 +1,19 @@
 import { sanityQuery } from "@/app/(public)/news/sanity";
 import type { Article } from "@/types/news.types";
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { defineQuery } from "next-sanity";
+
+export const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION,
+  useCdn: false,
+  token: process.env.SANITY_WRITE_TOKEN,
+});
+
+const builder = imageUrlBuilder(client);
+export const urlFor = (source: any) => builder.image(source);
 
 export function generateSlug(text: string) {
   return text
@@ -51,3 +65,6 @@ export async function fetchArticlesFromSantry(): Promise<Article[]> {
 
   return articles;
 }
+export const POST_QUERY = defineQuery(
+  `*[_type == "article" && slug.current == $slug][0]`,
+);
