@@ -2,7 +2,8 @@ import { client } from "@/utils/sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Lightbulb, Newspaper } from "lucide-react";
-import { urlFor, POST_QUERY } from "@/utils/sanity"
+import { urlFor, POST_QUERY } from "@/utils/sanity";
+import { formatDate } from "@/utils/date"
 import { Button } from "@/components/common/button";
 
 
@@ -16,11 +17,11 @@ export default async function PostPage({
   const post = await client.fetch(POST_QUERY, { slug });
 
   const article = post;
-  const formattedDate = article?.publishedAt ? new Date(article.publishedAt).toLocaleDateString() : "";
+  const formattedDate = article?.publishedAt ? formatDate(article.publishedAt) : "";
 
   if (!post) {
     return (
-      <main className="min-h-screen w-full bg-[#E4EBF3] px-5 md:px-8 pb-16 pt-4">
+      <main className="min-h-screen w-full  px-5 md:px-8 pb-16 pt-4">
         <div className="max-w-5xl mx-auto flex flex-col gap-4">
           <Link href="/news" className="underline">Back to News</Link>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
@@ -38,7 +39,7 @@ export default async function PostPage({
   }
 
   return (
-    <main className="min-h-screen w-full bg-[#E4EBF3] px-5 md:px-8 pb-16 pt-4">
+    <main className="min-h-screen w-full  px-5 md:px-8 pb-16 pt-4">
       <div className="max-w-5xl mx-auto flex flex-col gap-4">
 
         <Link href="/news" className="underline">Back to News</Link>
