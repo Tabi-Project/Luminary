@@ -1,6 +1,6 @@
-import { type Article, State } from "../types";
-import ArticleCard from "./article-card";
-import EmptyState from "./empty-state";
+import { type Article, State } from "@/types/news.types";
+import ArticleCard from "../article-card";
+import EmptyState from "../empty-state";
 
 const MAX_GRID_ITEMS = 4;
 

@@ -1,4 +1,4 @@
-import { type State } from "../types";
+import { type State } from "@/types/news.types";
 
 interface EmptyStateProps {
   setState: (state: State) => void;

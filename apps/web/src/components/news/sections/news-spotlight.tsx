@@ -1,5 +1,6 @@
-import { formatDate, escapeHtml, buildArticleUrl } from "../utils";
-import { type Article } from "../types";
+import { escapeHtml, buildArticleUrl } from "@/utils/news";
+import { formatDate } from "@/utils/date";
+import { type Article } from "@/types/news.types";
 import Link from "next/link";
 import Image from "next/image";
 

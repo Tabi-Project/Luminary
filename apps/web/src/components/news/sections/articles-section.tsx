@@ -2,8 +2,8 @@
 import FilterToolbar from "./filter-toolbar";
 import Aside from "./sidebar";
 import ArticleList from "./article-list";
-import { type Article, State } from "../types";
-import { getFilteredArticles } from "../utils";
+import { type Article, State } from "@/types/news.types";
+import { getFilteredArticles } from "@/utils/news";
 import { useState } from "react";
 
 export default function ArticlesSection({

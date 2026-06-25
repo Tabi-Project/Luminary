@@ -1,8 +1,8 @@
 import "@/app/styles/news.css";
-import { fetchArticlesFromSantry } from "./utils";
-import NewsSpotlight from "./components/news-spotlight";
-import ArticlesSection from "./components/articles-section";
-import { type Article } from "./types";
+import { fetchArticlesFromSantry } from "@/utils/news";
+import NewsSpotlight from "@/components/news/sections/news-spotlight";
+import ArticlesSection from "@/components/news/sections/articles-section";
+import { type Article } from "@/types/news.types";
 
 export default async function News() {
   //   const [rendered, setRendered] = useState(false);

@@ -1,5 +1,5 @@
-import { type State, type Article } from "../types";
-import { fetchCategories, getCategoryLabel } from "../utils";
+import { type State, type Article } from "@/types/news.types";
+import { fetchCategories, getCategoryLabel } from "@/utils/news";
 import { useEffect, useState } from "react";
 
 interface FilterToolbarProps {

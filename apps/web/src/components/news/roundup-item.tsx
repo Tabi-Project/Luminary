@@ -1,5 +1,6 @@
-import { type Article } from "../types";
-import { escapeHtml, formatDate } from "../utils";
+import { type Article } from "@/types/news.types";
+import { escapeHtml } from "@/utils/news";
+import { formatDate } from "@/utils/date";
 
 export default function RoundupItem({
   article,

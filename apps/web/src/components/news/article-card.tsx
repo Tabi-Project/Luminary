@@ -1,5 +1,7 @@
-import { type Article } from "../types";
-import { buildArticleUrl, escapeHtml, formatDate } from "../utils";
+import { type Article } from "@/types/news.types";
+import { buildArticleUrl, escapeHtml } from "@/utils/news";
+import { formatDate } from "@/utils/date";
+
 import Image from "next/image";
 
 export default function ArticleCard({
