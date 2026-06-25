@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         hostname: "i.pravatar.cc",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+      },
     ],
   },
 };
