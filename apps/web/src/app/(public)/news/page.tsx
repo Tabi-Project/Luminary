@@ -6,11 +6,10 @@ import { type Article } from "@/types/news.types";
 import { endpoints } from "@/data/endpoints";
 
 export default async function News() {
-  let articles: Article[] = [];
-  try {
-    articles = await fetchArticlesFromSantry();
-  } catch (error) {
-    console.error("Error fetching articles:", error);
+  const articles: Article[] = await fetchArticlesFromSantry();
+
+  if (!articles || articles.length === 0) {
+    console.error("Error fetching articles from Sanity");
   }
 
   const featuredArticle = articles.find((a) => a.featured) || articles[0];

@@ -75,7 +75,11 @@ export function SelectField({
         items={options}
         required={required}
         value={value ?? null}
-        onValueChange={(selected) => onChange?.(selected ?? "")}
+        onValueChange={(selected) =>
+          onChange?.({
+            target: { value: selected ?? "" },
+          } as React.ChangeEvent<HTMLSelectElement>)
+        }
       >
         <Select.Trigger id={htmlFor} className={triggerStyling}>
           <Select.Value placeholder={placeholder} />
@@ -142,7 +146,12 @@ export function TextAreaField({
   );
 }
 
-export function FormLabel({ label, htmlFor, required, className }: FormLabelProps) {
+export function FormLabel({
+  label,
+  htmlFor,
+  required,
+  className,
+}: FormLabelProps) {
   return (
     <label
       htmlFor={htmlFor}

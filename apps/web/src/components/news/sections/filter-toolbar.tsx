@@ -1,6 +1,8 @@
 import { type State, type Article } from "@/types/news.types";
 import { fetchCategories, getCategoryLabel } from "@/utils/news";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/common/button";
+import { SelectField, FormLabel } from "@/components/common/form";
 
 interface FilterToolbarProps {
   state: State;
@@ -24,7 +26,7 @@ export default function FilterToolbar({
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    async function getCat() {
+    async function getCategory() {
       try {
         const cat = await fetchCategories(articles);
         if (cat) {
@@ -35,10 +37,8 @@ export default function FilterToolbar({
       }
     }
 
-    getCat();
+    getCategory();
   }, []);
-
-  let count = 0;
 
   return (
     <>
@@ -48,66 +48,64 @@ export default function FilterToolbar({
         aria-label="Filter news articles"
         onSubmit={onSubmit}
       >
-        <label className="toolbar-select" htmlFor="fieldFilter">
-          <span className="visually-hidden">Filter by field</span>
-          <select
-            id="fieldFilter"
+        <div className="toolbar-select">
+          <SelectField
+            label=""
+            htmlFor="fieldFilter"
+            required={false}
             name="field"
             value={state.field}
             onChange={(e) => setState({ ...state, field: e.target.value })}
-          >
-            <option value="all">All Fields</option>
-            {categories.map((cat: string) => {
-              const label = getCategoryLabel(cat);
-              if (!label) return;
-              return (
-                <option value={label} key={count++}>
-                  {label}
-                </option>
-              );
-            })}
-          </select>
-        </label>
+            options={[
+              { value: "all", label: "All Fields" },
+              ...categories.map((cat: string) => {
+                const label = getCategoryLabel(cat);
+                return { value: label, label: label };
+              }),
+            ]}
+          />
+        </div>
 
-        <label className="toolbar-select" htmlFor="regionFilter">
-          <span className="visually-hidden">Filter by region</span>
-          <select
-            id="regionFilter"
+        <div className="toolbar-select">
+          <SelectField
+            label=""
+            htmlFor="regionFilter"
+            required={false}
             name="region"
             value={state.region}
             onChange={(e) => setState({ ...state, region: e.target.value })}
-          >
-            <option value="all">All Regions</option>
-            <option value="Global">Global</option>
-            <option value="Africa">Africa</option>
-            <option value="North America">North America</option>
-            <option value="Europe">Europe</option>
-            <option value="Asia">Asia</option>
-            <option value="Latin America">Latin America</option>
-            <option value="Middle East">Middle East</option>
-          </select>
-        </label>
+            options={[
+              { value: "all", label: "All Regions" },
+              { value: "Global", label: "Global" },
+              { value: "Africa", label: "Africa" },
+              { value: "North America", label: "North America" },
+              { value: "Europe", label: "Europe" },
+              { value: "Asia", label: "Asia" },
+              { value: "Latin America", label: "Latin America" },
+              { value: "Middle East", label: "Middle East" },
+            ]}
+          />
+        </div>
 
-        <label className="toolbar-select" htmlFor="timeFilter">
-          <span className="visually-hidden">Filter by time period</span>
-          <select
-            id="timeFilter"
+        <div className="toolbar-select">
+          <SelectField
+            label=""
+            htmlFor="timeFilter"
+            required={false}
             name="time"
             value={state.time}
             onChange={(e) => setState({ ...state, time: e.target.value })}
-          >
-            <option value="all">Any Time</option>
-            <option value="last-7">Last 7 days</option>
-            <option value="last-30">Last 30 days</option>
-            <option value="last-90">Last 90 days</option>
-            <option value="this-year">This year</option>
-          </select>
-        </label>
+            options={[
+              { value: "all", label: "Any Time" },
+              { value: "last-7", label: "Last 7 days" },
+              { value: "last-30", label: "Last 30 days" },
+              { value: "last-90", label: "Last 90 days" },
+              { value: "this-year", label: "This year" },
+            ]}
+          />
+        </div>
 
-        <button className="news-search-btn" type="submit">
-          <i className="fa-solid fa-magnifying-glass"></i>
-          <span>Search News</span>
-        </button>
+        <Button text="Search News" className="news-search-btn" type="submit" />
       </form>
     </>
   );

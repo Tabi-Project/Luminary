@@ -34,7 +34,7 @@ export interface SelectFieldProps extends FormLabelProps {
   selectClassName?: string;
   className?: string;
   labelClassName?: string;
-  onChange?: (value: string) => void;
+  onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export interface TextAreaFieldProps extends FormLabelProps {
