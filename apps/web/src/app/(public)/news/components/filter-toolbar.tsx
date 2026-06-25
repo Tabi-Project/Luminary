@@ -1,11 +1,18 @@
-import { type State } from "../types";
+import { type State, type Article } from "../types";
+import { fetchCategories, getCategoryLabel } from "../utils";
+import { useEffect, useState } from "react";
 
 interface FilterToolbarProps {
   state: State;
   setState: (state: State) => void;
+  articles: Article[];
 }
 
-export default function FilterToolbar({ state, setState }: FilterToolbarProps) {
+export default function FilterToolbar({
+  state,
+  setState,
+  articles,
+}: FilterToolbarProps) {
   const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -14,6 +21,24 @@ export default function FilterToolbar({ state, setState }: FilterToolbarProps) {
     const time = formData.get("time") as string;
     setState({ field, region, time });
   };
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function getCat() {
+      try {
+        const cat = await fetchCategories(articles);
+        if (cat) {
+          setCategories(cat);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    getCat();
+  }, []);
+
+  let count = 0;
 
   return (
     <>
@@ -32,6 +57,15 @@ export default function FilterToolbar({ state, setState }: FilterToolbarProps) {
             onChange={(e) => setState({ ...state, field: e.target.value })}
           >
             <option value="all">All Fields</option>
+            {categories.map((cat: string) => {
+              const label = getCategoryLabel(cat);
+              if (!label) return;
+              return (
+                <option value={label} key={count++}>
+                  {label}
+                </option>
+              );
+            })}
           </select>
         </label>
 

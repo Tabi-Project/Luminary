@@ -19,7 +19,7 @@
 }
 
 .news-page {
-  padding-top: 7rem;
+  padding-top: 3rem;
   padding-bottom: 4rem;
 }
 
@@ -175,7 +175,7 @@
   position: absolute;
   top: 1.35rem;
   left: 1.35rem;
-  z-index: 2;
+  /* z-index: 2; */
   display: inline-flex;
   align-items: center;
   padding: 0.52rem 0.85rem;
@@ -604,7 +604,7 @@
 
 @media (max-width: 900px) {
   .news-page {
-    padding-top: 6rem;
+    padding-top: 2rem;
   }
 
   .news-spotlight {

@@ -1,5 +1,6 @@
 import { Article } from "./types";
 import { sanityQuery } from "./sanity";
+import { endpoints } from "@/data/endpoints";
 
 const getDaysAgo = (value: number) => {
   const msPerDay = 1000 * 60 * 60 * 24;
@@ -77,11 +78,53 @@ export async function fetchArticlesFromSantry(): Promise<Article[]> {
   } catch (err) {
     console.error("Failed to load articles:", err);
     throw new Error("Failed to load articles");
-    // newsGrid.innerHTML = `<p class="news-empty__copy">
-    //   Unable to load articles right now. Please try again later.
-    // </p>`;
-    // return;
   }
 
   return articles;
 }
+
+export const getCategoryLabel = (
+  category:
+    | string
+    | {
+        title: string;
+        label: string;
+        category: string;
+        name: string;
+        slug: string;
+        field: string;
+        value: string;
+      },
+) => {
+  if (typeof category === "string") return category.trim();
+  const label = [
+    category?.name,
+    category?.title,
+    category?.label,
+    category?.field,
+    category?.value,
+    category?.slug,
+  ].find((v) => typeof v === "string" && v.trim());
+  return label ? label.trim() : "";
+};
+
+export const fetchCategories = async (
+  browseableArticles: { field: string }[],
+) => {
+  const endpoint = endpoints.categories.get;
+  try {
+    const res = await fetch(endpoint, {
+      headers: { Accept: "application/json" },
+    });
+    const result = await res.json().catch(() => ({}));
+    if (!res.ok || !result.success) throw new Error();
+    const categories = Array.isArray(result.data) ? result.data : [];
+    return categories;
+  } catch {
+    // Fallback: populate from article data
+    const fields = [
+      ...new Set(browseableArticles.map((a) => a.field).filter(Boolean)),
+    ].sort();
+    return fields;
+  }
+};

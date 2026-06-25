@@ -24,7 +24,11 @@ export default function ArticlesSection({
     <>
       <section className="news-toolbar-band">
         <div className="news-container">
-          <FilterToolbar state={state} setState={setState} />
+          <FilterToolbar
+            state={state}
+            setState={setState}
+            articles={filteredArticles}
+          />
         </div>
       </section>
 

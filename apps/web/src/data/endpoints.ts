@@ -6,4 +6,7 @@ export const endpoints = {
     create: "/nomination",
   },
   upload: "/upload",
+  categories: {
+    get: "/api/categories",
+  },
 };
