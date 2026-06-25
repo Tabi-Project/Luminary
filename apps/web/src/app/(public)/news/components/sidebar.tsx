@@ -1,4 +1,7 @@
-export default function Aside() {
+import RoundupItem from "./roundup-item";
+import { type Article } from "../types";
+
+export default function Aside({ articles }: { articles: Article[] }) {
   return (
     <>
       <aside className="news-results__sidebar">
@@ -12,7 +15,11 @@ export default function Aside() {
             </span>
             <h2 id="weeklyRoundupTitle">Weekly Roundup</h2>
           </div>
-          <ol id="roundupList" className="roundup-list"></ol>
+          <ol id="roundupList" className="roundup-list">
+            {articles.slice(0, 3).map((article, index) => (
+              <RoundupItem article={article} index={index} key={article.id} />
+            ))}
+          </ol>
         </section>
 
         <section

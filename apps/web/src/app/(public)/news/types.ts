@@ -14,3 +14,9 @@ export interface Article {
   externalUrl: string;
   sourceType: string;
 }
+
+export type State = {
+  field: string;
+  region: string;
+  time: string;
+};

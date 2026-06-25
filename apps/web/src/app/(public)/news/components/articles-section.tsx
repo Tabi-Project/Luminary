@@ -2,8 +2,9 @@
 import FilterToolbar from "./filter-toolbar";
 import Aside from "./sidebar";
 import ArticleList from "./article-list";
-import { type Article } from "../types";
+import { type Article, State } from "../types";
 import { getFilteredArticles } from "../utils";
+import { useState } from "react";
 
 export default function ArticlesSection({
   browseableArticles,
@@ -12,14 +13,18 @@ export default function ArticlesSection({
   browseableArticles: Article[];
   articleDetailPage: string;
 }) {
-  const state = { field: "all", region: "all", time: "all" };
+  const [state, setState] = useState<State>({
+    field: "all",
+    region: "all",
+    time: "all",
+  });
   const filteredArticles = getFilteredArticles(browseableArticles, state);
 
   return (
     <>
       <section className="news-toolbar-band">
         <div className="news-container">
-          <FilterToolbar />
+          <FilterToolbar state={state} setState={setState} />
         </div>
       </section>
 
@@ -27,8 +32,9 @@ export default function ArticlesSection({
         <ArticleList
           articles={filteredArticles}
           articleDetailPage={articleDetailPage}
+          setState={setState}
         />
-        <Aside />
+        <Aside articles={filteredArticles} />
       </section>
     </>
   );

@@ -1,21 +1,48 @@
-export default function FilterToolbar() {
+import { type State } from "../types";
+
+interface FilterToolbarProps {
+  state: State;
+  setState: (state: State) => void;
+}
+
+export default function FilterToolbar({ state, setState }: FilterToolbarProps) {
+  const onSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const field = formData.get("field") as string;
+    const region = formData.get("region") as string;
+    const time = formData.get("time") as string;
+    setState({ field, region, time });
+  };
+
   return (
     <>
       <form
         id="newsFilters"
         className="news-toolbar"
         aria-label="Filter news articles"
+        onSubmit={onSubmit}
       >
         <label className="toolbar-select" htmlFor="fieldFilter">
           <span className="visually-hidden">Filter by field</span>
-          <select id="fieldFilter" name="field">
+          <select
+            id="fieldFilter"
+            name="field"
+            value={state.field}
+            onChange={(e) => setState({ ...state, field: e.target.value })}
+          >
             <option value="all">All Fields</option>
           </select>
         </label>
 
         <label className="toolbar-select" htmlFor="regionFilter">
           <span className="visually-hidden">Filter by region</span>
-          <select id="regionFilter" name="region">
+          <select
+            id="regionFilter"
+            name="region"
+            value={state.region}
+            onChange={(e) => setState({ ...state, region: e.target.value })}
+          >
             <option value="all">All Regions</option>
             <option value="Global">Global</option>
             <option value="Africa">Africa</option>
@@ -29,7 +56,12 @@ export default function FilterToolbar() {
 
         <label className="toolbar-select" htmlFor="timeFilter">
           <span className="visually-hidden">Filter by time period</span>
-          <select id="timeFilter" name="time">
+          <select
+            id="timeFilter"
+            name="time"
+            value={state.time}
+            onChange={(e) => setState({ ...state, time: e.target.value })}
+          >
             <option value="all">Any Time</option>
             <option value="last-7">Last 7 days</option>
             <option value="last-30">Last 30 days</option>

@@ -1,14 +1,17 @@
-import { type Article } from "../types";
+import { type Article, State } from "../types";
 import ArticleCard from "./article-card";
+import EmptyState from "./empty-state";
 
 const MAX_GRID_ITEMS = 4;
 
 export default function ArticleList({
   articles,
   articleDetailPage,
+  setState,
 }: {
   articles: Article[];
   articleDetailPage: string;
+  setState: (state: State) => void;
 }) {
   return (
     <>
@@ -18,14 +21,24 @@ export default function ArticleList({
             <p className="news-results__eyebrow">Latest Stories</p>
             <h2>Featured reporting from across the Luminary network</h2>
           </div>
-          <p id="resultsSummary" className="news-results__summary"></p>
+          <p id="resultsSummary" className="news-results__summary">
+            {articles.length === 0
+              ? "No stories matched your current filters."
+              : null}
+            <br />
+            {articles.length > MAX_GRID_ITEMS
+              ? `Showing ${MAX_GRID_ITEMS} of ${articles.length} stories.`
+              : `${articles.length} currently visible.`}
+          </p>
         </div>
 
-        <div id="newsGrid" className="news-grid" aria-live="polite">
+        <div
+          id="newsGrid"
+          className={articles.length ? "news-grid" : ""}
+          aria-live="polite"
+        >
           {articles.length === 0 ? (
-            <p className="news-empty__copy">
-              Unable to load articles right now. Please try again later.
-            </p>
+            <EmptyState setState={setState} />
           ) : (
             articles
               .slice(0, MAX_GRID_ITEMS)
@@ -38,22 +51,6 @@ export default function ArticleList({
               ))
           )}
         </div>
-
-        <section id="emptyState" className="news-empty" hidden>
-          <p className="news-empty__title">
-            No articles match those filters yet.
-          </p>
-          <p className="news-empty__copy">
-            Try broadening the field, region, or time range to see more stories.
-          </p>
-          <button
-            id="clearFiltersButton"
-            className="news-empty__action"
-            type="button"
-          >
-            Clear filters
-          </button>
-        </section>
       </div>
     </>
   );
