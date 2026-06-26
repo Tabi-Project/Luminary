@@ -17,6 +17,38 @@ export async function sanityQuery(
   return data.result as Article[];
 }
 
+export async function fetchArticlesFromSantry(): Promise<Article[]> {
+  let articles: Article[] = [];
+
+  try {
+    const query = `
+      *[_type == "article" && status == "published"]
+      | order(publicationDate desc) {
+        "id": _id,
+        title,
+        "slug": slug.current,
+        author,
+        source,
+        "summary": excerpt,
+        field,
+        region,
+        readTime,
+        "imageUrl": coverImage.asset->url,
+        featured,
+        "date": publicationDate,
+        externalUrl,
+        sourceType
+      }
+    `;
+    articles = await sanityQuery(query);
+  } catch (err) {
+    console.error("Failed to load articles:", err);
+    throw new Error("Failed to load articles");
+  }
+
+  return articles;
+}
+
 export async function sanityMutate(mutations: any[]) {
   const data = await axiosPost(
     MUTATE_URL,
