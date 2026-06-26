@@ -2,8 +2,6 @@
 import { axiosGet, axiosPost } from "@/utils/api";
 import { QUERY_URL, MUTATE_URL, ASSET_URL } from "@/data/sanity";
 
-
-
 export async function sanityQuery(groqQuery: string, params: Record<string, any> = {}) {
   const url = new URL(QUERY_URL)
   url.searchParams.set('query', groqQuery)
@@ -14,6 +12,8 @@ export async function sanityQuery(groqQuery: string, params: Record<string, any>
   const data = await axiosGet<{ result: unknown }>(url.toString(), {})
   return data.result
 }
+
+
 
 export async function sanityMutate(mutations: any[]) {
   const data = await axiosPost(
