@@ -6,7 +6,9 @@ import { endpoints } from "@/data/endpoints";
 
 export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApiResponse> => {
   try {
-    const response = await axiosGet<SuccessApiResponse<ApiNomination[]>>(endpoints.nomination.get, {});
+    const response = await axiosGet<SuccessApiResponse<ApiNomination[]>>(endpoints.nomination.get, {
+      params: { status: "approved" }
+    });
     
     if (!response.success) {
       return {
@@ -16,7 +18,6 @@ export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApi
     }
 
     return response.data
-      .filter((item) => item.status === "approved")
       .map((item) => {
 
         let evidence = JSON.parse(item.evidence_urls);
