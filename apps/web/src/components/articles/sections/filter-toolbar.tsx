@@ -1,6 +1,5 @@
 import { type State, type Article } from "@/types/articles.types";
 import { getCategoryLabel } from "@/utils/article";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/common/button";
 import { SelectField } from "@/components/common/form";
 import {
@@ -11,6 +10,10 @@ import {
 import type { SelectOption } from "@/types/form.type";
 import { endpoints } from "@/data/endpoints";
 import { axiosGet } from "@/utils/api";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 export const fetchCategories = async (
   browseableArticles: { field: string }[],
@@ -50,30 +53,33 @@ export default function FilterToolbar({
     const time = formData.get("time") as string;
     setState({ field, region, time });
   };
-  const [categories, setCategories] = useState<SelectOption[]>([]);
 
-  useEffect(() => {
-    async function getCategory() {
-      try {
-        const cat = await fetchCategories(articles);
-        if (cat) {
-          setCategories(
-            cat.map((each: string) => {
-              const label = getCategoryLabel(each);
-              return { value: label, label: label };
-            }),
-          );
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    }
+  const {
+    data: categories = [],
+    isLoading: isLoadingCategories,
+    error,
+  } = useQuery<SelectOption[]>({
+    queryKey: ["categories", articles.length],
+    queryFn: () =>
+      fetchCategories(articles).then((cat) => {
+        return cat.map((each: string) => {
+          const label = getCategoryLabel(each);
+          return { value: label, label: label };
+        });
+      }),
+  });
 
-    getCategory();
-  }, []);
+  if (isLoadingCategories) {
+    return <div>Loading categories...</div>;
+  }
+
+  if (error) {
+    console.error(error);
+    return <div>Error loading categories</div>;
+  }
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <form
         id="newsFilters"
         className="news-toolbar"
@@ -123,6 +129,6 @@ export default function FilterToolbar({
           onClick={() => setState({ field: "all", region: "all", time: "all" })}
         />
       </form>
-    </>
+    </QueryClientProvider>
   );
 }

@@ -27,7 +27,7 @@ export default function ArticlesSection({
           <FilterToolbar
             state={state}
             setState={setState}
-            articles={filteredArticles}
+            articles={browseableArticles}
           />
         </div>
       </section>
