@@ -4,7 +4,6 @@ import { getApprovedProfiles } from "@/services/profile.service";
 export async function ProfileSection() {
   const result = await getApprovedProfiles();
 
-  // Handle API or Fetch errors gracefully by checking if the result contains an 'error' property
   if ("error" in result) {
     return (
       <section className="py-12 text-center bg-white rounded-3xl shadow-sm border border-danger/10">

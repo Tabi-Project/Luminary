@@ -7,8 +7,6 @@ import { endpoints } from "@/data/endpoints";
 export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApiResponse> => {
   try {
     const response = await axiosGet<SuccessApiResponse<ApiNomination[]>>(endpoints.nomination.get, {});
-
-    console.log(response);
     
     if (!response.success) {
       return {
@@ -20,13 +18,8 @@ export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApi
     return response.data
       .filter((item) => item.status === "approved")
       .map((item) => {
-        // let evidence: string[] = [];
+
         let evidence = JSON.parse(item.evidence_urls);
-        // try {
-        //   evidence = JSON.parse(item.evidence_urls);
-        // } catch (e) {
-        //   console.error("Error parsing evidence_urls", e);
-        // }
 
         return {
           id: item.nominee.id.toString(),
@@ -44,8 +37,6 @@ export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApi
   } catch (error) {
     console.error("Error fetching approved profiles:", error);
     
-    // axiosGet re-throws AxiosError response data as ErrorApiResponse.
-    // check if it matches that shape before returning.
     if (error && typeof error === 'object' && ('message' in error || 'error' in error)) {
       return error as ErrorApiResponse;
     }
