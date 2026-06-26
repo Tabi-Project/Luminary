@@ -1,5 +1,6 @@
 "use client";
 import { DataTableFilters } from "@/components/filters";
+import { DataTable } from "@/components/table";
 import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import {
@@ -9,6 +10,10 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { AdminService } from "@/services/admin.service";
 import { LayoutList } from "lucide-react";
+import {
+  nominationColumns,
+  type NominationRow,
+} from "@/components/admin/columns/nomination-column";
 
 export function NominationTableSection() {
   const [filters, setFilters] = useState({
@@ -29,6 +34,12 @@ export function NominationTableSection() {
     queryFn: () => AdminService.GetNominations(),
   });
 
+  const rows = (nominationsData?.data ?? []) as NominationRow[];
+
+  const handleView = (id: NominationRow["id"]) => {
+    console.log("View nomination:", id);
+  };
+
   return (
     <section className="w-full bg-white p-4 rounded-lg flex flex-col gap-4">
       <DataTableFilters
@@ -42,14 +53,19 @@ export function NominationTableSection() {
         setSearch={(val) => setFilters({ ...filters, search: val })}
         setDateRange={(val) => setFilters({ ...filters, dateRange: val })}
       />
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>Error: {error.message}</p>}
-      {nominationsData?.data &&
-        (nominationsData.data.length === 0 ? (
-          <EmptyTableState />
-        ) : (
-          <div>{/* your table */}</div>
-        ))}
+
+      {isLoading && <p className="text-sm text-muted">Loading...</p>}
+      {isError && <p className="text-sm text-danger">Error: {error.message}</p>}
+
+      {!isLoading && !isError && rows.length === 0 && <EmptyTableState />}
+
+      {!isLoading && !isError && rows.length > 0 && (
+        <DataTable<NominationRow>
+          columns={nominationColumns}
+          data={rows}
+          onView={handleView}
+        />
+      )}
     </section>
   );
 }
