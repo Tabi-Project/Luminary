@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/common/button";
 import { Globe, UserCircle } from 'lucide-react';
-import { NomineeProfile } from '@/types/profile.type';
 import { ProfileCardProps } from "@/types/profile.type";
 import { cn } from '@/utils/cn';
 
@@ -95,10 +94,12 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
       </div>
 
 
-      <Button
-        text="View Full Profile"
-        className="w-full bg-primary text-white justify-center py-4 rounded-2xl font-bold text-base hover:bg-[#097676] transition-colors mt-4"
-      />
+      <Link href={`/directory/${profile.id}`} className="mt-4">
+        <Button
+          text="View Full Profile"
+          className="w-full bg-primary text-white justify-center py-4 rounded-2xl font-bold text-base hover:bg-[#097676] transition-colors"
+        />
+      </Link>
     </article>
   );
 };

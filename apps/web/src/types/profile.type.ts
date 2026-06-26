@@ -4,6 +4,7 @@ export interface NomineeProfile {
   lastname: string;
   field: string;
   region: string;
+  organization?: string;
   impact: string;
   tags: string[];
   profilePhoto: string;
@@ -14,4 +15,13 @@ export interface NomineeProfile {
 export interface ProfileCardProps {
   profile: NomineeProfile;
   className?: string;
+}
+
+export interface ProfileDetailProps {
+  profile: NomineeProfile;
+}
+
+export interface ProfileLinksProps {
+  title: string;
+  links: string[];
 }
