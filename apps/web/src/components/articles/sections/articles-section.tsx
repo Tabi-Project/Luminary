@@ -2,7 +2,7 @@
 import FilterToolbar from "./filter-toolbar";
 import Aside from "./sidebar";
 import ArticleList from "./article-list";
-import { type Article, State } from "@/types/news.types";
+import { type Article, State } from "@/types/articles.types";
 import { getFilteredArticles } from "@/utils/article";
 import { useState } from "react";
 

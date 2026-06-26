@@ -1,7 +1,7 @@
 "use server";
 import { axiosGet, axiosPost } from "@/utils/api";
 import { QUERY_URL, MUTATE_URL, ASSET_URL } from "@/data/sanity";
-import type { Article } from "@/types/news.types";
+import type { Article } from "@/types/articles.types";
 
 export async function sanityQuery(
   groqQuery: string,

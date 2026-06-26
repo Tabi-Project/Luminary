@@ -1,8 +1,9 @@
-import { type Article } from "@/types/news.types";
+import { type Article } from "@/types/articles.types";
 import { buildArticleUrl } from "@/utils/article";
 import { escapeHtml } from "@/utils/string";
 import { formatDate } from "@/utils/date";
-
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function ArticleCard({
@@ -14,7 +15,7 @@ export default function ArticleCard({
 }) {
   return (
     <article className="story-card">
-      <a
+      <Link
         className="story-card__link"
         href={buildArticleUrl(article?.slug, articleDetailPage)}
       >
@@ -39,12 +40,13 @@ export default function ArticleCard({
           <p className="story-card__summary">{escapeHtml(article?.summary)}</p>
           <div className="story-card__footer">
             <span>{escapeHtml(article?.readTime?.toString() || "")}</span>
-            <span className="story-card__footer-arrow" aria-hidden="true">
-              ↗
-            </span>
+            <ArrowUpRight
+              className="story-card__footer-arrow"
+              aria-hidden="true"
+            />
           </div>
         </div>
-      </a>
+      </Link>
     </article>
   );
 }

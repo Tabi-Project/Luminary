@@ -1,8 +1,7 @@
-import { type Article, State } from "@/types/news.types";
+import { type Article, State } from "@/types/articles.types";
 import ArticleCard from "../article-card";
 import EmptyState from "../empty-state";
-
-const MAX_GRID_ITEMS = 4;
+import { MAX_GRID_ITEMS } from "@/data/articles";
 
 export default function ArticleList({
   articles,

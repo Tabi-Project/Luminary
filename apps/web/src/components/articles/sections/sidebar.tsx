@@ -1,5 +1,5 @@
 import RoundupItem from "../roundup-item";
-import { type Article } from "@/types/news.types";
+import { type Article } from "@/types/articles.types";
 
 export default function Aside({ articles }: { articles: Article[] }) {
   return (

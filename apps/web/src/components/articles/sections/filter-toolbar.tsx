@@ -1,8 +1,35 @@
-import { type State, type Article } from "@/types/news.types";
-import { fetchCategories, getCategoryLabel } from "@/utils/article";
+import { type State, type Article } from "@/types/articles.types";
+import { getCategoryLabel } from "@/utils/article";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/common/button";
-import { SelectField, FormLabel } from "@/components/common/form";
+import { SelectField } from "@/components/common/form";
+import {
+  regionFilterOptions,
+  timeFilterOptions,
+  categoryFilterOptions,
+} from "@/data/articles";
+import type { SelectOption } from "@/types/form.type";
+import { endpoints } from "@/data/endpoints";
+import { axiosGet } from "@/utils/api";
+
+export const fetchCategories = async (
+  browseableArticles: { field: string }[],
+) => {
+  const endpoint = endpoints.categories.get;
+  try {
+    const res = await axiosGet<{ data: { data: unknown } }>(endpoint, {});
+    const result = res.data;
+    if (!res) throw new Error();
+    const categories = Array.isArray(result.data) ? result.data : [];
+    return categories;
+  } catch {
+    // Fallback: populate from article data
+    const fields = [
+      ...new Set(browseableArticles.map((a) => a.field).filter(Boolean)),
+    ].sort();
+    return fields;
+  }
+};
 
 interface FilterToolbarProps {
   state: State;
@@ -23,14 +50,19 @@ export default function FilterToolbar({
     const time = formData.get("time") as string;
     setState({ field, region, time });
   };
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<SelectOption[]>([]);
 
   useEffect(() => {
     async function getCategory() {
       try {
         const cat = await fetchCategories(articles);
         if (cat) {
-          setCategories(cat);
+          setCategories(
+            cat.map((each: string) => {
+              const label = getCategoryLabel(each);
+              return { value: label, label: label };
+            }),
+          );
         }
       } catch (err) {
         console.error(err);
@@ -56,13 +88,7 @@ export default function FilterToolbar({
             name="field"
             value={state.field}
             onChange={(value) => setState({ ...state, field: value })}
-            options={[
-              { value: "all", label: "All Fields" },
-              ...categories.map((cat: string) => {
-                const label = getCategoryLabel(cat);
-                return { value: label, label: label };
-              }),
-            ]}
+            options={categoryFilterOptions(categories)}
           />
         </div>
 
@@ -74,16 +100,7 @@ export default function FilterToolbar({
             name="region"
             value={state.region}
             onChange={(value) => setState({ ...state, region: value })}
-            options={[
-              { value: "all", label: "All Regions" },
-              { value: "Global", label: "Global" },
-              { value: "Africa", label: "Africa" },
-              { value: "North America", label: "North America" },
-              { value: "Europe", label: "Europe" },
-              { value: "Asia", label: "Asia" },
-              { value: "Latin America", label: "Latin America" },
-              { value: "Middle East", label: "Middle East" },
-            ]}
+            options={regionFilterOptions}
           />
         </div>
 
@@ -95,17 +112,16 @@ export default function FilterToolbar({
             name="time"
             value={state.time}
             onChange={(value) => setState({ ...state, time: value })}
-            options={[
-              { value: "all", label: "Any Time" },
-              { value: "last-7", label: "Last 7 days" },
-              { value: "last-30", label: "Last 30 days" },
-              { value: "last-90", label: "Last 90 days" },
-              { value: "this-year", label: "This year" },
-            ]}
+            options={timeFilterOptions}
           />
         </div>
 
-        <Button text="Search News" className="news-search-btn" type="submit" />
+        <Button
+          text="Clear filters"
+          className="news-search-btn"
+          type="submit"
+          onClick={() => setState({ field: "all", region: "all", time: "all" })}
+        />
       </form>
     </>
   );

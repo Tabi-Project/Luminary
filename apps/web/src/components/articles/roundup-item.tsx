@@ -1,4 +1,4 @@
-import { type Article } from "@/types/news.types";
+import { type Article } from "@/types/articles.types";
 import { escapeHtml } from "@/utils/string";
 import { formatDate } from "@/utils/date";
 
@@ -12,12 +12,12 @@ export default function RoundupItem({
   return (
     <li className="roundup-item">
       <span className="roundup-item__index">
-        ${String(index + 1).padStart(2, "0")}
+        {String(index + 1).padStart(2, "0")}
       </span>
       <div>
-        <p className="roundup-item__title">${escapeHtml(article.title)}</p>
+        <p className="roundup-item__title">{escapeHtml(article.title)}</p>
         <p className="roundup-item__meta">
-          ${escapeHtml(article.source || article.author)} · $
+          {escapeHtml(article.source || article.author)} ·
           {escapeHtml(formatDate(article.date))}
         </p>
       </div>
