@@ -1,48 +1,32 @@
-import axios from "axios";
-import { NomineeProfile } from "@/types/profile.type";
+import { NomineeProfile, ApiNomination } from "@/types/profile.type";
+import { SuccessApiResponse, ErrorApiResponse } from "@/types/api.type";
+import { axiosGet } from "@/utils/api";
+import { endpoints } from "@/data/endpoints";
 
-const API_URL = "https://luminary-2lvb.onrender.com/api/nomination";
 
-interface ApiNominee {
-  id: number;
-  first_name: string;
-  last_name: string;
-  field: string;
-  country: string;
-  profile_image_url: string;
-}
-
-interface ApiNomination {
-  nominee_id: number;
-  status: string;
-  description: string;
-  evidence_urls: string;
-  supporting_urls: string[];
-  nominee: ApiNominee;
-}
-
-interface ApiResponse {
-  success: boolean;
-  data: ApiNomination[];
-}
-
-export const getApprovedProfiles = async (): Promise<NomineeProfile[]> => {
+export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApiResponse> => {
   try {
-    const response = await axios.get<ApiResponse>(API_URL);
+    const response = await axiosGet<SuccessApiResponse<ApiNomination[]>>(endpoints.nomination.get, {});
+
+    console.log(response);
     
-    if (!response.data.success) {
-      throw new Error("Failed to fetch profiles");
+    if (!response.success) {
+      return {
+        error: "API_UNSUCCESSFUL",
+        message: response.message || "Failed to fetch approved profiles from the API."
+      };
     }
 
-    return response.data.data
+    return response.data
       .filter((item) => item.status === "approved")
       .map((item) => {
-        let evidence: string[] = [];
-        try {
-          evidence = JSON.parse(item.evidence_urls);
-        } catch (e) {
-          console.error("Error parsing evidence_urls", e);
-        }
+        // let evidence: string[] = [];
+        let evidence = JSON.parse(item.evidence_urls);
+        // try {
+        //   evidence = JSON.parse(item.evidence_urls);
+        // } catch (e) {
+        //   console.error("Error parsing evidence_urls", e);
+        // }
 
         return {
           id: item.nominee.id.toString(),
@@ -59,6 +43,16 @@ export const getApprovedProfiles = async (): Promise<NomineeProfile[]> => {
       });
   } catch (error) {
     console.error("Error fetching approved profiles:", error);
-    return [];
+    
+    // axiosGet re-throws AxiosError response data as ErrorApiResponse.
+    // check if it matches that shape before returning.
+    if (error && typeof error === 'object' && ('message' in error || 'error' in error)) {
+      return error as ErrorApiResponse;
+    }
+
+    return {
+      error: "FETCH_FAILED",
+      message: error instanceof Error ? error.message : "An unexpected connection error occurred."
+    };
   }
 };

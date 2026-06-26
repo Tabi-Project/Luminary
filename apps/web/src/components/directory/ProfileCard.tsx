@@ -6,7 +6,7 @@ import { Globe, UserCircle } from "lucide-react";
 import { ProfileCardProps } from "@/types/profile.type";
 import { cn } from "@/utils/cn";
 
-const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
+export const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
   return (
     <article
       className={cn(
@@ -98,5 +98,3 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
     </article>
   );
 };
-
-export default ProfileCard;

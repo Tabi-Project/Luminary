@@ -4,6 +4,7 @@ export const endpoints = {
   },
   nomination: {
     create: "/nomination",
+    get: "/nomination",
   },
   upload: "/upload",
 };
