@@ -2,6 +2,7 @@ import { NomineeProfile, ApiNomination } from "@/types/profile.type";
 import { SuccessApiResponse, ErrorApiResponse } from "@/types/api.type";
 import { axiosGet } from "@/utils/api";
 import { endpoints } from "@/data/endpoints";
+import { getApiErrorMessage } from "@/utils/error";
 
 
 export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApiResponse> => {
@@ -38,13 +39,9 @@ export const getApprovedProfiles = async (): Promise<NomineeProfile[] | ErrorApi
   } catch (error) {
     console.error("Error fetching approved profiles:", error);
     
-    if (error && typeof error === 'object' && ('message' in error || 'error' in error)) {
-      return error as ErrorApiResponse;
-    }
-
     return {
       error: "FETCH_FAILED",
-      message: error instanceof Error ? error.message : "An unexpected connection error occurred."
+      message: getApiErrorMessage(error),
     };
   }
 };
