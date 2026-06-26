@@ -7,4 +7,9 @@ export const endpoints = {
     create: "/nomination",
   },
   upload: "/upload",
+  admin: {
+    nominations: {
+      getNominations: "/admin/nominations",
+    },
+  },
 };
