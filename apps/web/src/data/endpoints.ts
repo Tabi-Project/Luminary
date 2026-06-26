@@ -13,4 +13,9 @@ export const endpoints = {
   articles: {
     get: "/articles",
   },
+  admin: {
+    nominations: {
+      getNominations: "/admin/nominations",
+    },
+  },
 };

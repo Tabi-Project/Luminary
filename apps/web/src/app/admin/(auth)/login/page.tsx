@@ -61,7 +61,7 @@ export default function LoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-6">
-      <article className="flex w-full max-w-[480px] flex-col gap-6 rounded-lg bg-white p-8 shadow">
+      <article className="flex w-full max-w-120 flex-col gap-6 rounded-lg bg-white p-8 shadow">
         <Link href="/" className="w-fit">
           <Image
             src="/images/luminary-black-logo.png"
@@ -79,7 +79,11 @@ export default function LoginPage() {
           </p>
         </header>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5"
+          noValidate
+        >
           <FormField
             label="Email address"
             htmlFor="login-email"
