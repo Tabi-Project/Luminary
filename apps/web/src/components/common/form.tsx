@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FormFieldProps,
   FormLabelProps,
@@ -69,7 +71,9 @@ export function SelectField({
 
   return (
     <div className={formFieldStyling}>
-      <FormLabel label={label} htmlFor={htmlFor} required={required} />
+      {label && (
+        <FormLabel label={label} htmlFor={htmlFor} required={required} />
+      )}
       <Select.Root
         name={name}
         items={options}
@@ -142,7 +146,12 @@ export function TextAreaField({
   );
 }
 
-export function FormLabel({ label, htmlFor, required, className }: FormLabelProps) {
+export function FormLabel({
+  label,
+  htmlFor,
+  required,
+  className,
+}: FormLabelProps) {
   return (
     <label
       htmlFor={htmlFor}
