@@ -17,7 +17,7 @@ export async function sanityQuery(
   return data.result as Article[];
 }
 
-export async function fetchArticlesFromSantry(): Promise<Article[]> {
+export async function fetchArticlesFromSantry(): Promise<Article[] | null> {
   let articles: Article[] = [];
 
   try {
@@ -43,7 +43,7 @@ export async function fetchArticlesFromSantry(): Promise<Article[]> {
     articles = await sanityQuery(query);
   } catch (err) {
     console.error("Failed to load articles:", err);
-    throw new Error("Failed to load articles");
+    return null;
   }
 
   return articles;

@@ -6,10 +6,18 @@ import { endpoints } from "@/data/endpoints";
 import { fetchArticlesFromSantry } from "@/actions/sanity";
 
 export default async function News() {
-  const articles: Article[] = await fetchArticlesFromSantry();
+  const articles: Article[] | null = await fetchArticlesFromSantry();
 
-  if (!articles || articles.length === 0) {
-    console.error("Error fetching articles from Sanity");
+  if (articles === null) {
+    throw new Error("Failed to load articles from Sanity");
+  } else if (articles.length === 0) {
+    return (
+      <main className="news-page">
+        <section className="news-container">
+          <p>No articles available at the moment. Please check back later.</p>
+        </section>
+      </main>
+    );
   }
 
   const featuredArticle = articles.find((a) => a.featured) || articles[0];
