@@ -41,4 +41,5 @@ export interface DataTableProps<TRow extends { id: string | number }> {
   onView: (id: TRow["id"]) => void;
   className?: string;
   emptyMessage?: string;
+  isLoading?: boolean;
 }

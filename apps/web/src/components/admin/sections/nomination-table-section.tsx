@@ -4,34 +4,50 @@ import { DataTable } from "@/components/table";
 import { useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import {
-  nominationDateRangeOptions,
   nominationSortOptions,
+  nominationSortOrderOptions,
 } from "@/data/admin";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { AdminService } from "@/services/admin.service";
 import { LayoutList } from "lucide-react";
 import {
   nominationColumns,
   type NominationRow,
 } from "@/components/admin/columns/nomination-column";
+import { DataTablePagination } from "@/components/pagination";
 
 export function NominationTableSection() {
   const [filters, setFilters] = useState({
     search: "",
-    sort: "nominee_name",
-    dateRange: "all_time",
+    sort_by: "created_at",
+    sort_order: "desc",
   });
   const debouncedSearch = useDebounce(filters.search, 300);
-  const [pagination, setPagination] = useState({ page: 1, pageSize: 10 });
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 15;
 
   const {
     data: nominationsData,
     isLoading,
+    isFetching,
     error,
     isError,
   } = useQuery({
-    queryKey: ["nominations", filters.dateRange, debouncedSearch, filters.sort],
-    queryFn: () => AdminService.GetNominations(),
+    queryKey: [
+      "nominations",
+      debouncedSearch,
+      filters.sort_by,
+      filters.sort_order,
+      page,
+    ],
+    placeholderData: keepPreviousData,
+    queryFn: () =>
+      AdminService.GetNominations(
+        debouncedSearch,
+        page,
+        filters.sort_by,
+        filters.sort_order,
+      ),
   });
 
   const rows = (nominationsData?.data ?? []) as NominationRow[];
@@ -40,35 +56,53 @@ export function NominationTableSection() {
     console.log("View nomination:", id);
   };
 
+  const updateFilter = (patch: Partial<typeof filters>) => {
+    setFilters((prev) => ({ ...prev, ...patch }));
+    setPage(1);
+  };
+
+  const isEmpty = !isLoading && !isFetching && !isError && rows.length === 0;
+  const showTable = !isError && (isLoading || isFetching || rows.length > 0);
+
   return (
     <section className="w-full bg-white p-4 rounded-lg flex flex-col gap-4">
       <DataTableFilters
-        sort={filters.sort}
+        sort={filters.sort_by}
         search={filters.search}
-        dateRange={filters.dateRange}
+        sortOrder={filters.sort_order}
         sortOptions={nominationSortOptions}
+        sortOrderOptions={nominationSortOrderOptions}
         searchPlaceholder="Search nominee name"
-        dateRangeOptions={nominationDateRangeOptions}
-        setSort={(val) => setFilters({ ...filters, sort: val })}
-        setSearch={(val) => setFilters({ ...filters, search: val })}
-        setDateRange={(val) => setFilters({ ...filters, dateRange: val })}
+        setSort={(val) => updateFilter({ sort_by: val })}
+        setSearch={(val) => updateFilter({ search: val })}
+        setSortOrder={(val) => updateFilter({ sort_order: val })}
       />
 
-      {isLoading && <p className="text-sm text-muted">Loading...</p>}
       {isError && <p className="text-sm text-danger">Error: {error.message}</p>}
 
-      {!isLoading && !isError && rows.length === 0 && <EmptyTableState />}
+      {isEmpty && <EmptyTableState />}
 
-      {!isLoading && !isError && rows.length > 0 && (
+      {showTable && (
         <DataTable<NominationRow>
-          columns={nominationColumns}
           data={rows}
           onView={handleView}
+          columns={nominationColumns}
+          isLoading={isLoading || isFetching}
         />
       )}
+
+      <DataTablePagination
+        page={page}
+        setPage={setPage}
+        limit={PAGE_SIZE}
+        recordName="nominations"
+        totalCount={nominationsData?.meta?.total}
+        totalPages={nominationsData?.meta?.total_pages}
+      />
     </section>
   );
 }
+
 
 const EmptyTableState = () => {
   return (

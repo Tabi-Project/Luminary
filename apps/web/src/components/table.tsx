@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye } from "lucide-react";
+import { Eye, Loader2 } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { Button } from "@/components/common/button";
 import type { DataTableProps } from "@/types/table";
@@ -11,14 +11,20 @@ export function DataTable<TRow extends { id: string | number }>({
   onView,
   className,
   emptyMessage = "No records found.",
+  isLoading = false,
 }: DataTableProps<TRow>) {
   return (
     <div
       className={cn(
-        "w-full overflow-x-auto rounded-lg border border-border bg-white",
+        "relative w-full overflow-x-auto rounded-lg border border-border bg-white",
         className,
       )}
     >
+      {isLoading && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-white/70">
+          <Loader2 size={24} className="animate-spin text-primary" />
+        </div>
+      )}
       <table className="w-full min-w-max border-collapse text-sm">
         <thead>
           <tr className="border-b border-border bg-bg-surface text-left">
