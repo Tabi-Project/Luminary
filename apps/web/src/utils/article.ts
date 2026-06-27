@@ -1,4 +1,4 @@
-import { Article } from "@/types/articles.types";
+import { Article } from "@/types/articles.type";
 import { endpoints } from "@/data/endpoints";
 import { getDaysAgo } from "@/utils/date";
 

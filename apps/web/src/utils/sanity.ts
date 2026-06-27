@@ -1,6 +1,5 @@
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import { defineQuery } from "next-sanity";
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -31,7 +30,3 @@ export function estimateReadTime(text: string) {
   const readTime = Math.ceil(minutes);
   return readTime;
 }
-
-export const POST_QUERY = defineQuery(
-  `*[_type == "article" && slug.current == $slug][0]`,
-);

@@ -1,8 +1,8 @@
 "use client";
 import FilterToolbar from "./filter-toolbar";
-import Aside from "./sidebar";
+import ArticleSidebar from "./sidebar";
 import ArticleList from "./article-list";
-import { type Article, State } from "@/types/articles.types";
+import { type Article, State } from "@/types/articles.type";
 import { getFilteredArticles } from "@/utils/article";
 import { useState } from "react";
 
@@ -38,7 +38,7 @@ export default function ArticlesSection({
           articleDetailPage={articleDetailPage}
           setState={setState}
         />
-        <Aside articles={filteredArticles} />
+        <ArticleSidebar articles={filteredArticles} />
       </section>
     </>
   );

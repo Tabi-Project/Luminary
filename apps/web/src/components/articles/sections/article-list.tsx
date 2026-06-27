@@ -1,4 +1,4 @@
-import { type Article, State } from "@/types/articles.types";
+import { type Article, State } from "@/types/articles.type";
 import ArticleCard from "../article-card";
 import EmptyState from "../empty-state";
 import { MAX_GRID_ITEMS } from "@/data/articles";

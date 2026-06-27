@@ -1,7 +1,7 @@
 import "@/app/styles/news.css";
 import NewsSpotlight from "@/components/articles/sections/news-spotlight";
 import ArticlesSection from "@/components/articles/sections/articles-section";
-import { type Article } from "@/types/articles.types";
+import { type Article } from "@/types/articles.type";
 import { endpoints } from "@/data/endpoints";
 import { fetchArticlesFromSantry } from "@/actions/sanity";
 

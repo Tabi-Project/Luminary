@@ -1,4 +1,4 @@
-import { type State, type Article } from "@/types/articles.types";
+import { type State, type Article } from "@/types/articles.type";
 import { getCategoryLabel } from "@/utils/article";
 import { Button } from "@/components/common/button";
 import { SelectField } from "@/components/common/form";
@@ -8,31 +8,11 @@ import {
   categoryFilterOptions,
 } from "@/data/articles";
 import type { SelectOption } from "@/types/form.type";
-import { endpoints } from "@/data/endpoints";
-import { axiosGet } from "@/utils/api";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
+import { fetchCategories } from "@/services/articles.service";
 
 const queryClient = new QueryClient();
-
-export const fetchCategories = async (
-  browseableArticles: { field: string }[],
-) => {
-  const endpoint = endpoints.categories.get;
-  try {
-    const res = await axiosGet<{ data: { data: unknown } }>(endpoint, {});
-    const result = res.data;
-    if (!res) throw new Error();
-    const categories = Array.isArray(result.data) ? result.data : [];
-    return categories;
-  } catch {
-    // Fallback: populate from article data
-    const fields = [
-      ...new Set(browseableArticles.map((a) => a.field).filter(Boolean)),
-    ].sort();
-    return fields;
-  }
-};
 
 interface FilterToolbarProps {
   state: State;

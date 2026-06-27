@@ -1,4 +1,4 @@
-import { type Article } from "@/types/articles.types";
+import { type Article } from "@/types/articles.type";
 import { buildArticleUrl } from "@/utils/article";
 import { escapeHtml } from "@/utils/string";
 import { formatDate } from "@/utils/date";

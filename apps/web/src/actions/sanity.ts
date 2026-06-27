@@ -1,7 +1,7 @@
 "use server";
 import { axiosGet, axiosPost } from "@/utils/api";
-import { QUERY_URL, MUTATE_URL, ASSET_URL } from "@/data/sanity";
-import type { Article } from "@/types/articles.types";
+import { QUERY_URL, MUTATE_URL, ASSET_URL, QUERY } from "@/data/sanity";
+import type { Article } from "@/types/articles.type";
 
 export async function sanityQuery(
   groqQuery: string,
@@ -21,26 +21,7 @@ export async function fetchArticlesFromSantry(): Promise<Article[] | null> {
   let articles: Article[] = [];
 
   try {
-    const query = `
-      *[_type == "article" && status == "published"]
-      | order(publicationDate desc) {
-        "id": _id,
-        title,
-        "slug": slug.current,
-        author,
-        source,
-        "summary": excerpt,
-        field,
-        region,
-        readTime,
-        "imageUrl": coverImage.asset->url,
-        featured,
-        "date": publicationDate,
-        externalUrl,
-        sourceType
-      }
-    `;
-    articles = await sanityQuery(query);
+    articles = await sanityQuery(QUERY);
   } catch (err) {
     console.error("Failed to load articles:", err);
     return null;

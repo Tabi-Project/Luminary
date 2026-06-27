@@ -1,7 +1,7 @@
 import RoundupItem from "../roundup-item";
-import { type Article } from "@/types/articles.types";
+import { type Article } from "@/types/articles.type";
 
-export default function Aside({ articles }: { articles: Article[] }) {
+export default function ArticleSidebar({ articles }: { articles: Article[] }) {
   return (
     <>
       <aside className="news-results__sidebar">
