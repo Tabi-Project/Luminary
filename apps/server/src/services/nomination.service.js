@@ -163,7 +163,7 @@ export const getAll = async ({ search, country } = {}) => {
     let query = supabaseAdmin
       .from(NOMINATION_TABLE_NAME)
       .select(
-        `*, nominee:${NOMINEE_TABLE_NAME}(*), nominator:${NOMINATOR_TABLE_NAME}(*)`,
+        `*, nominee:${NOMINEE_TABLE_NAME}!inner(*), nominator:${NOMINATOR_TABLE_NAME}(*)`,
       )
       .eq("status", NominationStatus.APPROVED);
 
@@ -197,12 +197,24 @@ export const getAll = async ({ search, country } = {}) => {
   }
 };
 
-export const adminGetAll = async ({ search, country } = {}) => {
+export const adminGetAll = async ({
+  search,
+  country,
+  page = 1,
+  limit = 20,
+  sort_by = "created_at",
+  sort_order = "desc",
+} = {}) => {
   try {
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+    const ascending = sort_order === "asc";
+
     let query = supabaseAdmin
       .from(NOMINATION_TABLE_NAME)
       .select(
-        `*, nominee:${NOMINEE_TABLE_NAME}(*), nominator:${NOMINATOR_TABLE_NAME}(*)`,
+        `*, nominee:${NOMINEE_TABLE_NAME}!inner(*), nominator:${NOMINATOR_TABLE_NAME}(*)`,
+        { count: "exact" },
       );
 
     if (search) {
@@ -218,19 +230,26 @@ export const adminGetAll = async ({ search, country } = {}) => {
       });
     }
 
-    const { data: nominations, error } = await query;
+    const { data: nominations, count, error } = await query
+      .order(
+        sort_by === "nominee_name" ? "first_name" : sort_by,
+        sort_by === "nominee_name"
+          ? { ascending, referencedTable: NOMINEE_TABLE_NAME }
+          : { ascending },
+      )
+      .range(from, to);
 
     if (error) {
       throw createError(error.message, 400);
     }
 
-    return nominations;
+    return { nominations, total: count };
   } catch (error) {
     if (error.statusCode) {
       throw error;
     }
 
-    console.error("Critical Error in getNominations:", error);
+    console.error("Critical Error in adminGetAll:", error);
     throw createError("Internal Server Error", 500);
   }
 };
