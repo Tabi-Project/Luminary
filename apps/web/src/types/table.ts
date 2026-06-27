@@ -31,6 +31,9 @@ export interface TableColumn<TRow extends { id: string | number }> {
  * @property columns      - Column definitions.
  * @property data         - Array of row objects to render.
  * @property onView       - Called with the row's `id` when the View button is clicked.
+ * @property onApprove    - Optional. Called with the row's `id` to approve it.
+ * @property onReject     - Optional. Called with the row's `id` to reject it.
+ * @property onSuspend    - Optional. Called with the row's `id` to suspend it.
  * @property className    - Optional extra class applied to the outermost wrapper.
  * @property emptyMessage - Optional message shown when `data` is empty.
  *                          Defaults to "No records found."
@@ -39,6 +42,9 @@ export interface DataTableProps<TRow extends { id: string | number }> {
   columns: TableColumn<TRow>[];
   data: TRow[];
   onView: (id: TRow["id"]) => void;
+  onApprove?: (id: TRow["id"]) => void;
+  onReject?: (id: TRow["id"]) => void;
+  onSuspend?: (id: TRow["id"]) => void;
   className?: string;
   emptyMessage?: string;
 }

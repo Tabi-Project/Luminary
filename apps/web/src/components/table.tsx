@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye } from "lucide-react";
+import { Ban, Check, Eye, X } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { Button } from "@/components/common/button";
 import type { DataTableProps } from "@/types/table";
@@ -9,6 +9,9 @@ export function DataTable<TRow extends { id: string | number }>({
   columns,
   data,
   onView,
+  onApprove,
+  onReject,
+  onSuspend,
   className,
   emptyMessage = "No records found.",
 }: DataTableProps<TRow>) {
@@ -73,15 +76,50 @@ export function DataTable<TRow extends { id: string | number }>({
                   );
                 })}
 
-                <td className="px-4 py-3 text-right">
-                  <Button
-                    variant="ghost"
-                    icon={<Eye size={15} />}
-                    iconPosition="left"
-                    text="View"
-                    onClick={() => onView(row.id)}
-                    className="ml-auto text-primary hover:bg-primary/10 rounded-md px-3 py-1.5 text-xs"
-                  />
+                <td className="px-4 py-3">
+                  <div className="flex items-center justify-end gap-1">
+                    <Button
+                      variant="ghost"
+                      icon={<Eye size={15} />}
+                      iconPosition="left"
+                      text="View"
+                      onClick={() => onView(row.id)}
+                      className="text-primary hover:bg-primary/10 rounded-md px-3 py-1.5 text-xs"
+                    />
+
+                    {onApprove && (
+                      <Button
+                        variant="ghost"
+                        icon={<Check size={15} />}
+                        iconPosition="left"
+                        text="Approve"
+                        onClick={() => onApprove(row.id)}
+                        className="text-success hover:bg-success/10 rounded-md px-3 py-1.5 text-xs"
+                      />
+                    )}
+
+                    {onReject && (
+                      <Button
+                        variant="ghost"
+                        icon={<X size={15} />}
+                        iconPosition="left"
+                        text="Reject"
+                        onClick={() => onReject(row.id)}
+                        className="text-danger hover:bg-danger/10 rounded-md px-3 py-1.5 text-xs"
+                      />
+                    )}
+
+                    {onSuspend && (
+                      <Button
+                        variant="ghost"
+                        icon={<Ban size={15} />}
+                        iconPosition="left"
+                        text="Suspend"
+                        onClick={() => onSuspend(row.id)}
+                        className="text-warning hover:bg-warning/10 rounded-md px-3 py-1.5 text-xs"
+                      />
+                    )}
+                  </div>
                 </td>
               </tr>
             ))
