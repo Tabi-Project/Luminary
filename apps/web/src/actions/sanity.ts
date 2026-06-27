@@ -22,7 +22,7 @@ export async function sanityMutate(mutations: any[]) {
     {
       config: {
         headers: {
-          Authorization: `Bearer ${process.env.SANITY_WRITE_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN}`,
         },
       },
     }
@@ -41,7 +41,7 @@ export async function sanityUploadImage(formData: FormData) {
       config: {
         headers: {
           'Content-Type': file.type,
-          Authorization: `Bearer ${process.env.SANITY_WRITE_TOKEN}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN}`,
         },
       },
     }
