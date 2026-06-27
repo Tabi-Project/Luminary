@@ -29,6 +29,18 @@ const actionsByStatus: Record<NominationStatus, Action[]> = {
   suspended: ["approve"],
 };
 
+function toUrlList(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value.filter(
+      (v): v is string => typeof v === "string" && v.trim() !== "",
+    );
+  }
+  if (typeof value === "string" && value.trim() !== "") {
+    return [value.trim()];
+  }
+  return [];
+}
+
 function fullName(p?: { first_name?: string; last_name?: string } | null) {
   if (!p) return "";
   return [p.first_name, p.last_name].filter(Boolean).join(" ").trim();
@@ -110,8 +122,8 @@ export default function NominationDetailPage() {
   const submissionType = isSelf ? "Self submission" : "Nomination";
   const status = nomination.status;
   const allowed = actionsByStatus[status] ?? [];
-  const supportingLinks = (nomination.supporting_urls ?? []).filter(Boolean);
-  const evidenceLinks = (nomination.evidence_urls ?? []).filter(Boolean);
+  const supportingLinks = toUrlList(nomination.supporting_urls);
+  const evidenceLinks = toUrlList(nomination.evidence_urls);
 
   return (
     <div className="flex flex-col gap-6 py-8">
@@ -143,7 +155,7 @@ export default function NominationDetailPage() {
               icon={<Check size={16} />}
               text="Approve"
               disabled={isPending}
-              onClick={() => trigger("approve", nomination.id)}
+              onClick={() => trigger("approve", id)}
               className="justify-center"
             />
           )}
@@ -153,7 +165,7 @@ export default function NominationDetailPage() {
               icon={<X size={16} />}
               text="Reject"
               disabled={isPending}
-              onClick={() => trigger("reject", nomination.id)}
+              onClick={() => trigger("reject", id)}
               className="text-danger hover:bg-danger/10"
             />
           )}
@@ -163,7 +175,7 @@ export default function NominationDetailPage() {
               icon={<Ban size={16} />}
               text="Suspend"
               disabled={isPending}
-              onClick={() => trigger("suspend", nomination.id)}
+              onClick={() => trigger("suspend", id)}
               className="text-warning hover:bg-warning/10"
             />
           )}

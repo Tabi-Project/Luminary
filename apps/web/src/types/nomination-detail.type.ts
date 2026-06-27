@@ -13,8 +13,8 @@ export interface NominationDetail {
   id: string;
   status: NominationStatus;
   description?: string;
-  evidence_urls?: string[];
-  supporting_urls?: string[];
+  evidence_urls?: string[] | string | null;
+  supporting_urls?: string[] | string | null;
   created_at: string;
   updated_at?: string;
   is_self_submission?: boolean;
