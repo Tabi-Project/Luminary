@@ -12,10 +12,10 @@ export const errorResponse = (res, message, statusCode = 500) => {
   });
 };
 
-export const paginatedResponse = (res, data, pagination) => {
+export const paginatedResponse = (res, data, meta) => {
   return res.status(200).json({
     success: true,
     data,
-    pagination,
+    meta,
   });
 };

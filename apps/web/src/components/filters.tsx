@@ -6,25 +6,25 @@ import { SelectOption } from "@/types/form.type";
 interface DataTableFiltersProps {
   sort: string;
   search: string;
-  dateRange: string;
+  sortOrder: string;
   searchPlaceholder: string;
   sortOptions: SelectOption[];
+  sortOrderOptions: SelectOption[];
   setSort: (val: string) => void;
-  dateRangeOptions: SelectOption[];
   setSearch: (val: string) => void;
-  setDateRange: (val: string) => void;
+  setSortOrder: (val: string) => void;
 }
 
 export function DataTableFilters({
   sort,
-  dateRange,
   search,
+  sortOrder,
   searchPlaceholder,
-  dateRangeOptions,
   sortOptions,
-  setDateRange,
+  sortOrderOptions,
   setSort,
   setSearch,
+  setSortOrder,
 }: DataTableFiltersProps) {
   return (
     <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -41,17 +41,17 @@ export function DataTableFilters({
         <SelectField
           label=""
           className="w-full"
-          value={dateRange}
-          options={dateRangeOptions}
-          onChange={(val) => setDateRange(val)}
+          value={sort}
+          options={sortOptions}
+          onChange={(val) => setSort(val)}
           selectClassName="bg-primary/5 h-full"
         />
         <SelectField
           label=""
           className="w-full"
-          value={sort}
-          options={sortOptions}
-          onChange={(val) => setSort(val)}
+          value={sortOrder}
+          options={sortOrderOptions}
+          onChange={(val) => setSortOrder(val)}
           selectClassName="bg-primary/5 h-full"
         />
       </div>

@@ -9,13 +9,11 @@ export const dashboardMenu = [
 ];
 
 export const nominationSortOptions = [
-  { label: "Nominee name", value: "nominee_name" },
-  { label: "Recently Added", value: "recently_added" },
-  { label: "Oldest first", value: "nomination_date_asc" },
+  { label: "Nominee Name", value: "nominee_name" },
+  { label: "Date Added", value: "created_at" },
 ];
 
-export const nominationDateRangeOptions = [
-  { label: "All Time", value: "all_time" },
-  { label: "Past 7 Days", value: "past_7_days" },
-  { label: "Past 30 Days", value: "past_30_days" },
+export const nominationSortOrderOptions = [
+  { label: "Newest First", value: "desc" },
+  { label: "Oldest First", value: "asc" },
 ];
