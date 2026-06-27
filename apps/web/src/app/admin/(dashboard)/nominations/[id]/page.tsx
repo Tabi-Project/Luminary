@@ -20,6 +20,15 @@ const statusStyles: Record<NominationStatus, string> = {
   suspended: "bg-muted/10 text-muted",
 };
 
+type Action = "approve" | "reject" | "suspend";
+
+const actionsByStatus: Record<NominationStatus, Action[]> = {
+  pending: ["approve", "reject"],
+  approved: ["suspend"],
+  rejected: ["approve"],
+  suspended: ["approve"],
+};
+
 function fullName(p?: { first_name?: string; last_name?: string } | null) {
   if (!p) return "";
   return [p.first_name, p.last_name].filter(Boolean).join(" ").trim();
@@ -100,6 +109,7 @@ export default function NominationDetailPage() {
   const isSelf = nomination.is_self_submission ?? !nominatorName;
   const submissionType = isSelf ? "Self submission" : "Nomination";
   const status = nomination.status;
+  const allowed = actionsByStatus[status] ?? [];
   const supportingLinks = (nomination.supporting_urls ?? []).filter(Boolean);
   const evidenceLinks = (nomination.evidence_urls ?? []).filter(Boolean);
 
@@ -127,30 +137,36 @@ export default function NominationDetailPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <Button
-            variant="default"
-            icon={<Check size={16} />}
-            text="Approve"
-            disabled={status === "approved" || isPending}
-            onClick={() => trigger("approve", nomination.id)}
-            className="justify-center"
-          />
-          <Button
-            variant="ghost"
-            icon={<X size={16} />}
-            text="Reject"
-            disabled={status === "rejected" || isPending}
-            onClick={() => trigger("reject", nomination.id)}
-            className="text-danger hover:bg-danger/10"
-          />
-          <Button
-            variant="ghost"
-            icon={<Ban size={16} />}
-            text="Suspend"
-            disabled={status === "suspended" || isPending}
-            onClick={() => trigger("suspend", nomination.id)}
-            className="text-warning hover:bg-warning/10"
-          />
+          {allowed.includes("approve") && (
+            <Button
+              variant="default"
+              icon={<Check size={16} />}
+              text="Approve"
+              disabled={isPending}
+              onClick={() => trigger("approve", nomination.id)}
+              className="justify-center"
+            />
+          )}
+          {allowed.includes("reject") && (
+            <Button
+              variant="ghost"
+              icon={<X size={16} />}
+              text="Reject"
+              disabled={isPending}
+              onClick={() => trigger("reject", nomination.id)}
+              className="text-danger hover:bg-danger/10"
+            />
+          )}
+          {allowed.includes("suspend") && (
+            <Button
+              variant="ghost"
+              icon={<Ban size={16} />}
+              text="Suspend"
+              disabled={isPending}
+              onClick={() => trigger("suspend", nomination.id)}
+              className="text-warning hover:bg-warning/10"
+            />
+          )}
         </div>
       </div>
 
