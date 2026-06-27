@@ -2,6 +2,7 @@
 import { DataTableFilters } from "@/components/filters";
 import { DataTable } from "@/components/table";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useDebounce } from "@/hooks/useDebounce";
 import {
   nominationDateRangeOptions,
@@ -16,6 +17,8 @@ import {
 } from "@/components/admin/columns/nomination-column";
 
 export function NominationTableSection() {
+  const router = useRouter();
+
   const [filters, setFilters] = useState({
     search: "",
     sort: "nominee_name",
@@ -36,9 +39,8 @@ export function NominationTableSection() {
 
   const rows = (nominationsData?.data ?? []) as NominationRow[];
 
-  const handleView = (id: NominationRow["id"]) => {
-    console.log("View nomination:", id);
-  };
+  const handleView = (id: NominationRow["id"]) =>
+    router.push(`/admin/nominations/${id}`);
 
   return (
     <section className="w-full bg-white p-4 rounded-lg flex flex-col gap-4">
