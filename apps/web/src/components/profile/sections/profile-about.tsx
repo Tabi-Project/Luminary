@@ -1,12 +1,12 @@
+import { PROFILE_ATTRIBUTES } from "@/data/profile";
 import { ProfileDetailProps } from "@/types/profile.type";
 import { capitalizeFirstLetter } from "@/utils/string";
 
 export function ProfileAbout({ profile }: ProfileDetailProps) {
-  const attributes = [
-    { label: "Field", value: profile.field },
-    { label: "Region", value: profile.region },
-    { label: "Organization", value: profile.organization },
-  ].filter(
+  const attributes = PROFILE_ATTRIBUTES.map(({ label, key }) => ({
+    label,
+    value: profile[key],
+  })).filter(
     (attribute): attribute is { label: string; value: string } =>
       Boolean(attribute.value),
   );

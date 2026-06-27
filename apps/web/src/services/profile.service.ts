@@ -1,4 +1,5 @@
-import { NomineeProfile, ApiNomination } from "@/types/profile.type";
+import { NomineeProfile } from "@/types/profile.type";
+import { ApiNomination } from "@/types/nomination.type";
 import { SuccessApiResponse, ErrorApiResponse } from "@/types/api.type";
 import { axiosGet } from "@/utils/api";
 import { endpoints } from "@/data/endpoints";
