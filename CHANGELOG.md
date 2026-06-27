@@ -1,11 +1,8 @@
 # Changelog
-
 All notable changes to this project will be documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/), and this project adheres to [Semantic Versioning](https://semver.org).
 
-
-## [Unreleased]
-
+## [Unreleased] 
 ### Added
 - Lucid React Icons
 - Base UI component library
@@ -20,20 +17,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - Switch to a Next.js project structure
 - Convert all pages from HTML, CSS, JS to Next.js + TypeScript + TailwindCSS
 #### Documentation
-- `README.md` and `CONTRIBUTION.md` updated with apprioprate instructions
-
+- `README.md` and `CONTRIBUTION.md` updated with appropriate instructions 
 
 ### Removed
 - Native CSS files
 ---
 
-
 ## [1.0.0] - 2026-03-30
-
 ### Added
-
 #### Features
-- Womens Directory
+- Womens' Directory
 - Profile Page
 - Nomination form
 - Self submission form
@@ -48,7 +41,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/2.0.0/),
 - **Database**: Supabase
 - **Content Management System (CMS):** Sanity for handling article management.
 ---
-
 
 [unreleased]: https://github.com/Tabi-Project/Luminary/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/Tabi-Project/Luminary/releases/tag/v1.0.0
