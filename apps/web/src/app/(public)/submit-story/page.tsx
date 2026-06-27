@@ -75,8 +75,8 @@ export default function SubmitStoryPage() {
 
   if (success) {
     return (
-      <main className="min-h-screen bg-[#E4EBF3] w-full flex items-center justify-center px-4">
-        <div className="bg-white rounded-xl border border-border/50 shadow-sm p-10 text-center max-w-md w-full">
+      <main className="min-h-screen bg-background w-full flex items-center justify-center px-4">
+        <div className="bg-white rounded-xl border border-border/50 shadow-sm p-10 text-center flex flex-col justify-between items-center max-w-md w-full">
           <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
             <Check className="text-green-600" size={24} />
           </div>
@@ -86,7 +86,7 @@ export default function SubmitStoryPage() {
           </p>
           <Button
             onClick={() => setSuccess(false)}
-            className="mt-6 text-sm text-primary underline"
+            className="mt-6 text-sm text-white underline"
             text="Submit another story"
           />
         </div>
@@ -95,7 +95,7 @@ export default function SubmitStoryPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#E4EBF3] w-full px-5 pt-10 pb-16">
+    <main className="min-h-screen bg-background w-full px-5 pt-10 pb-16">
       <div className="max-w-2xl mx-auto flex flex-col gap-6">
         <div>
           <h1 className="text-4xl lg:text-5xl font-bold">Submit A Story</h1>
