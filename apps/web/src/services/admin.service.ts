@@ -16,11 +16,16 @@ function authConfig() {
 }
 
 export class AdminService {
-  static async GetNominations() {
-    const response = await axiosGet(
-      endpoints.admin.nominations.getNominations,
-      authConfig(),
-    );
+  static async GetNominations(
+    search: string,
+    page: number,
+    sort_by: string,
+    sort_order: string,
+  ) {
+    const response = await axiosGet(endpoints.admin.nominations.getNominations, {
+      params: { search, page, sort_by, sort_order },
+      ...authConfig(),
+    });
 
     return response as SuccessApiResponse<any[]>;
   }
