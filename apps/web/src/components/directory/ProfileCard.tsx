@@ -2,12 +2,11 @@ import type { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/common/button";
-import { Globe, UserCircle } from 'lucide-react';
+import { Globe, UserCircle } from "lucide-react";
 import { ProfileCardProps } from "@/types/profile.type";
-import { cn } from '@/utils/cn';
+import { cn } from "@/utils/cn";
 
-
-const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
+export const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
   return (
     <article
       className={cn(
@@ -22,7 +21,7 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
             height={96}
             src={profile.profilePhoto}
             alt={profile.firstname}
-            className="object-cover rounded-[1.25rem]"
+            className="object-cover rounded-[1.25rem] w-24 h-24"
           />
         </div>
 
@@ -43,13 +42,12 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
         ))}
       </div>
 
-      <div className="min-h-20">
-        <p className="text-text-main leading-relaxed text-[15px]">
+      <div className="h-30 overflow-hidden">
+        <p className="text-text-main leading-relaxed text-[15px] line-clamp-5">
           {profile.impact}
         </p>
       </div>
 
-      <div className="h-[1px] bg-light-gray w-full" />
 
       <div className="flex flex-col gap-4">
         <h4 className="text-muted text-[13px] font-bold uppercase tracking-wider">
@@ -103,5 +101,3 @@ const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
     </article>
   );
 };
-
-export default ProfileCard;

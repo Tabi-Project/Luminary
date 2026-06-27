@@ -25,3 +25,21 @@ export interface ProfileLinksProps {
   title: string;
   links: string[];
 }
+
+export interface ApiNominee {
+  id: number;
+  first_name: string;
+  last_name: string;
+  field: string;
+  country: string;
+  profile_image_url: string;
+}
+
+export interface ApiNomination {
+  nominee_id: number;
+  status: string;
+  description: string;
+  evidence_urls: string;
+  supporting_urls: string[];
+  nominee: ApiNominee;
+}

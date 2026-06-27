@@ -1,3 +1,4 @@
+import { AdminProviders } from "@/contexts/admin-providers";
 import "../globals.css";
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
@@ -20,7 +21,9 @@ export default function AdminLayout({
 }>) {
   return (
     <html lang="en" className={`${raleway.variable} h-full antialiased`}>
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <AdminProviders>{children}</AdminProviders>
+      </body>
     </html>
   );
 }

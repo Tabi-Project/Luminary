@@ -1,9 +1,9 @@
+import { AuthService } from "@/services/auth.service";
 import { ErrorApiResponse } from "@/types/api.type";
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 
 const instance: AxiosInstance = axios.create({
-  baseURL:
-    process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5000/api",
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5000/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,7 +13,7 @@ instance.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
-      // Please Remember to write the logout function
+      AuthService.logout();
     }
 
     return Promise.reject(error);
@@ -28,7 +28,7 @@ export async function axiosGet<T = unknown>(
   }: {
     params?: Record<string, unknown>;
     config?: AxiosRequestConfig;
-  },
+  } = {},
 ) {
   try {
     const response = await instance.get<T>(url, { params, ...config });

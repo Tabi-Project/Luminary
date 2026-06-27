@@ -79,3 +79,14 @@ export interface PhotoUploadProps {
   value: File | null;
   onChange: (file: File | null) => void;
 }
+
+export interface Nominee {
+  first_name: string;
+  last_name: string;
+  email: string;
+  field: string;
+  country: string;
+  description: string;
+  organization?: string;
+  profile_image_url?: string;
+}

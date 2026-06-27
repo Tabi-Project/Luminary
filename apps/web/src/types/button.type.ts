@@ -5,4 +5,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
   loading?: boolean;
   iconPosition?: "left" | "right";
+  variant?: "default" | "ghost";
 }
