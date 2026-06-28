@@ -35,14 +35,17 @@ export default function FilterToolbar({
     data: categories = [],
     isLoading: isLoadingCategories,
     error,
-  } = useQuery<SelectOption[]>({
+  } = useQuery({
     queryKey: ["categories", articles.length],
-    queryFn: () =>
-      fetchCategories(articles).then((cat) => {
-        return cat.map((each: string) => {
-          const label = getCategoryLabel(each);
-          return { value: label, label: label };
-        });
+    queryFn: () => fetchCategories(articles),
+    select: (categories: string[]): SelectOption[] =>
+      categories.map((category) => {
+        const label = getCategoryLabel(category);
+
+        return {
+          value: label,
+          label,
+        };
       }),
   });
 
