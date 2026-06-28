@@ -6,7 +6,7 @@ export const fetchCategories = async (
 ) => {
   const endpoint = endpoints.categories.get;
   try {
-    const res = await axiosGet<{ data: { data: unknown } }>(endpoint, {});
+    const res = await axiosGet<{ data: { data: string[] } }>(endpoint, {});
     const result = res.data;
     if (!res) throw new Error();
     const categories = Array.isArray(result.data) ? result.data : [];
