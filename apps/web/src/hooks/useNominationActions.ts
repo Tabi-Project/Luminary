@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AdminService } from "@/services/admin.service";
 
 export type NominationAction = "approve" | "reject" | "suspend";
@@ -35,54 +34,62 @@ const meta: Record<
 };
 
 interface Options {
-  onSuccess?: (action: NominationAction, id: string) => void;
+  onSuccess?: (action: NominationAction, id: string) => void | Promise<void>;
 }
 
-/**
- * Shared approve / reject / suspend logic for nominations.
- * Owns the confirmation-dialog state and the mutation, so the table
- * and the detail page drive the same flow. Invalidates both the list
- * (`nominations`) and the single-item (`nomination`) queries on success.
- */
 export function useNominationActions(options: Options = {}) {
-  const queryClient = useQueryClient();
   const [pending, setPending] = useState<{
     id: string;
     action: NominationAction;
   } | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const mutation = useMutation({
-    mutationFn: ({ id, action }: { id: string; action: NominationAction }) =>
-      runners[action](id),
-    onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["nominations"] });
-      queryClient.invalidateQueries({ queryKey: ["nomination", variables.id] });
-      setPending(null);
-      options.onSuccess?.(variables.action, variables.id);
-    },
-  });
-
-  const trigger = (action: NominationAction, id: string) =>
+  const trigger = (action: NominationAction, id: string) => {
+    setError(null);
     setPending({ id, action });
+  };
+
+  const close = () => {
+    setPending(null);
+    setError(null);
+  };
+
+  const confirm = async () => {
+    if (!pending) return;
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      await runners[pending.action](pending.id);
+      await options.onSuccess?.(pending.action, pending.id);
+      setPending(null);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const active = pending ? meta[pending.action] : null;
 
   return {
     trigger,
-    pending,
-    isPending: mutation.isPending,
+    error,
+    isPending: loading,
     dialog: {
       open: pending !== null,
       setOpen: (open: boolean) => {
-        if (!open) setPending(null);
+        if (!open) close();
       },
       title: active?.title ?? "",
       description: active?.description,
       confirmText: active?.confirmText,
-      loading: mutation.isPending,
-      onConfirm: () => {
-        if (pending) mutation.mutate(pending);
-      },
+      loading,
+      onConfirm: confirm,
     },
   };
 }

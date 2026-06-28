@@ -1,21 +1,24 @@
 import { endpoints } from "@/data/endpoints";
-import { SuccessApiResponse } from "@/types/api.type";
-import { NominationDetail } from "@/types/nomination-detail.type";
+import {
+  PaginatedSuccessApiResponse,
+  SuccessApiResponse,
+} from "@/types/api.type";
+import { NominationDetail } from "@/types/nomination.type";
 import { axiosGet, axiosPatch } from "@/utils/api";
 import { getAuthToken } from "@/utils/auth";
 
-function authConfig() {
-  const token = getAuthToken();
-  return {
-    config: {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  };
-}
-
 export class AdminService {
+  private static getAuthConfig() {
+    const token = getAuthToken();
+    return {
+      config: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    };
+  }
+
   static async GetNominations(
     search: string,
     page: number,
@@ -24,16 +27,16 @@ export class AdminService {
   ) {
     const response = await axiosGet(endpoints.admin.nominations.getNominations, {
       params: { search, page, sort_by, sort_order },
-      ...authConfig(),
+      ...this.getAuthConfig(),
     });
 
-    return response as SuccessApiResponse<any[]>;
+    return response as PaginatedSuccessApiResponse<any[]>;
   }
 
   static async GetNominationById(id: string) {
     const response = await axiosGet(
       endpoints.admin.nominations.getById(id),
-      authConfig(),
+      this.getAuthConfig(),
     );
 
     return response as SuccessApiResponse<NominationDetail>;
@@ -43,7 +46,7 @@ export class AdminService {
     const response = await axiosPatch(
       endpoints.admin.nominations.approve(id),
       undefined,
-      authConfig(),
+      this.getAuthConfig(),
     );
 
     return response as SuccessApiResponse<unknown>;
@@ -53,7 +56,7 @@ export class AdminService {
     const response = await axiosPatch(
       endpoints.admin.nominations.reject(id),
       undefined,
-      authConfig(),
+      this.getAuthConfig(),
     );
 
     return response as SuccessApiResponse<unknown>;
@@ -63,7 +66,7 @@ export class AdminService {
     const response = await axiosPatch(
       endpoints.admin.nominations.suspend(id),
       undefined,
-      authConfig(),
+      this.getAuthConfig(),
     );
 
     return response as SuccessApiResponse<unknown>;
