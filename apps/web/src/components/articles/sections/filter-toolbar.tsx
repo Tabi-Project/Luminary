@@ -8,11 +8,8 @@ import {
   categoryFilterOptions,
 } from "@/data/articles";
 import type { SelectOption } from "@/types/form.type";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 import { fetchCategories } from "@/services/articles.service";
-
-const queryClient = new QueryClient();
 
 interface FilterToolbarProps {
   state: State;
@@ -59,56 +56,54 @@ export default function FilterToolbar({
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <form
-        id="newsFilters"
-        className="news-toolbar"
-        aria-label="Filter news articles"
-        onSubmit={onSubmit}
-      >
-        <div className="toolbar-select">
-          <SelectField
-            label=""
-            htmlFor="fieldFilter"
-            required={false}
-            name="field"
-            value={state.field}
-            onChange={(value) => setState({ ...state, field: value })}
-            options={categoryFilterOptions(categories)}
-          />
-        </div>
-
-        <div className="toolbar-select">
-          <SelectField
-            label=""
-            htmlFor="regionFilter"
-            required={false}
-            name="region"
-            value={state.region}
-            onChange={(value) => setState({ ...state, region: value })}
-            options={regionFilterOptions}
-          />
-        </div>
-
-        <div className="toolbar-select">
-          <SelectField
-            label=""
-            htmlFor="timeFilter"
-            required={false}
-            name="time"
-            value={state.time}
-            onChange={(value) => setState({ ...state, time: value })}
-            options={timeFilterOptions}
-          />
-        </div>
-
-        <Button
-          text="Clear filters"
-          className="news-search-btn"
-          type="submit"
-          onClick={() => setState({ field: "all", region: "all", time: "all" })}
+    <form
+      id="newsFilters"
+      className="news-toolbar"
+      aria-label="Filter news articles"
+      onSubmit={onSubmit}
+    >
+      <div className="toolbar-select">
+        <SelectField
+          label=""
+          htmlFor="fieldFilter"
+          required={false}
+          name="field"
+          value={state.field}
+          onChange={(value) => setState({ ...state, field: value })}
+          options={categoryFilterOptions(categories)}
         />
-      </form>
-    </QueryClientProvider>
+      </div>
+
+      <div className="toolbar-select">
+        <SelectField
+          label=""
+          htmlFor="regionFilter"
+          required={false}
+          name="region"
+          value={state.region}
+          onChange={(value) => setState({ ...state, region: value })}
+          options={regionFilterOptions}
+        />
+      </div>
+
+      <div className="toolbar-select">
+        <SelectField
+          label=""
+          htmlFor="timeFilter"
+          required={false}
+          name="time"
+          value={state.time}
+          onChange={(value) => setState({ ...state, time: value })}
+          options={timeFilterOptions}
+        />
+      </div>
+
+      <Button
+        text="Clear filters"
+        className="news-search-btn"
+        type="submit"
+        onClick={() => setState({ field: "all", region: "all", time: "all" })}
+      />
+    </form>
   );
 }
