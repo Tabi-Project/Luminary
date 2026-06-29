@@ -6,7 +6,7 @@ export interface NominationRow {
   nominee: Nominee;
   is_self_submission: boolean;
   created_at: string;
-  status: "pending" | "approved" | "rejected";
+  status: "pending" | "approved" | "rejected" | "suspended";
 }
 
 const fullName = (row: NominationRow) =>
@@ -16,6 +16,7 @@ const statusStyles: Record<NominationRow["status"], string> = {
   pending: "bg-warning/10 text-warning",
   approved: "bg-success/10 text-success",
   rejected: "bg-danger/10 text-danger",
+  suspended: "bg-muted/10 text-muted",
 };
 
 export const nominationColumns: TableColumn<NominationRow>[] = [
