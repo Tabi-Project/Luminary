@@ -1,6 +1,5 @@
 import { createClient } from "@sanity/client";
-import imageUrlBuilder from '@sanity/image-url';
-import { defineQuery } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -11,15 +10,17 @@ export const client = createClient({
 });
 
 const builder = imageUrlBuilder(client);
-export const urlFor = (source: any) => builder.image(source);
+export const urlFor = (source: string) => builder.image(source);
 
 export function generateSlug(text: string) {
-  return text.toString().toLowerCase()
-    .replace(/\s+/g, '-')        
-    .replace(/[^\w\-]+/g, '')    
-    .replace(/\-\-+/g, '-')      
-    .replace(/^-+/, '')          
-    .replace(/-+$/, '');         
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w\-]+/g, "")
+    .replace(/\-\-+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
 }
 
 export function estimateReadTime(text: string) {
@@ -29,7 +30,3 @@ export function estimateReadTime(text: string) {
   const readTime = Math.ceil(minutes);
   return readTime;
 }
-
-export const POST_QUERY = defineQuery(
-  `*[_type == "article" && slug.current == $slug][0]`
-);

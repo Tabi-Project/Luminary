@@ -2,6 +2,7 @@
 import { DataTableFilters } from "@/components/filters";
 import { DataTable } from "@/components/table";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useDebounce } from "@/hooks/useDebounce";
 import {
   nominationSortOptions,
@@ -17,6 +18,8 @@ import {
 import { DataTablePagination } from "@/components/pagination";
 
 export function NominationTableSection() {
+  const router = useRouter();
+
   const [filters, setFilters] = useState({
     search: "",
     sort_by: "created_at",
@@ -52,9 +55,8 @@ export function NominationTableSection() {
 
   const rows = (nominationsData?.data ?? []) as NominationRow[];
 
-  const handleView = (id: NominationRow["id"]) => {
-    console.log("View nomination:", id);
-  };
+  const handleView = (id: NominationRow["id"]) =>
+    router.push(`/admin/nominations/${id}`);
 
   const updateFilter = (patch: Partial<typeof filters>) => {
     setFilters((prev) => ({ ...prev, ...patch }));

@@ -15,3 +15,11 @@ export function splitName(value: string): {
     lastName: parts.slice(1).join(" "),
   };
 }
+
+export const escapeHtml = (value: string) =>
+  String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
