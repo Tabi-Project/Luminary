@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
@@ -12,11 +13,40 @@ import {
   LinkList,
 } from "@/components/admin/nomination-detail-cards";
 import { AdminService } from "@/services/admin.service";
-import { useNominationActions } from "@/hooks/useNominationActions";
 import { actionsByStatus, nominationStatusStyles } from "@/data/status";
 import { getInitials, toUrlList } from "@/utils/nomination";
 import { formatDate } from "@/utils/date";
 import type { NominationDetail } from "@/types/nomination.type";
+
+type Action = "approve" | "reject" | "suspend";
+
+const actionRequest: Record<Action, (id: string) => Promise<unknown>> = {
+  approve: (id) => AdminService.ApproveNomination(id),
+  reject: (id) => AdminService.RejectNomination(id),
+  suspend: (id) => AdminService.SuspendNomination(id),
+};
+
+const actionCopy: Record<
+  Action,
+  { title: string; description: string; confirmText: string }
+> = {
+  approve: {
+    title: "Approve nomination",
+    description:
+      "This will approve the nomination and move it forward in the workflow.",
+    confirmText: "Approve",
+  },
+  reject: {
+    title: "Reject nomination",
+    description: "This will reject the nomination. The nominee will not be published.",
+    confirmText: "Reject",
+  },
+  suspend: {
+    title: "Suspend nomination",
+    description: "This will suspend the nomination until it is reviewed again.",
+    confirmText: "Suspend",
+  },
+};
 
 function hostname(url: string) {
   try {
@@ -35,16 +65,33 @@ export default function NominationDetailPage() {
     enabled: Boolean(id),
   });
 
-  const {
-    trigger,
-    dialog,
-    isPending,
-    error: actionError,
- } = useNominationActions({
-  onSuccess: () => {
-    refetch();
-  },
-});;
+  const [pendingAction, setPendingAction] = useState<Action | null>(null);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [actionError, setActionError] = useState<string | null>(null);
+
+  const closeDialog = () => {
+    setPendingAction(null);
+    setActionError(null);
+  };
+
+  const confirmAction = async () => {
+    if (!pendingAction) return;
+
+    setActionLoading(true);
+    setActionError(null);
+
+    try {
+      await actionRequest[pendingAction](id);
+      await refetch();
+      setPendingAction(null);
+    } catch (err) {
+      setActionError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setActionLoading(false);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -85,6 +132,7 @@ export default function NominationDetailPage() {
   const allowed = actionsByStatus[status] ?? [];
   const supportingLinks = toUrlList(nomination.supporting_urls);
   const evidenceLinks = toUrlList(nomination.evidence_urls);
+  const dialogCopy = pendingAction ? actionCopy[pendingAction] : null;
 
   return (
     <div className="flex flex-col gap-6 py-8">
@@ -115,8 +163,8 @@ export default function NominationDetailPage() {
                 variant="default"
                 icon={<Check size={16} />}
                 text="Approve"
-                disabled={isPending}
-                onClick={() => trigger("approve", id)}
+                disabled={actionLoading}
+                onClick={() => setPendingAction("approve")}
                 className="justify-center"
               />
             )}
@@ -125,8 +173,8 @@ export default function NominationDetailPage() {
                 variant="ghost"
                 icon={<X size={16} />}
                 text="Reject"
-                disabled={isPending}
-                onClick={() => trigger("reject", id)}
+                disabled={actionLoading}
+                onClick={() => setPendingAction("reject")}
                 className="text-danger hover:bg-danger/10"
               />
             )}
@@ -135,15 +183,13 @@ export default function NominationDetailPage() {
                 variant="ghost"
                 icon={<Ban size={16} />}
                 text="Suspend"
-                disabled={isPending}
-                onClick={() => trigger("suspend", id)}
+                disabled={actionLoading}
+                onClick={() => setPendingAction("suspend")}
                 className="text-warning hover:bg-warning/10"
               />
             )}
           </div>
-          {actionError && (
-            <p className="text-sm text-danger">{actionError}</p>
-          )}
+          {actionError && <p className="text-sm text-danger">{actionError}</p>}
         </div>
       </div>
 
@@ -240,7 +286,17 @@ export default function NominationDetailPage() {
         </div>
       </div>
 
-      <ConfirmDialog {...dialog} />
+      <ConfirmDialog
+        open={pendingAction !== null}
+        setOpen={(open) => {
+          if (!open) closeDialog();
+        }}
+        title={dialogCopy?.title ?? ""}
+        description={dialogCopy?.description}
+        confirmText={dialogCopy?.confirmText}
+        loading={actionLoading}
+        onConfirm={confirmAction}
+      />
     </div>
   );
 }
