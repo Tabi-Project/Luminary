@@ -1,19 +1,34 @@
 "use server";
 import { axiosGet, axiosPost } from "@/utils/api";
-import { QUERY_URL, MUTATE_URL, ASSET_URL } from "@/data/sanity";
+import { QUERY_URL, MUTATE_URL, ASSET_URL, QUERY } from "@/data/sanity";
+import type { Article } from "@/types/articles.type";
 
-export async function sanityQuery(groqQuery: string, params: Record<string, any> = {}) {
-  const url = new URL(QUERY_URL)
-  url.searchParams.set('query', groqQuery)
+export async function sanityQuery(
+  groqQuery: string,
+  params: Record<string, any> = {},
+) {
+  const url = new URL(QUERY_URL);
+  url.searchParams.set("query", groqQuery);
 
   for (const [key, value] of Object.entries(params)) {
-    url.searchParams.set(`$${key}`, JSON.stringify(value))
+    url.searchParams.set(`$${key}`, JSON.stringify(value));
   }
-  const data = await axiosGet<{ result: unknown }>(url.toString(), {})
-  return data.result
+  const data = await axiosGet<{ result: unknown }>(url.toString(), {});
+  return data.result as Article[];
 }
 
+export async function fetchArticlesFromSantry(): Promise<Article[] | null> {
+  let articles: Article[] = [];
 
+  try {
+    articles = await sanityQuery(QUERY);
+  } catch (err) {
+    console.error("Failed to load articles:", err);
+    return null;
+  }
+
+  return articles;
+}
 
 export async function sanityMutate(mutations: any[]) {
   const data = await axiosPost(
@@ -25,31 +40,29 @@ export async function sanityMutate(mutations: any[]) {
           Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN}`,
         },
       },
-    }
-  )
-  return data
+    },
+  );
+  return data;
 }
 
 export async function sanityUploadImage(formData: FormData) {
   const file = formData.get("file") as File;
   if (!file) throw new Error("No file provided");
 
-  const data = await axiosPost<{ document: { _id: string } }>(
-    ASSET_URL,
-    file,
-    {
-      config: {
-        headers: {
-          'Content-Type': file.type,
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN}`,
-        },
+  const data = await axiosPost<{ document: { _id: string } }>(ASSET_URL, file, {
+    config: {
+      headers: {
+        "Content-Type": file.type,
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_WRITE_TOKEN}`,
       },
-    }
-  )
-  return data.document._id
+    },
+  });
+  return data.document._id;
 }
 
-export async function submitArticleAction(formData: FormData): Promise<{ success: boolean; error?: string }> {
+export async function submitArticleAction(
+  formData: FormData,
+): Promise<{ success: boolean; error?: string }> {
   const { generateSlug, estimateReadTime } = await import("@/utils/sanity");
 
   const title = formData.get("headline") as string;
@@ -58,7 +71,8 @@ export async function submitArticleAction(formData: FormData): Promise<{ success
   const regionVal = formData.get("region") as string;
   const sourceName = formData.get("source_name") as string;
   const sourceType = formData.get("source_type") as string;
-  const sourceTypeVal = sourceType === "External Link" ? "external" : "original";
+  const sourceTypeVal =
+    sourceType === "External Link" ? "external" : "original";
   const externalUrl = formData.get("external_url") as string;
   const summary = formData.get("summary") as string;
   const bodyHtml = formData.get("content") as string;
@@ -86,7 +100,12 @@ export async function submitArticleAction(formData: FormData): Promise<{ success
         externalUrl: externalUrl || null,
         excerpt: summary || null,
         body: bodyHtml || null,
-        coverImage: coverImageRef ? { _type: "image", asset: { _type: "reference", _ref: coverImageRef } } : null,
+        coverImage: coverImageRef
+          ? {
+              _type: "image",
+              asset: { _type: "reference", _ref: coverImageRef },
+            }
+          : null,
         publicationDate: publicationDate || null,
         readTime: bodyHtml ? estimateReadTime(bodyHtml) : null,
         status: "pending_review",
@@ -95,6 +114,6 @@ export async function submitArticleAction(formData: FormData): Promise<{ success
       },
     },
   ]);
-  
+
   return { success: true };
 }

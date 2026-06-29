@@ -2,11 +2,10 @@ import { client } from "@/utils/sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Lightbulb, Newspaper } from "lucide-react";
-import { urlFor, POST_QUERY } from "@/utils/sanity";
-import { formatDate } from "@/utils/date"
+import { urlFor } from "@/utils/sanity";
+import { formatDate } from "@/utils/date";
 import { Button } from "@/components/common/button";
-
-
+import { POST_QUERY } from "@/data/sanity";
 
 export default async function PostPage({
   params,
@@ -17,13 +16,17 @@ export default async function PostPage({
   const post = await client.fetch(POST_QUERY, { slug });
 
   const article = post;
-  const formattedDate = article?.publishedAt ? formatDate(article.publishedAt) : "";
+  const formattedDate = article?.publishedAt
+    ? formatDate(article.publishedAt)
+    : "";
 
   if (!post) {
     return (
       <main className="min-h-screen w-full  px-5 md:px-8 pb-16 pt-4">
         <div className="max-w-5xl mx-auto flex flex-col gap-4">
-          <Link href="/news" className="underline">Back to News</Link>
+          <Link href="/news" className="underline">
+            Back to News
+          </Link>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             <article className="lg:col-span-2  rounded-xl overflow-hidden">
               <div className="px-6 pb-2">
@@ -35,20 +38,24 @@ export default async function PostPage({
           </div>
         </div>
       </main>
-    )
+    );
   }
 
   return (
     <main className="min-h-screen w-full  px-5 md:px-8 pb-16 pt-4">
       <div className="max-w-5xl mx-auto flex flex-col gap-4">
-
-        <Link href="/news" className="underline">Back to News</Link>
+        <Link href="/news" className="underline">
+          Back to News
+        </Link>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           <article className="lg:col-span-2 bg-white rounded-xl border border-slate-100 overflow-hidden">
-
             <div className="flex flex-row gap-2 px-6 py-3 pt-10 text-xs text-muted">
-              <span className="rounded-lg bg-slate-100 text-slate-600 px-2.5 py-0.5">{article.region}</span>
-              <span className="rounded-lg bg-slate-100 text-slate-600 px-2.5 py-0.5">{article.field}</span>
+              <span className="rounded-lg bg-slate-100 text-slate-600 px-2.5 py-0.5">
+                {article.region}
+              </span>
+              <span className="rounded-lg bg-slate-100 text-slate-600 px-2.5 py-0.5">
+                {article.field}
+              </span>
             </div>
 
             <div className="px-6 pb-2">
@@ -59,14 +66,18 @@ export default async function PostPage({
 
             {article.excerpt && (
               <div className="px-6 pb-4">
-                <p className="text-sm text-muted leading-relaxed">{article.excerpt}</p>
+                <p className="text-sm text-muted leading-relaxed">
+                  {article.excerpt}
+                </p>
               </div>
             )}
 
             <div className="border-t border-slate-100 mx-6" />
 
             <div className="flex items-center gap-2 px-6 py-3 text-xs text-muted">
-              <span className="font-medium text-slate-600">{article.author || article.source || "Luminary"}</span>
+              <span className="font-medium text-slate-600">
+                {article.author || article.source || "Luminary"}
+              </span>
               <span>·</span>
               <span>{formattedDate}</span>
               <span>·</span>
@@ -75,7 +86,11 @@ export default async function PostPage({
 
             <div className="relative mx-6 mb-6 rounded-lg overflow-hidden aspect-video bg-slate-100">
               <Image
-                src={urlFor(article.coverImage).width(600).height(400).format('webp').url()}
+                src={urlFor(article.coverImage)
+                  .width(600)
+                  .height(400)
+                  .format("webp")
+                  .url()}
                 alt={article.title}
                 fill
                 priority
@@ -95,9 +110,10 @@ export default async function PostPage({
                   dangerouslySetInnerHTML={{ __html: article.body }}
                 />
               ) : (
-                <p className="text-sm text-muted italic">No article content provided.</p>
+                <p className="text-sm text-muted italic">
+                  No article content provided.
+                </p>
               )}
-
 
               {article.sourceType === "external" && article.externalUrl && (
                 <div className="mt-8">
@@ -115,18 +131,21 @@ export default async function PostPage({
             </div>
           </article>
 
-
           <aside className="lg:col-span-1 flex flex-col gap-5">
             <div className="bg-white rounded-xl shadow-sm border border-slate-100 p-5">
               <div className="flex items-center gap-2 mb-4">
                 <span className="text-slate-400">
                   <Newspaper />
                 </span>
-                <h2 className="text-sm font-bold text-text-main">Related Articles</h2>
+                <h2 className="text-sm font-bold text-text-main">
+                  Related Articles
+                </h2>
               </div>
 
               <div>
-                <p className="text-sm text-muted italic">No Related Articles Yet</p>
+                <p className="text-sm text-muted italic">
+                  No Related Articles Yet
+                </p>
               </div>
             </div>
 
@@ -135,13 +154,19 @@ export default async function PostPage({
                 <Lightbulb size={18} className="text-slate-500" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-text-main mb-1">Have a News Tip?</h3>
+                <h3 className="text-sm font-bold text-text-main mb-1">
+                  Have a News Tip?
+                </h3>
                 <p className="text-xs text-muted leading-relaxed">
-                  Know a story about a woman making an impact that we should cover? Submit it for our editors to review.
+                  Know a story about a woman making an impact that we should
+                  cover? Submit it for our editors to review.
                 </p>
               </div>
               <Link href="/submit-story">
-                <Button className="items-center gap-2 text-sm font-semibold text-white bg-text-main hover:bg-text-main/90 px-5 py-2.5 rounded-lg transition-colors duration-200" text="Submit a story" />
+                <Button
+                  className="items-center gap-2 text-sm font-semibold text-white bg-text-main hover:bg-text-main/90 px-5 py-2.5 rounded-lg transition-colors duration-200"
+                  text="Submit a story"
+                />
               </Link>
             </div>
           </aside>
