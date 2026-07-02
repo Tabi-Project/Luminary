@@ -1,4 +1,5 @@
 import { Button } from "@/components/common/button";
+import Link from "next/link";
 import { FeaturedArticleCard } from "../featured-article-card";
 
 export function FeaturedArticleSection() {
@@ -26,7 +27,9 @@ export function FeaturedArticleSection() {
     <section className="w-full">
       <div className="w-full flex items-center justify-between">
         <span className="text-4xl font-bold">Featured Stories</span>
-        <Button text="View all stories" />
+        <Link href="/articles">
+          <Button text="View all stories" />
+        </Link>
       </div>
       <div className="w-full grid grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
         {articles.map((article, idx) => (
