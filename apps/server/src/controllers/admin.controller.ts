@@ -1,19 +1,31 @@
+import type { RequestHandler } from "express";
 import { createError } from "../utils/AppError.js";
 import * as NominationService from "../services/nomination.service.js";
 import { successResponse, paginatedResponse } from "../utils/apiResponse.js";
 
-const ALLOWED_SORT_FIELDS = ["created_at", "nominee_name"];
+const ALLOWED_SORT_FIELDS = ["created_at", "nominee_name"] as const;
+type SortField = (typeof ALLOWED_SORT_FIELDS)[number];
 
-export const getNominations = async (req, res, next) => {
+const queryParam = (value: unknown): string | undefined =>
+  typeof value === "string" && value.length > 0 ? value : undefined;
+
+const isSortField = (value: string): value is SortField =>
+  (ALLOWED_SORT_FIELDS as readonly string[]).includes(value);
+
+export const getNominations: RequestHandler = async (req, res, next) => {
   try {
-    const { search, country } = req.query;
+    const search = queryParam(req.query.search);
+    const country = queryParam(req.query.country);
 
-    const page = Math.max(1, parseInt(req.query.page) || 1);
-    const limit = Math.min(100, Math.max(1, parseInt(req.query.limit) || 15));
-    const sort_by = req.query.sort_by || "created_at";
-    const sort_order = req.query.sort_order || "desc";
+    const page = Math.max(1, parseInt(queryParam(req.query.page) ?? "", 10) || 1);
+    const limit = Math.min(
+      100,
+      Math.max(1, parseInt(queryParam(req.query.limit) ?? "", 10) || 15),
+    );
+    const sort_by = queryParam(req.query.sort_by) ?? "created_at";
+    const sort_order = queryParam(req.query.sort_order) ?? "desc";
 
-    if (!ALLOWED_SORT_FIELDS.includes(sort_by)) {
+    if (!isSortField(sort_by)) {
       return next(
         createError(
           `Invalid sort_by value. Allowed values: ${ALLOWED_SORT_FIELDS.join(", ")}`,
@@ -22,7 +34,7 @@ export const getNominations = async (req, res, next) => {
       );
     }
 
-    if (!["asc", "desc"].includes(sort_order)) {
+    if (sort_order !== "asc" && sort_order !== "desc") {
       return next(
         createError("Invalid sort_order value. Allowed values: asc, desc", 400),
       );
@@ -48,17 +60,11 @@ export const getNominations = async (req, res, next) => {
       has_prev_page: page > 1,
     });
   } catch (error) {
-    console.log(error);
-
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
     next(error);
   }
 };
 
-export const getNominationById = async (req, res, next) => {
+export const getNominationById: RequestHandler<{ id: string }> = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -66,15 +72,11 @@ export const getNominationById = async (req, res, next) => {
 
     return successResponse(res, data, 200);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };
 
-export const rejectNomination = async (req, res, next) => {
+export const rejectNomination: RequestHandler<{ id: string }> = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -82,15 +84,11 @@ export const rejectNomination = async (req, res, next) => {
 
     return successResponse(res, data, 200);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };
 
-export const approveNomination = async (req, res, next) => {
+export const approveNomination: RequestHandler<{ id: string }> = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -98,15 +96,11 @@ export const approveNomination = async (req, res, next) => {
 
     return successResponse(res, data, 200);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };
 
-export const suspendNomination = async (req, res, next) => {
+export const suspendNomination: RequestHandler<{ id: string }> = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -114,10 +108,6 @@ export const suspendNomination = async (req, res, next) => {
 
     return successResponse(res, data, 200);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };
