@@ -38,15 +38,15 @@ const siteAuthors = [
   },
   {
     name: "Ramnan Ramyii",
-    url: "",
+    url: "https://ramyil-project-gallery.netlify.app/",
   },
   {
     name: "Awoyemi Abiola",
-    url: "",
+    url: "https://biola.is-a.dev",
   },
   {
     name: "Daniel Chisom",
-    url: "",
+    url: "https://cottony-nutmeg-424.notion.site/Chukwusom-D-C-Backend-Engineering-Portfolio-1f56f01b670680bb8ce4e5e176d52406",
   },
   {
     name: "Emmanuel Dania",
