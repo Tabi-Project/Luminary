@@ -27,6 +27,7 @@ export async function FeaturedArticleSection() {
               title={article.title}
               author={article.author}
               tags={[article.field, article.source]}
+              slug={article.slug}
               className={idx === 2 ? "sm:col-span-2 lg:col-span-1" : ""}
             />
           ))}
