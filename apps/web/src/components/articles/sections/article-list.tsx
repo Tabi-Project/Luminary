@@ -6,11 +6,9 @@ import { MAX_GRID_ITEMS } from "@/data/articles";
 export default function ArticleList({
   articles,
   articleDetailPage,
-  setState,
 }: {
   articles: Article[];
   articleDetailPage: string;
-  setState: (state: State) => void;
 }) {
   return (
     <>
@@ -37,7 +35,7 @@ export default function ArticleList({
           aria-live="polite"
         >
           {articles.length === 0 ? (
-            <EmptyState setState={setState} />
+            <EmptyState />
           ) : (
             articles
               .slice(0, MAX_GRID_ITEMS)

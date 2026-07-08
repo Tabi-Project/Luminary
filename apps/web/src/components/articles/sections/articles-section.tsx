@@ -36,7 +36,6 @@ export default function ArticlesSection({
         <ArticleList
           articles={filteredArticles}
           articleDetailPage={articleDetailPage}
-          setState={setState}
         />
         <ArticleSidebar articles={filteredArticles} />
       </section>
