@@ -5,6 +5,6 @@ export const menu = [
   },
   {
     label: "News",
-    href: "/news",
+    href: "/articles",
   },
 ];

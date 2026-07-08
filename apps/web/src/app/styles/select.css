@@ -1,0 +1,16 @@
+.select-popup {
+    transition-property: opacity, transform, display, overlay;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-behavior: allow-discrete;
+    transform-origin: top;
+}
+
+[data-starting-style] {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+}
+[data-ending-style] {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+}

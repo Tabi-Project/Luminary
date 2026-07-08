@@ -4,14 +4,8 @@ export interface SuccessApiResponse<T> {
   success: boolean;
 }
 
-export interface PaginatedSuccessApiResponse<T> extends Omit<
-  SuccessApiResponse<T>,
-  "data"
-> {
-  data: {
-    data: T[];
-    meta: PaginationMeta;
-  };
+export interface PaginatedSuccessApiResponse<T> extends SuccessApiResponse<T> {
+  meta: PaginationMeta;
 }
 
 export interface ErrorApiResponse {

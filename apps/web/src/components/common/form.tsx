@@ -1,8 +1,11 @@
+"use client";
+
 import {
   FormFieldProps,
   FormLabelProps,
   SelectFieldProps,
   TextAreaFieldProps,
+  TextFieldProps,
 } from "@/types/form.type";
 import { cn } from "@/utils/cn";
 import { Select } from "@base-ui/react";
@@ -10,6 +13,10 @@ import { Check, ChevronDown } from "lucide-react";
 
 const fieldStyling =
   "w-full px-4 py-2 h-10 border border-border rounded-md bg-bg-surface";
+
+export function TextField({ className, ...props }: TextFieldProps) {
+  return <input className={cn(fieldStyling, className)} {...props} />;
+}
 
 export function FormField({
   label,
@@ -23,14 +30,12 @@ export function FormField({
   inputClassName,
   className,
 }: FormFieldProps) {
-  const inputStyling = cn(fieldStyling, inputClassName);
-
   const formFieldStyling = cn("flex flex-col gap-2", className);
 
   return (
     <div className={formFieldStyling}>
       <FormLabel label={label} htmlFor={htmlFor} required={required} />
-      <input
+      <TextField
         type={type}
         name={name}
         id={htmlFor}
@@ -38,7 +43,7 @@ export function FormField({
         required={required}
         onChange={onChange}
         placeholder={placeholder}
-        className={inputStyling}
+        className={inputClassName}
       />
     </div>
   );
@@ -66,7 +71,9 @@ export function SelectField({
 
   return (
     <div className={formFieldStyling}>
-      <FormLabel label={label} htmlFor={htmlFor} required={required} />
+      {label && (
+        <FormLabel label={label} htmlFor={htmlFor} required={required} />
+      )}
       <Select.Root
         name={name}
         items={options}
@@ -139,11 +146,19 @@ export function TextAreaField({
   );
 }
 
-function FormLabel({ label, htmlFor, required }: FormLabelProps) {
+export function FormLabel({
+  label,
+  htmlFor,
+  required,
+  className,
+}: FormLabelProps) {
   return (
     <label
       htmlFor={htmlFor}
-      className="flex text-muted items-start text-xs font-medium"
+      className={cn(
+        "flex text-muted items-start text-xs font-medium",
+        className,
+      )}
     >
       <span>{label}</span>
       {required && <span className="text-warning">*</span>}

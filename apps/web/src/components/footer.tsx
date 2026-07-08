@@ -13,11 +13,15 @@ export function Footer() {
           Luminary{" "}
         </span>
         <div className="mt-6 lg:mt-10 flex items-center gap-3">
-          <Button text="Submit a story" className="bg-text-main" />
-          <Button
-            text="Nominate a woman"
-            className="bg-light-gray text-muted shadow-none"
-          />
+          <Link href="/submit-story">
+            <Button text="Submit a story" className="bg-text-main" />
+          </Link>
+          <Link href="/nominate">
+            <Button
+              text="Nominate a woman"
+              className="bg-light-gray text-muted shadow-none"
+            />
+          </Link>
         </div>
       </div>
       <div className="border-t border-light-gray h-14 flex items-center justify-between text-muted text-sm font-medium">

@@ -31,10 +31,10 @@ export function ContributorCard({
           width={150}
           height={150}
           src={image}
-          className="rounded-full w-25 aspect-square object-cover border-primary border-2 hover:scale-105 transition-all duration-200 ease"
+          className="rounded-full w-24 sm:w-30 aspect-square object-cover border-primary border-2 hover:scale-105 transition-all duration-200 ease"
         />
         <div className="flex flex-col items-center w-full">
-          <span className="text-sm">{name}</span>
+          <span className="text-sm font-semibold">{name}</span>
           <span className="text-muted text-xs">{role}</span>
         </div>
       </div>
