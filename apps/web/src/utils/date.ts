@@ -3,9 +3,12 @@ export const getDaysAgo = (value: number) => {
   return Math.floor((Date.now() - new Date(value).getTime()) / msPerDay);
 };
 
-export const formatDate = (value: number) =>
-  new Intl.DateTimeFormat("en-US", {
+export function formatDate(value: number): string;
+export function formatDate(value: Date | string): string;
+export function formatDate(value: number | Date | string): string {
+  return new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
   }).format(new Date(value));
+}
