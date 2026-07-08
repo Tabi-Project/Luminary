@@ -1,11 +1,14 @@
+import type { RequestHandler } from "express";
 import { NominationStatus } from "../lib/nominations.js";
 import * as nominationService from "../services/nomination.service.js";
-import { successResponse, paginatedResponse } from "../utils/apiResponse.js";
-import { createError } from "../utils/AppError.js";
+import { successResponse } from "../utils/apiResponse.js";
 
-export const createNomination = async (req, res, next) => {
+const queryParam = (value: unknown): string | undefined =>
+  typeof value === "string" && value.length > 0 ? value : undefined;
+
+export const createNomination: RequestHandler = async (req, res, next) => {
   try {
-    const data = await nominationService.create(req.body);
+    const data = await nominationService.create(req.body ?? {});
 
     return successResponse(res, data, 201);
   } catch (error) {
@@ -13,9 +16,10 @@ export const createNomination = async (req, res, next) => {
   }
 };
 
-export const getNominations = async (req, res, next) => {
+export const getNominations: RequestHandler = async (req, res, next) => {
   try {
-    const { search, country } = req.query;
+    const search = queryParam(req.query.search);
+    const country = queryParam(req.query.country);
 
     const data = await nominationService.getAll({ search, country });
 
@@ -25,7 +29,7 @@ export const getNominations = async (req, res, next) => {
   }
 };
 
-export const getNominationById = async (req, res, next) => {
+export const getNominationById: RequestHandler<{ id: string }> = async (req, res, next) => {
   try {
     const { id } = req.params;
 
@@ -33,18 +37,14 @@ export const getNominationById = async (req, res, next) => {
 
     return successResponse(res, data, 200);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };
 
-export const consentApproval = async (req, res, next) => {
+export const consentApproval: RequestHandler<{ id: string }> = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { nomination } = req.body;
+    const { nomination } = req.body ?? {};
 
     const data = await nominationService.update(
       { ...nomination, status: NominationStatus.CONSENT_GRANTED },
@@ -53,27 +53,21 @@ export const consentApproval = async (req, res, next) => {
 
     return successResponse(res, data, 200);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };
 
-export const consentRejection = async (req, res, next) => {
+export const consentRejection: RequestHandler<{ id: string }> = async (req, res, next) => {
   try {
     const { id } = req.params;
+
     const data = await nominationService.update(
       { status: NominationStatus.CONSENT_REJECTED },
       id,
     );
+
     return successResponse(res, data, 200);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };

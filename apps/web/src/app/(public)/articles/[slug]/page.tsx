@@ -44,7 +44,7 @@ export default async function PostPage({
   return (
     <main className="min-h-screen w-full  px-5 md:px-8 pb-16 pt-4">
       <div className="max-w-5xl mx-auto flex flex-col gap-4">
-        <Link href="/news" className="underline">
+        <Link href="/articles" className="underline">
           Back to News
         </Link>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">

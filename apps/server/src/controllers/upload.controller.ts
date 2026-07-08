@@ -1,8 +1,9 @@
-import { successResponse } from "../utils/apiResponse.js";
+import type { RequestHandler } from "express";
 import { createError } from "../utils/AppError.js";
+import { successResponse } from "../utils/apiResponse.js";
 import * as UtilsService from "../services/utils.service.js";
 
-export const uploadImage = async (req, res, next) => {
+export const uploadImage: RequestHandler = async (req, res, next) => {
   try {
     if (!req.file) {
       throw createError("No file uploaded", 400);
@@ -12,10 +13,6 @@ export const uploadImage = async (req, res, next) => {
 
     return successResponse(res, data, 201);
   } catch (error) {
-    if (!error.statusCode) {
-      return next(createError("Internal Server Error", 500));
-    }
-
-    return next(error);
+    next(error);
   }
 };

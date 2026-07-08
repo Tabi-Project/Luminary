@@ -98,7 +98,7 @@ export const MobileNav = () => {
                 className="pt-6"
               >
                 <Link
-                  href="/"
+                  href="/nominate"
                   onClick={() => setIsOpen(false)}
                   className="block text-center bg-text-main text-bg-surface px-3 py-3 rounded-lg font-medium"
                 >

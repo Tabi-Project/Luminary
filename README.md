@@ -112,8 +112,9 @@ Profiles and news items are organised using a shared category system:
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v18+
-- [pnpm](https://pnpm.io/) v8+ (`npm install -g pnpm`)
+- [Node.js](https://nodejs.org/) v20+
+- [pnpm](https://pnpm.io/) v10+ (`npm install -g pnpm`)
+- A PostgreSQL database — a [Neon](https://neon.tech/) project or any local/self-hosted Postgres instance
 
 ### Monorepo Structure
 
@@ -122,7 +123,7 @@ This project uses **pnpm workspaces** with [Turborepo](https://turbo.build/). Th
 | App | Path | Description |
 |-----|------|-------------|
 | `web` | `apps/web` | Next.js frontend |
-| `server` | `apps/server` | Express.js backend |
+| `server` | `apps/server` | Express (TypeScript) backend with Drizzle ORM |
 
 ### Install all dependencies
 
@@ -163,6 +164,33 @@ Each app has its own `.env` file. Copy the example files and fill in your values
 cp apps/server/.env.example apps/server/.env
 ```
 
+The server needs at minimum:
+
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | Postgres connection string — a Neon URL (`...neon.tech/...?sslmode=require`) or a local one (`postgresql://user:pass@localhost:5432/luminary`) |
+| `JWT_SECRET` | Secret for signing admin access tokens (e.g. `openssl rand -hex 32`) |
+| `JWT_REFRESH_SECRET` | Secret for refresh tokens (optional, falls back to `JWT_SECRET`) |
+| `ADMIN_EMAIL` / `ADMIN_PASSWORD` | Credentials created by the seed script |
+| `SUPABASE_URL` / `SUPABASE_SERVICE_ROLE_KEY` | Only needed for image uploads (Supabase Storage) |
+| `CORS_ORIGIN` | Frontend origin, defaults to `http://localhost:3000` |
+
+### Database setup
+
+The server uses [Drizzle ORM](https://orm.drizzle.team/) with plain Postgres, so the same commands work against Neon or a local instance — only `DATABASE_URL` changes. From `apps/server`:
+
+```bash
+pnpm db:migrate   # apply SQL migrations from apps/server/drizzle/
+pnpm db:seed      # create the first admin user from ADMIN_EMAIL / ADMIN_PASSWORD
+```
+
+Other database scripts:
+
+```bash
+pnpm db:generate  # regenerate migrations after editing src/db/schema.ts
+pnpm db:push      # push schema directly without migration files (dev only)
+```
+
 ---
 
 ## Technology Stack
@@ -174,26 +202,28 @@ cp apps/server/.env.example apps/server/.env
 
 **Backend**
 - Node.js
-- Express
+- Express 5
+- TypeScript
 
-**Database & Authentication**
-- Supabase (PostgreSQL)
+**Database**
+- PostgreSQL — [Neon](https://neon.tech/) in production, any Postgres instance locally
+- [Drizzle ORM](https://orm.drizzle.team/) with SQL migrations via drizzle-kit
 
-**Search**
-- Supabase Full-Text Search
+**Authentication**
+- JWT (access + refresh tokens) with bcrypt-hashed admin credentials
 
 **Email**
 - Resend or SendGrid
 
 **Image Storage**
-- Cloudinary
+- Supabase Storage
 
 **CMS (News Management)**
 - Notion API or Strapi
 
 **Hosting**
 - Netlify (Frontend)
-- Railway or Render (Backend)
+- Railway (Backend)
 
 ---
 
