@@ -91,6 +91,34 @@ export interface Nominee {
   profile_image_url?: string;
 }
 
+export interface ApiNominee {
+  id: number;
+  first_name: string;
+  last_name: string;
+  field: string;
+  country: string;
+  organization?: string;
+  profile_image_url: string;
+}
+
+export interface ApiNominator {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  relationship_to_nominee: string;
+}
+
+export interface ApiNomination {
+  id: number;
+  nominee_id: number;
+  status: string;
+  description: string;
+  evidence_urls: string | string[];
+  supporting_urls: string | string[];
+  nominee: ApiNominee;
+  nominator?: ApiNominator | null;
+}
 export type NominationStatus =
   | "pending"
   | "approved"

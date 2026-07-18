@@ -91,10 +91,13 @@ export const ProfileCard: FC<ProfileCardProps> = ({ profile, className }) => {
         </div>
       </div>
 
-      <Button
-        text="View Full Profile"
-        className="w-full bg-primary text-white justify-center py-4 rounded-2xl font-bold text-base hover:bg-[#097676] transition-colors mt-4"
-      />
+
+      <Link href={`/directory/${profile.id}`} className="mt-4">
+        <Button
+          text="View Full Profile"
+          className="w-full bg-primary text-white justify-center py-4 rounded-2xl font-bold text-base hover:bg-[#097676] transition-colors"
+        />
+      </Link>
     </article>
   );
 };

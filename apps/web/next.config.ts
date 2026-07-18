@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "i.pravatar.cc",
+        port: "",
+      },
+      {
+        protocol: "https",
         hostname: "cdn.sanity.io",
         port: "",
       },

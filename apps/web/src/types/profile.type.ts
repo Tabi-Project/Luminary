@@ -4,6 +4,7 @@ export interface NomineeProfile {
   lastname: string;
   field: string;
   region: string;
+  organization?: string;
   impact: string;
   tags: string[];
   profilePhoto: string;
@@ -16,20 +17,11 @@ export interface ProfileCardProps {
   className?: string;
 }
 
-export interface ApiNominee {
-  id: number;
-  first_name: string;
-  last_name: string;
-  field: string;
-  country: string;
-  profile_image_url: string;
+export interface ProfileDetailProps {
+  profile: NomineeProfile;
 }
 
-export interface ApiNomination {
-  nominee_id: number;
-  status: string;
-  description: string;
-  evidence_urls: string;
-  supporting_urls: string[];
-  nominee: ApiNominee;
+export interface ProfileLinksProps {
+  title: string;
+  links: string[];
 }
